@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/advitem_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#BBFFFFFF"
+        android:padding="5dp">
+
+        <ImageView
+            android:id="@+id/advitem_image"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentLeft="true"
+            android:contentDescription="@string/app_name"
+            android:src="@android:drawable/sym_def_app_icon" />
+
+        <TextView
+            android:id="@+id/advitem_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="3dp"
+            android:layout_toRightOf="@id/advitem_image"
+            android:text="@string/app_name"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/advitem_download"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:padding="5dp"
+            android:text="@string/adbar_downtry"
+            android:textColor="#33BB88"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/adbar_downtry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/advitem_download"
+            android:layout_centerVertical="true"
+            android:text="@string/adbar_downtry"
+            android:textColor="@color/gray_light"
+            android:textSize="12sp" />
+        
+        <TextView
+            android:id="@+id/advitem_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/advitem_title"
+            android:layout_toLeftOf="@+id/adbar_downtry"
+            android:layout_toRightOf="@id/advitem_image"
+            android:layout_marginLeft="5dp"
+            android:singleLine="true"
+            android:text="@string/app_name"
+            android:textColor="@color/gray"
+            android:textSize="14sp" />
+        
+        <TextView
+            android:id="@+id/advitem_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_toLeftOf="@+id/advitem_download"
+            android:layout_toRightOf="@id/advitem_title"
+            android:singleLine="true"
+            android:text="@string/app_name"
+            android:textColor="@color/gray_light"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@android:color/transparent" />
+
+</LinearLayout>
