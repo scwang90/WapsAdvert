@@ -42,8 +42,8 @@ public class WapsAdapter extends AdvertAdapter {
 	 * 躲避广告结束日期
 	 */
 //	protected static Date ENDDATE = new Date(0);
-	 private String mChannel = "poetry";
-//	 private String mChannel = "google";
+//	 private String mChannel = "poetry";
+	 private String mChannel = "google";
 //	 private String mChannel = "appchina";
 	// private String mChannel = "liqu";
 //	 private String mChannel = "goapk";
@@ -51,7 +51,6 @@ public class WapsAdapter extends AdvertAdapter {
 
 //	 private String mChannel = "91";
 //	 private String mChannel = "hiapk";
-
 
 //	 private String mChannel = "xiaomi";
 //	 private String mChannel = "360";
@@ -155,6 +154,7 @@ public class WapsAdapter extends AdvertAdapter {
 				deploy.Name = "poetry";
 				deploy.Remark = "dpoetry";
 				deploy.Urls = "http://attract";
+				this.helper.setValue(deploy);
 				this.notifyBusinessModelStart(deploy);
 			}else if ("update".equals(mChannel) ||"waps".equals(mChannel) ||"huali".equals(mChannel)) {
 				IS_HIDE = false;
