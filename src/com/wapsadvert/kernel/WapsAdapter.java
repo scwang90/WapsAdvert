@@ -42,21 +42,21 @@ public class WapsAdapter extends AdvertAdapter {
 	 * 躲避广告结束日期
 	 */
 //	protected static Date ENDDATE = new Date(0);
-//	 private String mChannel = "poetry";
+	 private String mChannel = "poetry";
 //	 private String mChannel = "google";
 //	 private String mChannel = "appchina";
 	// private String mChannel = "liqu";
 //	 private String mChannel = "goapk";
-	 private String mChannel = "wandoujia";
+//	 private String mChannel = "wandoujia";
+
+//	 private String mChannel = "91";
+//	 private String mChannel = "hiapk";
 
 
 //	 private String mChannel = "xiaomi";
 //	 private String mChannel = "360";
 //	 private String mChannel = "qq";
 //	 private String mChannel = "baidu";
-
-//	private String mChannel = "91";
-//	 private String mChannel = "hiapk";
 
 //	 private String mChannel = "gfan";
 //	  private String mChannel = "eoe";

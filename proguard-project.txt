@@ -18,3 +18,7 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+
+#andadvert»ìÏý±ê¼Ç
+-keep class com.andadvert.model.** {<fields>;}
+
