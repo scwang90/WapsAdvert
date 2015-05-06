@@ -89,6 +89,7 @@ public class WapsAdapter extends AdvertAdapter {
 	private WapsAdapter(String defchannel) {
 		// TODO Auto-generated constructor stub
 		mDefChannel = defchannel;
+		mChannel = getChannel();
 //		String mchanel = AfApplication.getApp().getMetaData("chanel");
 //		if (AfStringUtil.isNotEmpty(mchanel)) {
 //			mChannel = mchanel;
