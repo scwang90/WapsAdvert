@@ -34,7 +34,7 @@ import com.attract.application.AdvAttractAdapter;
 import com.attract.fragment.AttractFragmentBase;
 import com.attract.kernel.AttractStatistics;
 import com.wapsadvert.R;
-import com.wapsadvert.kernel.AttractPointKernel;
+import com.wapsadvert.kernel.PointKernelAttract;
 
 public class AdvAttractActivity extends AfActivity implements OnClickListener {
 	
@@ -56,6 +56,7 @@ public class AdvAttractActivity extends AfActivity implements OnClickListener {
 		String currency = AdvAttractAdapter.getInstance().getCurrency();
 		mTitlebar = new AfModuleTitlebar(this);
 		mTitlebar.setTitle("免费"+currency);
+		mTitlebar.setOnGoBackListener(this);
 		mProgress = new AfModuleProgressImpl(this);
 		mProgress.setDescription("正在加载");
 		mSelector = new AfFrameSelector(this, R.id.advattract_frame);
@@ -73,26 +74,21 @@ public class AdvAttractActivity extends AfActivity implements OnClickListener {
 	}
 	
 	@Override
-	protected void onPause() {
-		// TODO Auto-generated method stub
-		super.onPause();
-		this.finish();
-	}
-	
-	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		if (v != null && v.getId() == AfModuleTitlebar.ID_GOBACK) {
-			onBackKeyPressed();
+			if (!onBackKeyPressed()) {
+				this.finish();
+			}
 		}
 	}
 	
 	@Override
 	protected boolean onBackKeyPressed() {
 		// TODO Auto-generated method stub
-		int point = AttractPointKernel.getComPoint();
+		int point = PointKernelAttract.getComPoint();
 		String currency = AdvAttractAdapter.getInstance().getCurrency();
-		if (point < 100 && AttractPointKernel.isDownloaded() && mAdapter != null && mAdapter.getCount() > 1) {
+		if (point < 100 && PointKernelAttract.isDownloaded() && mAdapter != null && mAdapter.getCount() > 1) {
 //			doShowDialog("温馨提示", String.format("    激活软件需要100%s，您目前只下载了一个软件不足以激活软件！", currency),"继续下载",
 			doShowDialog("温馨提示", String.format(DS.d("0c8bf7b5d9ad1cad8be1a337f94f0e9bc9cd226fff431410dc81663" +
 					"6a6119c874d621995e51d609c75bfed5b14723e13720af967b44cae5c4f92a0d4142619986ccd2b2b451282e" +
@@ -101,7 +97,7 @@ public class AdvAttractActivity extends AfActivity implements OnClickListener {
 						@Override
 						public void onClick(DialogInterface dialog, int index) {
 							// TODO Auto-generated method stub
-							AdCustom ad = AttractPointKernel.getNewAdCustom(mAdapter.getList());
+							AdCustom ad = PointKernelAttract.getNewAdCustom(mAdapter.getList());
 							if (ad != null) {
 								AfPrivateCaches.getInstance().put(AttractFragmentBase.KEY_IMPORTUNE, false);
 								AdvAttractActivity.this.downloadAd(ad);
@@ -121,7 +117,7 @@ public class AdvAttractActivity extends AfActivity implements OnClickListener {
 		AppConnect connect = AppConnect.getInstance(getActivity());
 		connect.downloadAd(getActivity(), ad.Id);
 		AttractStatistics.doStaticsPoint();
-		AttractPointKernel.doStatisticsAdInfo(ad);
+		PointKernelAttract.doStatisticsAdInfo(ad);
 	}
 
 	@Override

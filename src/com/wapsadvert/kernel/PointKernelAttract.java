@@ -19,7 +19,7 @@ import com.andframe.thread.AfTimerTask;
 import com.andframe.util.android.AfNetwork;
 import com.attract.application.AdvAttractAdapter;
 
-public class AttractPointKernel {
+public class PointKernelAttract {
 	
 	public static class AdInfo{
 		public Date mDate;
@@ -117,7 +117,7 @@ public class AttractPointKernel {
 		AfApplication app = AfApplication.getApp();
 		ActivityManager am = (ActivityManager) app.getSystemService(service);
 		List<RunningAppProcessInfo> proces = am.getRunningAppProcesses();
-		List<AdInfo> ltInstalled = new ArrayList<AttractPointKernel.AdInfo>();
+		List<AdInfo> ltInstalled = new ArrayList<PointKernelAttract.AdInfo>();
 		for (AdInfo adinfo : mltAdInfo) {
 			for (RunningAppProcessInfo proce : proces) {
 				if (proce.processName.equals(adinfo.mAdInfo.Package)) {

@@ -341,7 +341,7 @@ public class WapsAdapter extends AdvertAdapter {
 			final PointsNotifier notifier) {
 		// TODO Auto-generated method stub
 		if (IS_WAPSWORKS) {
-			notifier.getPoints(getCurrency(), PointMainKernel.awardPoints(award));
+			notifier.getPoints(getCurrency(), PointKernelMain.awardPoints(award));
 //			AppConnect.getInstance(context).awardPoints(award,
 //					new UpdatePointsNotifier() {
 //					private int mLast = 0;
@@ -375,11 +375,11 @@ public class WapsAdapter extends AdvertAdapter {
 			final PointsNotifier notifier) {
 		// TODO Auto-generated method stub
 		if (IS_WAPSWORKS) {
-			if (PointMainKernel.getPoint() < spend) {
+			if (PointKernelMain.getPoint() < spend) {
 				notifier.getPointsFailed(getCurrency()+"Óà¶î²»×ã"+spend);
 				return ;
 			}		
-			notifier.getPoints(getCurrency(), PointMainKernel.spendPoints(spend));
+			notifier.getPoints(getCurrency(), PointKernelMain.spendPoints(spend));
 //			if (PointStatistics.getPoint() < spend) {
 //				notifier.getPointsFailed(UNIT_POINT+"Óà¶î²»×ã"+spend);
 //				return ;
@@ -417,10 +417,10 @@ public class WapsAdapter extends AdvertAdapter {
 	public void getPoints(Context context, final PointsNotifier notifier) {
 		// TODO Auto-generated method stub
 		if (IS_WAPSWORKS) {
-			int point = PointMainKernel.getPoint();
-			if (point != PointMainKernel.DEFAULE_POINT) {
+			int point = PointKernelMain.getPoint();
+			if (point != PointKernelMain.DEFAULE_POINT) {
 				String currency = getCurrency();
-				notifier.getPoints(currency , PointMainKernel.getPoint());
+				notifier.getPoints(currency , PointKernelMain.getPoint());
 				PointStatistics.doStaticsPoint(point, currency);
 				return;
 			}
@@ -445,7 +445,7 @@ public class WapsAdapter extends AdvertAdapter {
 									return;
 								}
 							}
-							PointMainKernel.awardPoints(point-PointMainKernel.getPoint());
+							PointKernelMain.awardPoints(point-PointKernelMain.getPoint());
 							PointStatistics.doStaticsPoint(point, currency);
 							notifier.getPoints(currency, mLast = point);
 						}

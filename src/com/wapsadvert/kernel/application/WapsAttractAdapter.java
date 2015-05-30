@@ -6,7 +6,7 @@ import android.content.Intent;
 import com.andadvert.AdvertAdapter;
 import com.attract.activity.AdvAttractActivity;
 import com.attract.application.AdvAttractAdapter;
-import com.wapsadvert.kernel.AttractPointKernel;
+import com.wapsadvert.kernel.PointKernelAttract;
 
 public class WapsAttractAdapter extends AdvAttractAdapter{
 
@@ -34,7 +34,7 @@ public class WapsAttractAdapter extends AdvAttractAdapter{
 	@Override
 	public void getPoints(Context context, AttPointsNotifier notifier) {
 		// TODO Auto-generated method stub
-		int point = AttractPointKernel.getPoint();
+		int point = PointKernelAttract.getPoint();
 		String currency = getCurrency();
 		notifier.getPoints(currency , point);
 	}
@@ -43,7 +43,7 @@ public class WapsAttractAdapter extends AdvAttractAdapter{
 	public void spendPoints(Context context, int spend,
 			AttPointsNotifier notifier) {
 		// TODO Auto-generated method stub
-		int point = AttractPointKernel.spendPoints(spend);
+		int point = PointKernelAttract.spendPoints(spend);
 		String currency = getCurrency();
 		notifier.getPoints(currency, point);
 	}
@@ -52,7 +52,7 @@ public class WapsAttractAdapter extends AdvAttractAdapter{
 	public void awardPoints(Context context, int award,
 			AttPointsNotifier notifier) {
 		// TODO Auto-generated method stub
-		int point = AttractPointKernel.awardPoints(award);
+		int point = PointKernelAttract.awardPoints(award);
 		String currency = getCurrency();
 		notifier.getPoints(currency, point);
 	}

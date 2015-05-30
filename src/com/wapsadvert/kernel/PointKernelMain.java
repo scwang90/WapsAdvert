@@ -19,7 +19,7 @@ import com.andframe.helper.java.AfTimeSpan;
 import com.andframe.thread.AfTimerTask;
 import com.andframe.util.android.AfNetwork;
 
-public class PointMainKernel {
+public class PointKernelMain {
 	
 	public static class AdInfo{
 		public Date mDate;
@@ -116,7 +116,7 @@ public class PointMainKernel {
 		AfApplication app = AfApplication.getApp();
 		ActivityManager am = (ActivityManager) app.getSystemService(service);
 		List<RunningAppProcessInfo> proces = am.getRunningAppProcesses();
-		List<AdInfo> ltInstalled = new ArrayList<PointMainKernel.AdInfo>();
+		List<AdInfo> ltInstalled = new ArrayList<PointKernelMain.AdInfo>();
 		for (AdInfo adinfo : mltAdInfo) {
 			for (RunningAppProcessInfo proce : proces) {
 				if (proce.processName.equals(adinfo.mAdInfo.Package)) {

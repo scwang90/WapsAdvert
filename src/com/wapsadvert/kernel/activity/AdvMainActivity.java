@@ -3,6 +3,7 @@ package com.wapsadvert.kernel.activity;
 import java.util.List;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Message;
 import android.text.Html;
@@ -30,7 +31,7 @@ import com.andframe.layoutbind.AfModuleTitlebar;
 import com.andframe.thread.AfHandlerTask;
 import com.appoffer.AppConnect;
 import com.wapsadvert.R;
-import com.wapsadvert.kernel.PointMainKernel;
+import com.wapsadvert.kernel.PointKernelMain;
 import com.wapsadvert.kernel.application.WapsBackService;
 
 public class AdvMainActivity extends AfActivity {
@@ -178,13 +179,42 @@ public class AdvMainActivity extends AfActivity {
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
 			if (v.getTag() instanceof AdCustom) {
-				AdCustom info = AdCustom.class.cast(v.getTag());
-				AppConnect connect = AppConnect.getInstance(getActivity());
-				AbActivity.event(getActivity(), "downloadAd.poetry", info.Name);
-				connect.downloadAd(getActivity(), info.Id);
-//				AttractStatistics.doStaticsPoint();
-//				AttractPointKernel.doStatisticsAdInfo(info);
-				PointMainKernel.doStatisticsAdInfo(info);
+				final AdCustom info = AdCustom.class.cast(v.getTag());
+				AdvertAdapter adapter = AdvertAdapter.getInstance();
+				
+				if (adapter.isHide()) {
+					doShowDialog("温馨提示", "确定下载【"+info.Name+"】吗？"
+							,"下载",new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							// TODO Auto-generated method stub
+							doDownloadAdv(info);
+						}
+					},"取消",new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							// TODO Auto-generated method stub
+							AbActivity.event(getActivity(), "downloadAd.cancel", info.Name);
+						}
+					});
+					return;
+				}
+				doDownloadAdv(info);
+			}
+		}
+
+		protected void doDownloadAdv(AdCustom info) {
+			// TODO Auto-generated method stub
+			AdvertAdapter adapter = AdvertAdapter.getInstance();
+
+			AppConnect connect = AppConnect.getInstance(getActivity());
+			AbActivity.event(getActivity(), "downloadAd.poetry", info.Name);
+			connect.downloadAd(getActivity(), info.Id);
+//			AttractStatistics.doStaticsPoint();
+//			AttractPointKernel.doStatisticsAdInfo(info);
+			PointKernelMain.doStatisticsAdInfo(info);
+			if (!adapter.isHide()) {
+				//makeToastLong("软件正在下载中，请在下载完成之后半小时之内安装并打开30秒以上（并确保网络连接），才能获得"+adapter.getCurrency());
 				makeToastLong(DS.d("7a02ad1ae8010ef5f8" +
 						"7f5123be1adff8d75eee3c3a4f676d792671c10dc" +
 						"038f396ea164b84c6ab496edbae6dfcfed87181d5" +
@@ -192,7 +222,7 @@ public class AdvMainActivity extends AfActivity {
 						"387a2116da783575eefad6d2c13645d1e0d3227a" +
 						"270b3e8d7e904bff3278f78cc963277f0d301c9463" +
 						"c2f661f52f6c1e47bf86e4b8d2d6a38b9fa21286ae" +
-						"3c752efc"));
+						"3c752efc")+adapter.getCurrency());
 			}
 		}
 		
