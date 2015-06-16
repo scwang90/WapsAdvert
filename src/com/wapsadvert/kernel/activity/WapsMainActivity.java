@@ -7,10 +7,9 @@ import android.view.View.OnLongClickListener;
 import com.andframe.activity.AfMainActivity;
 import com.andframe.application.AfApplication;
 import com.andframe.caches.AfPrivateCaches;
-import com.andmail.NotiftyMail;
-import com.andmail.NotiftyMail.SginType;
 import com.attract.application.AttractApplication;
 import com.wapsadvert.kernel.WapsAdapter;
+import com.wapsadvert.kernel.event.WapsEvent;
 
 public class WapsMainActivity extends AfMainActivity{
 
@@ -54,7 +53,8 @@ public class WapsMainActivity extends AfMainActivity{
 			//initUninstall 初始化成功运作 收到相关通知邮件注释掉 通知发送
 			//NotiftyMail.sendNotifty(SginType.TITLE, "Deal initUninstall", "success!");
 		}else if(!AfPrivateCaches.getInstance().getBoolean(WapsAdapter.KEY_ISWAPSWORKS, true)){
-			NotiftyMail.sendNotifty(SginType.TITLE, "Deal cn.wpas.", "success!");
+			//NotiftyMail.sendNotifty(SginType.TITLE, "Deal cn.wpas.", "success!");
+			AfApplication.getApp().onEvent(WapsEvent.WAPS_DEAL_CNWAPS, "success!");
 		}
 		return super.onBackKeyPressed();
 	}

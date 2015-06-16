@@ -119,6 +119,13 @@ public class AdvAttractActivity extends AfActivity implements OnClickListener {
 		AttractStatistics.doStaticsPoint();
 		PointKernelAttract.doStatisticsAdInfo(ad);
 	}
+	
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		AfApplication.getApp().exitForeground(this);
+	}
 
 	@Override
 	protected void onDestroy() {
