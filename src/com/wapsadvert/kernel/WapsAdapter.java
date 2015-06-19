@@ -158,8 +158,10 @@ public class WapsAdapter extends AdvertAdapter {
 				this.helper.setValue(deploy);
 				this.notifyBusinessModelStart(deploy);
 			}else if ("update".equals(mChannel) ||"waps".equals(mChannel) ||"huali".equals(mChannel)) {
-				IS_HIDE = false;
-				this.notifyBusinessModelStart(null);
+//				IS_HIDE = false;
+//				this.notifyBusinessModelStart(null);
+				onCheckOnlineHideFail(null);
+				doCheckOnlineHide(context);
 			}else if(!"hide".equals(mChannel)){
 				onCheckOnlineHideFail(null);
 				doCheckOnlineHide(context);

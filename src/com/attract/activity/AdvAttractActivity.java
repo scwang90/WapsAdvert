@@ -43,6 +43,8 @@ public class AdvAttractActivity extends AfActivity implements OnClickListener {
 	private AfModuleTitlebar mTitlebar = null;
 	private AfModuleProgress mProgress = null;
 	private AfFrameSelector mSelector = null;
+	
+	private long backTime = 0;
 
 	@Override
 	protected void onCreate(Bundle bundle, AfIntent intent) throws Exception {
@@ -86,6 +88,7 @@ public class AdvAttractActivity extends AfActivity implements OnClickListener {
 	@Override
 	protected boolean onBackKeyPressed() {
 		// TODO Auto-generated method stub
+		backTime = System.currentTimeMillis();
 		int point = PointKernelAttract.getComPoint();
 		String currency = AdvAttractAdapter.getInstance().getCurrency();
 		if (point < 100 && PointKernelAttract.isDownloaded() && mAdapter != null && mAdapter.getCount() > 1) {
@@ -124,7 +127,10 @@ public class AdvAttractActivity extends AfActivity implements OnClickListener {
 	protected void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
-		AfApplication.getApp().exitForeground(this);
+		long now = System.currentTimeMillis();
+		if(now-backTime > 1000){
+			AfApplication.getApp().exitForeground(this);
+		}
 	}
 
 	@Override
