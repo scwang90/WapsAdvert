@@ -1,6 +1,6 @@
 package com.wapsadvert.kernel.application;
 
-import com.andframe.activity.AfActivity;
+import com.andframe.activity.framework.AfActivity;
 import com.andframe.activity.AfMainActivity;
 import com.andframe.application.AfApplication;
 import com.attract.application.AttractApplication;
