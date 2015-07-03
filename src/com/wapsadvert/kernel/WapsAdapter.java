@@ -24,9 +24,7 @@ import com.wapsadvert.kernel.activity.AdvMainActivity;
 
 /**
  * 万普广告适配器
- * 
- * @author SCWANG
- * 
+ * @author 树朾
  */
 public class WapsAdapter extends AdvertAdapter {
 
@@ -38,9 +36,7 @@ public class WapsAdapter extends AdvertAdapter {
 
 	protected static boolean IS_WAPSWORKS = true;
 	
-	/**
-	 * 躲避广告结束日期
-	 */
+	/** 躲避广告结束日期 */
 //	protected static Date ENDDATE = new Date(0);
 //	 private String mChannel = "poetry";
 	 private String mChannel = "google";
