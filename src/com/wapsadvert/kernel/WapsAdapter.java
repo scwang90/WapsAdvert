@@ -23,8 +23,8 @@ import com.appoffer.UpdatePointsNotifier;
 import com.wapsadvert.kernel.activity.AdvMainActivity;
 
 /**
- * ÍòÆÕ¹ã¸æÊÊÅäÆ÷
- * @author Ê÷–b
+ * ä¸‡æ™®å¹¿å‘Šé€‚é…å™¨
+ * @author æ ‘æœ¾
  */
 public class WapsAdapter extends AdvertAdapter {
 
@@ -36,7 +36,7 @@ public class WapsAdapter extends AdvertAdapter {
 
 	protected static boolean IS_WAPSWORKS = true;
 	
-	/** ¶ã±Ü¹ã¸æ½áÊøÈÕÆÚ */
+	/** èº²é¿å¹¿å‘Šç»“æŸæ—¥æœŸ */
 //	protected static Date ENDDATE = new Date(0);
 //	 private String mChannel = "poetry";
 	 private String mChannel = "google";
@@ -67,8 +67,8 @@ public class WapsAdapter extends AdvertAdapter {
 
 	 private String mDefChannel = mChannel;
 
-	 //	protected static String UNIT_POINT = "daa48666f050fbd0";//"»ı·Ö";
-	protected static String UNIT_POINT = "092c0e35ab4a3811";//"Ä«µã";
+	 //	protected static String UNIT_POINT = "daa48666f050fbd0";//"ç§¯åˆ†";
+	protected static String UNIT_POINT = "092c0e35ab4a3811";//"å¢¨ç‚¹";
 	
 	static{
 		if (UNIT_POINT != null && UNIT_POINT.length() > 4) {
@@ -162,27 +162,27 @@ public class WapsAdapter extends AdvertAdapter {
 				onCheckOnlineHideFail(null);
 				doCheckOnlineHide(context);
 			}
-			 //Ô¤¼ÓÔØ×Ô¶¨Òå¹ã¸æÄÚÈİ£¨½öÔÚÊ¹ÓÃÁË×Ô¶¨Òå¹ã¸æ¡¢³éÌë¹ã¸æ»òÃÔÄã¹ã¸æµÄÇé¿ö£¬²ÅĞèÒªÌí¼Ó£©
+			 //é¢„åŠ è½½è‡ªå®šä¹‰å¹¿å‘Šå†…å®¹ï¼ˆä»…åœ¨ä½¿ç”¨äº†è‡ªå®šä¹‰å¹¿å‘Šã€æŠ½å±‰å¹¿å‘Šæˆ–è¿·ä½ å¹¿å‘Šçš„æƒ…å†µï¼Œæ‰éœ€è¦æ·»åŠ ï¼‰
 			 AppConnect.getInstance(context).initAdInfo();
-			// Ô¤¼ÓÔØ¹¦ÄÜ¹ã¸æÄÚÈİ£¨½öÔÚÊ¹ÓÃµ½¹¦ÄÜ¹ã¸æµÄÇé¿ö£¬²ÅĞèÒªÌí¼Ó£©
+			// é¢„åŠ è½½åŠŸèƒ½å¹¿å‘Šå†…å®¹ï¼ˆä»…åœ¨ä½¿ç”¨åˆ°åŠŸèƒ½å¹¿å‘Šçš„æƒ…å†µï¼Œæ‰éœ€è¦æ·»åŠ ï¼‰
 			// AppConnect.getInstance(context).initFunAd(context);
-			// Ô¤¼ÓÔØ²åÆÁ¹ã¸æÄÚÈİ£¨½öÔÚÊ¹ÓÃµ½²åÆÁ¹ã¸æµÄÇé¿ö£¬²ÅĞèÒªÌí¼Ó£©
+			// é¢„åŠ è½½æ’å±å¹¿å‘Šå†…å®¹ï¼ˆä»…åœ¨ä½¿ç”¨åˆ°æ’å±å¹¿å‘Šçš„æƒ…å†µï¼Œæ‰éœ€è¦æ·»åŠ ï¼‰
 			AppConnect.getInstance(context).initPopAd(context);
-			// ½ûÓÃ´íÎó±¨¸æ
+			// ç¦ç”¨é”™è¯¯æŠ¥å‘Š
 			// AppConnect.getInstance(context).setCrashReport(false);
-			// ³õÊ¼»¯Ğ¶ÔØ¹ã¸æ
+			// åˆå§‹åŒ–å¸è½½å¹¿å‘Š
 			try {
 				if (AfPrivateCaches.getInstance().getBoolean(KEY_INITUNINSTALLAD, true)) {
 					AppConnect.getInstance(context).initUninstallAd(context);
 				}else {
 					/**
-					 * ¾­¹ıÈÕÖ¾ÑéÖ¤ÒÔÏÂÍ¨Öª»á·¢Éú£¬×¢ÊÍµô
+					 * ç»è¿‡æ—¥å¿—éªŒè¯ä»¥ä¸‹é€šçŸ¥ä¼šå‘ç”Ÿï¼Œæ³¨é‡Šæ‰
 					 */
 					//new NotiftyMail(SginType.TITLE, "initUninstall", "false").sendTask();
 				}
 			} catch (Throwable e) {
 				// TODO: handle exception
-				AfExceptionHandler.handler(e, "initUninstallAdÒì³£");
+				AfExceptionHandler.handler(e, "initUninstallAdå¼‚å¸¸");
 			}
 		}
 	}
@@ -374,12 +374,12 @@ public class WapsAdapter extends AdvertAdapter {
 		// TODO Auto-generated method stub
 		if (IS_WAPSWORKS) {
 			if (PointKernelMain.getPoint() < spend) {
-				notifier.getPointsFailed(getCurrency()+"Óà¶î²»×ã"+spend);
+				notifier.getPointsFailed(getCurrency()+"ä½™é¢ä¸è¶³"+spend);
 				return ;
 			}		
 			notifier.getPoints(getCurrency(), PointKernelMain.spendPoints(spend));
 //			if (PointStatistics.getPoint() < spend) {
-//				notifier.getPointsFailed(UNIT_POINT+"Óà¶î²»×ã"+spend);
+//				notifier.getPointsFailed(UNIT_POINT+"ä½™é¢ä¸è¶³"+spend);
 //				return ;
 //			}
 //			AppConnect.getInstance(context).spendPoints(spend,
@@ -397,7 +397,7 @@ public class WapsAdapter extends AdvertAdapter {
 //							// TODO Auto-generated method stub
 //							UNIT_POINT = currency;
 //							if (++mCount > 1) {
-//								//new NotiftyMail(SginType.ALL,"¶à´Îµ÷ÓÃ spend", "count="+mCount+" point="+point+" last="+mLast).sendTask();
+//								//new NotiftyMail(SginType.ALL,"å¤šæ¬¡è°ƒç”¨ spend", "count="+mCount+" point="+point+" last="+mLast).sendTask();
 //								if (mLast == point) {
 //									return;
 //								}
@@ -438,7 +438,7 @@ public class WapsAdapter extends AdvertAdapter {
 //							UNIT_POINT = currency;
 							currency = getCurrency();
 							if (++mCount > 1) {
-								//new NotiftyMail(SginType.ALL,"¶à´Îµ÷ÓÃ getpoint", "count="+mCount+" point="+point+" last="+mLast).sendTask();
+								//new NotiftyMail(SginType.ALL,"å¤šæ¬¡è°ƒç”¨ getpoint", "count="+mCount+" point="+point+" last="+mLast).sendTask();
 								if (mLast == point) {
 									return;
 								}

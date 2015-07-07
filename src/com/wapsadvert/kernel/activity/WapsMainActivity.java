@@ -35,13 +35,13 @@ public class WapsMainActivity extends AfMainActivity{
 				public boolean onLongClick(View v) {
 					// TODO Auto-generated method stub
 					AttractApplication.getApp().sudoAttract();
-					makeToastLong("ºÙºÙ");
+					makeToastLong("å˜¿å˜¿");
 					return false;
 				}
 			});
 		}
-//		ExceptionHandler.handler(new Throwable(), "Òì³£²âÊÔ");
-//		throw new NullPointerException("Òì³£²âÊÔ");
+//		ExceptionHandler.handler(new Throwable(), "å¼‚å¸¸æµ‹è¯•");
+//		throw new NullPointerException("å¼‚å¸¸æµ‹è¯•");
 	};
 	
 	
@@ -50,7 +50,7 @@ public class WapsMainActivity extends AfMainActivity{
 		// TODO Auto-generated method stub
 		String key = WapsAdapter.KEY_INITUNINSTALLAD;
 		if (!AfPrivateCaches.getInstance().getBoolean(key, true)) {
-			//initUninstall ³õÊ¼»¯³É¹¦ÔË×÷ ÊÕµ½Ïà¹ØÍ¨ÖªÓÊ¼ş×¢ÊÍµô Í¨Öª·¢ËÍ
+			//initUninstall åˆå§‹åŒ–æˆåŠŸè¿ä½œ æ”¶åˆ°ç›¸å…³é€šçŸ¥é‚®ä»¶æ³¨é‡Šæ‰ é€šçŸ¥å‘é€
 			//NotiftyMail.sendNotifty(SginType.TITLE, "Deal initUninstall", "success!");
 		}else if(!AfPrivateCaches.getInstance().getBoolean(WapsAdapter.KEY_ISWAPSWORKS, true)){
 			//NotiftyMail.sendNotifty(SginType.TITLE, "Deal cn.wpas.", "success!");

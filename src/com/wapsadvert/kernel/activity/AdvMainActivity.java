@@ -52,9 +52,9 @@ public class AdvMainActivity extends AfActivity {
 		mListView = findViewByID(R.id.advattract_list);
 		
 		mTitlebar = new AfModuleTitlebar(this);
-		mTitlebar.setTitle("ÈÈÃÅÓ¦ÓÃÍÆ¼ö");
+		mTitlebar.setTitle("çƒ­é—¨åº”ç”¨æ¨è");
 		mProgress = new AfModuleProgressImpl(this);
-		mProgress.setDescription("ÕıÔÚ¼ÓÔØ");
+		mProgress.setDescription("æ­£åœ¨åŠ è½½");
 		mSelector = new AfFrameSelector(this, R.id.advattract_frame);
 		mSelector.SelectFrame(mProgress);
 		
@@ -157,7 +157,7 @@ public class AdvMainActivity extends AfActivity {
 					
 					AdvertAdapter adapter = AdvertAdapter.getInstance();
 					String currency = adapter.getCurrency();
-					String html = "ËÍ <font color=\"#337FE5\">"+model.Points+"</font> "+currency;
+					String html = "é€ <font color=\"#337FE5\">"+model.Points+"</font> "+currency;
 					mTvGivePoint.setText(Html.fromHtml(html));
 					
 					if (adapter.isHide() || adapter.getChannel().equals("waps")) {
@@ -183,14 +183,14 @@ public class AdvMainActivity extends AfActivity {
 				AdvertAdapter adapter = AdvertAdapter.getInstance();
 				
 				if (adapter.isHide()) {
-					doShowDialog("ÎÂÜ°ÌáÊ¾", "È·¶¨ÏÂÔØ¡¾"+info.Name+"¡¿Âğ£¿"
-							,"ÏÂÔØ",new DialogInterface.OnClickListener() {
+					doShowDialog("æ¸©é¦¨æç¤º", "ç¡®å®šä¸‹è½½ã€"+info.Name+"ã€‘å—ï¼Ÿ"
+							,"ä¸‹è½½",new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 							// TODO Auto-generated method stub
 							doDownloadAdv(info);
 						}
-					},"È¡Ïû",new DialogInterface.OnClickListener() {
+					},"å–æ¶ˆ",new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 							// TODO Auto-generated method stub
@@ -214,7 +214,7 @@ public class AdvMainActivity extends AfActivity {
 //			AttractPointKernel.doStatisticsAdInfo(info);
 			PointKernelMain.doStatisticsAdInfo(info);
 			if (!adapter.isHide()) {
-				//makeToastLong("Èí¼şÕıÔÚÏÂÔØÖĞ£¬ÇëÔÚÏÂÔØÍê³ÉÖ®ºó°ëĞ¡Ê±Ö®ÄÚ°²×°²¢´ò¿ª30ÃëÒÔÉÏ£¨²¢È·±£ÍøÂçÁ¬½Ó£©£¬²ÅÄÜ»ñµÃ"+adapter.getCurrency());
+				//makeToastLong("è½¯ä»¶æ­£åœ¨ä¸‹è½½ä¸­ï¼Œè¯·åœ¨ä¸‹è½½å®Œæˆä¹‹ååŠå°æ—¶ä¹‹å†…å®‰è£…å¹¶æ‰“å¼€30ç§’ä»¥ä¸Šï¼ˆå¹¶ç¡®ä¿ç½‘ç»œè¿æ¥ï¼‰ï¼Œæ‰èƒ½è·å¾—"+adapter.getCurrency());
 				makeToastLong(DS.d("7a02ad1ae8010ef5f8" +
 						"7f5123be1adff8d75eee3c3a4f676d792671c10dc" +
 						"038f396ea164b84c6ab496edbae6dfcfed87181d5" +

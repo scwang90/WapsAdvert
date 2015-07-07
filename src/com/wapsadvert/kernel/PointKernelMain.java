@@ -46,24 +46,24 @@ public class PointKernelMain {
 		}
 	}
 	public static final int DEFAULE_POINT = -1;
-	//ÓÃ»§µÄ»ı·Ö
+	//ç”¨æˆ·çš„ç§¯åˆ†
 	private static int mPoints = DEFAULE_POINT;
-	//µÈ´ıÏÂÔØ°²×°µÄ app
+	//ç­‰å¾…ä¸‹è½½å®‰è£…çš„ app
 	private static List<AdInfo> mltAdInfo = new ArrayList<AdInfo>();
-	//ÒÑ¾­ÏÂÔØ°²×°µÄ app
+	//å·²ç»ä¸‹è½½å®‰è£…çš„ app
 	private static List<AdInfo> mltInstalled = new ArrayList<AdInfo>();
 	
 	private static final String KEY_CACHE = "93089433021020214102";
 	private static final String KEY_POINT = "91259234021020214102";
 	private static final String KEY_LIST_ADINFO = "15859874021020214102";
 	private static final String KEY_LIST_INSTALL = "27893935021020214102";
-	//¶¨Ê±Æ÷ÖÜÆÚ10ÃëÖÓ
+	//å®šæ—¶å™¨å‘¨æœŸ10ç§’é’Ÿ
 	private static final long KEY_PERIOD = 60000;
 	
-	//»º´æÆ÷
+	//ç¼“å­˜å™¨
 	private static AfPrivateCaches mCache = AfPrivateCaches.getInstance(KEY_CACHE);
 
-	//µãÊı»ñÈ¡¶¨Ê±Æ÷
+	//ç‚¹æ•°è·å–å®šæ—¶å™¨
 	private static Timer mTimer = null;
 	private static Date mTime = new Date();
 	private static AfTimeSpan mSpan = AfTimeSpan.FromHours(1);
@@ -89,7 +89,7 @@ public class PointKernelMain {
 			}
 		}
 		mltAdInfo.add(new AdInfo(info));
-		doUpdateCache();//¸üĞÂ»º´æ
+		doUpdateCache();//æ›´æ–°ç¼“å­˜
 		doStartTimer();
 	}
 	
@@ -122,7 +122,7 @@ public class PointKernelMain {
 				if (proce.processName.equals(adinfo.mAdInfo.Package)) {
 					if(AfApplication.getNetworkStatus() == AfNetwork.TYPE_NONE){
 						String currency = AdvertAdapter.getInstance().getCurrency();
-						String msg = "ÇëÈ·±£Á¬½Óµ½»¥ÁªÍøÔÙÔËĞĞ°²×°Èí¼ş²Å¿É»ñµÃ"+currency;
+						String msg = "è¯·ç¡®ä¿è¿æ¥åˆ°äº’è”ç½‘å†è¿è¡Œå®‰è£…è½¯ä»¶æ‰å¯è·å¾—"+currency;
 						Toast.makeText(AfApplication.getApp(), msg, Toast.LENGTH_LONG).show();
 						AfExceptionHandler.handleAttach(new Exception(msg), msg);
 						return;
@@ -136,7 +136,7 @@ public class PointKernelMain {
 		for (AdInfo info : ltInstalled) {
 			mltAdInfo.remove(info);
 		}
-		doUpdateCache();//¸üĞÂ»º´æ
+		doUpdateCache();//æ›´æ–°ç¼“å­˜
 	}
 
 	protected static void doUpdateCache() {

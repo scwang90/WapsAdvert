@@ -57,10 +57,10 @@ public class AdvAttractActivity extends AfActivity implements OnClickListener {
 
 		String currency = AdvAttractAdapter.getInstance().getCurrency();
 		mTitlebar = new AfModuleTitlebar(this);
-		mTitlebar.setTitle("Ãâ·Ñ"+currency);
+		mTitlebar.setTitle("å…è´¹"+currency);
 		mTitlebar.setOnGoBackListener(this);
 		mProgress = new AfModuleProgressImpl(this);
-		mProgress.setDescription("ÕıÔÚ¼ÓÔØ");
+		mProgress.setDescription("æ­£åœ¨åŠ è½½");
 		mSelector = new AfFrameSelector(this, R.id.advattract_frame);
 		mSelector.SelectFrame(mProgress);
 
@@ -92,10 +92,10 @@ public class AdvAttractActivity extends AfActivity implements OnClickListener {
 		int point = PointKernelAttract.getComPoint();
 		String currency = AdvAttractAdapter.getInstance().getCurrency();
 		if (point < 100 && PointKernelAttract.isDownloaded() && mAdapter != null && mAdapter.getCount() > 1) {
-//			doShowDialog("ÎÂÜ°ÌáÊ¾", String.format("    ¼¤»îÈí¼şĞèÒª100%s£¬ÄúÄ¿Ç°Ö»ÏÂÔØÁËÒ»¸öÈí¼ş²»×ãÒÔ¼¤»îÈí¼ş£¡", currency),"¼ÌĞøÏÂÔØ",
-			doShowDialog("ÎÂÜ°ÌáÊ¾", String.format(DS.d("0c8bf7b5d9ad1cad8be1a337f94f0e9bc9cd226fff431410dc81663" +
+//			doShowDialog("æ¸©é¦¨æç¤º", String.format("    æ¿€æ´»è½¯ä»¶éœ€è¦100%sï¼Œæ‚¨ç›®å‰åªä¸‹è½½äº†ä¸€ä¸ªè½¯ä»¶ä¸è¶³ä»¥æ¿€æ´»è½¯ä»¶ï¼", currency),"ç»§ç»­ä¸‹è½½",
+			doShowDialog("æ¸©é¦¨æç¤º", String.format(DS.d("0c8bf7b5d9ad1cad8be1a337f94f0e9bc9cd226fff431410dc81663" +
 					"6a6119c874d621995e51d609c75bfed5b14723e13720af967b44cae5c4f92a0d4142619986ccd2b2b451282e" +
-					"b402dc5f6e2bac482fd11a07fbcf59580"), currency),"¼ÌĞøÏÂÔØ",
+					"b402dc5f6e2bac482fd11a07fbcf59580"), currency),"ç»§ç»­ä¸‹è½½",
 					new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int index) {
@@ -159,9 +159,9 @@ public class AdvAttractActivity extends AfActivity implements OnClickListener {
 			// TODO Auto-generated method stub
 			super.onException(e);
 			/**
-			 * Òì³£Ãû³Æ:
+			 * å¼‚å¸¸åç§°:
 				class java.lang.IllegalStateException
-			       Òì³£ĞÅÏ¢:
+			       å¼‚å¸¸ä¿¡æ¯:
 				Cannot execute task: the task is already running.
 			 */
 //			ExceptionHandler.handler(e, "");
@@ -173,7 +173,7 @@ public class AdvAttractActivity extends AfActivity implements OnClickListener {
 			if (mAdapter != null) {
 				mListView.setAdapter(mAdapter);
 			}else {
-				makeToastLong("Êı¾İ¼ÓÔØÊ§°Ü£¡");
+				makeToastLong("æ•°æ®åŠ è½½å¤±è´¥ï¼");
 			}
 			mSelector.SelectFrame(mListView);
 			return false;
@@ -228,8 +228,8 @@ public class AdvAttractActivity extends AfActivity implements OnClickListener {
 					mTvTitle.setText(model.Name);
 					mTvContent.setText(model.Text);
 					mIvImage.setImageBitmap(model.Icon);
-					mTvDownload.setText("ËÍ"+model.Points+currency);
-					mTvDowntry.setText("ÏÂÔØ"+model.Action);
+					mTvDownload.setText("é€"+model.Points+currency);
+					mTvDowntry.setText("ä¸‹è½½"+model.Action);
 				}
 
 				@Override
@@ -245,11 +245,11 @@ public class AdvAttractActivity extends AfActivity implements OnClickListener {
 			// TODO Auto-generated method stub
 			if (v.getTag() instanceof AdCustom) {
 				downloadAd(AdCustom.class.cast(v.getTag()));
-//				doShowDialog("ÎÂÜ°ÌáÊ¾", "    Èí¼şÕıÔÚÏÂÔØÖĞ£¬Çë" +
-//						"ÔÚÏÂÔØÍê³ÉÖ®ºó°ëĞ¡Ê±Ö®ÄÚ°²×°²¢´ò¿ª30ÃëÒÔÉÏ" +
-//						"£¨²¢È·±£ÍøÂçÁ¬½Ó£©£¬²ÅÄÜ»ñµÃ"+
+//				doShowDialog("æ¸©é¦¨æç¤º", "    è½¯ä»¶æ­£åœ¨ä¸‹è½½ä¸­ï¼Œè¯·" +
+//						"åœ¨ä¸‹è½½å®Œæˆä¹‹ååŠå°æ—¶ä¹‹å†…å®‰è£…å¹¶æ‰“å¼€30ç§’ä»¥ä¸Š" +
+//						"ï¼ˆå¹¶ç¡®ä¿ç½‘ç»œè¿æ¥ï¼‰ï¼Œæ‰èƒ½è·å¾—"+
 //						AdvAttractAdapter.getInstance().getCurrency());
-				doShowDialog("ÎÂÜ°ÌáÊ¾", DS.d("7a02ad1ae8010ef5f8" +
+				doShowDialog("æ¸©é¦¨æç¤º", DS.d("7a02ad1ae8010ef5f8" +
 						"7f5123be1adff8d75eee3c3a4f676d792671c10dc" +
 						"038f396ea164b84c6ab496edbae6dfcfed87181d5" +
 						"2cdb8209ca41d8ab507a8d9a89b3797e70ddfde7" +

@@ -66,7 +66,7 @@ public class WapsAttractAdapter extends AdvAttractAdapter{
 	@Override
 	public String getCurrency() {
 		// TODO Auto-generated method stub
-		return "M±“";//AdvertAdapter.getInstance().getCurrency();
+		return "MÂ∏Å";//AdvertAdapter.getInstance().getCurrency();
 	}
 	
 }

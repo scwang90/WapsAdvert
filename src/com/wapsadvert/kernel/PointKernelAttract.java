@@ -45,11 +45,11 @@ public class PointKernelAttract {
 			return super.equals(o);
 		}
 	}
-	//ÓÃ»§µÄ»ı·Ö
+	//ç”¨æˆ·çš„ç§¯åˆ†
 	private static int mPoints = 0;
-	//µÈ´ıÏÂÔØ°²×°µÄ app
+	//ç­‰å¾…ä¸‹è½½å®‰è£…çš„ app
 	private static List<AdInfo> mltAdInfo = new ArrayList<AdInfo>();
-	//ÒÑ¾­ÏÂÔØ°²×°µÄ app
+	//å·²ç»ä¸‹è½½å®‰è£…çš„ app
 	private static List<AdInfo> mltInstalled = new ArrayList<AdInfo>();
 
 	private static final String KEY_DOWNLOAD = "95976004134032214102";
@@ -57,13 +57,13 @@ public class PointKernelAttract {
 	private static final String KEY_POINT = "75282482634041114102";
 	private static final String KEY_LIST_ADINFO = "00678600734041114102";
 	private static final String KEY_LIST_INSTALL = "96534570734041114102";
-	//¶¨Ê±Æ÷ÖÜÆÚ10ÃëÖÓ
+	//å®šæ—¶å™¨å‘¨æœŸ10ç§’é’Ÿ
 	private static final long KEY_PERIOD = 60000;
 	
-	//»º´æÆ÷
+	//ç¼“å­˜å™¨
 	private static AfPrivateCaches mCache = AfPrivateCaches.getInstance(KEY_CACHE);
 
-	//µãÊı»ñÈ¡¶¨Ê±Æ÷
+	//ç‚¹æ•°è·å–å®šæ—¶å™¨
 	private static Timer mTimer = null;
 	private static Date mTime = new Date();
 	private static AfTimeSpan mSpan = AfTimeSpan.FromHours(1);
@@ -90,7 +90,7 @@ public class PointKernelAttract {
 		}
 		mCache.put(KEY_DOWNLOAD, true);
 		mltAdInfo.add(new AdInfo(info));
-		doUpdateCache();//¸üĞÂ»º´æ
+		doUpdateCache();//æ›´æ–°ç¼“å­˜
 		doStartTimer();
 	}
 	
@@ -123,7 +123,7 @@ public class PointKernelAttract {
 				if (proce.processName.equals(adinfo.mAdInfo.Package)) {
 					if(AfApplication.getNetworkStatus() == AfNetwork.TYPE_NONE){
 						String currency = AdvAttractAdapter.getInstance().getCurrency();
-						String msg = "ÇëÏÈÁªÍøÔÙ´ò¿ªÏÂÔØÈí¼ş²ÅÄÜËÍ"+currency;
+						String msg = "è¯·å…ˆè”ç½‘å†æ‰“å¼€ä¸‹è½½è½¯ä»¶æ‰èƒ½é€"+currency;
 						Toast.makeText(AfApplication.getApp(), msg, Toast.LENGTH_LONG).show();
 						AfExceptionHandler.handleAttach(new Exception(msg), msg);
 						return;
@@ -137,7 +137,7 @@ public class PointKernelAttract {
 		for (AdInfo info : ltInstalled) {
 			mltAdInfo.remove(info);
 		}
-		doUpdateCache();//¸üĞÂ»º´æ
+		doUpdateCache();//æ›´æ–°ç¼“å­˜
 	}
 
 	protected static void doUpdateCache() {

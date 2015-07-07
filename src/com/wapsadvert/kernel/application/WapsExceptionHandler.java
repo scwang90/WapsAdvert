@@ -31,7 +31,7 @@ public class WapsExceptionHandler extends AfExceptionHandler{
 				if (isWaps || element.toString().indexOf("cn.waps.") >= 0
 						|| element.toString().indexOf("com.appoffer.") >= 0) {
 					AfPrivateCaches.getInstance().put(WapsAdapter.KEY_INITUNINSTALLAD, false);
-					//³É¹¦´¦ÀíÕâ¸öÒì³££¬²¢ÇÒ³É¹¦·ÀÖ¹ÔÙ´Î·¢Éú
+					//æˆåŠŸå¤„ç†è¿™ä¸ªå¼‚å¸¸ï¼Œå¹¶ä¸”æˆåŠŸé˜²æ­¢å†æ¬¡å‘ç”Ÿ
 					//handler(ex, "Deal Width UnsatisfiedLinkError");
 					startForeground();
 					return;
