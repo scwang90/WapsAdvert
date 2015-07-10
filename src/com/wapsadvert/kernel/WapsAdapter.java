@@ -9,10 +9,10 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.andadvert.AdvertAdapter;
+import com.andadvert.OnlineKey;
 import com.andadvert.PointStatistics;
 import com.andadvert.listener.PointsNotifier;
 import com.andadvert.model.AdCustom;
-import com.andadvert.model.OnlineDeploy;
 import com.andadvert.util.DS;
 import com.andframe.application.AfApplication;
 import com.andframe.application.AfExceptionHandler;
@@ -33,6 +33,8 @@ public class WapsAdapter extends AdvertAdapter {
 	public static final String KEY_INITUNINSTALLAD = "10505902520282114102";
 
 	public static final String KEY_ISWAPSWORKS = "05143911204192114102";
+
+	private static int UNIT_PRICE = 70;
 
 	protected static boolean IS_WAPSWORKS = true;
 	
@@ -136,6 +138,7 @@ public class WapsAdapter extends AdvertAdapter {
 			}else {
 				IS_WAPSWORKS = false;
 			}
+			UNIT_PRICE = OnlineKey.getInteger(context, OnlineKey.KEY_UNITPRICE,UNIT_PRICE, "get unitprice");
 		} catch (Throwable e) {
 			// TODO: handle exception
 			IS_WAPSWORKS = false;
@@ -144,7 +147,7 @@ public class WapsAdapter extends AdvertAdapter {
 		
 //		IS_WAPSWORKS = date1.after(date2);
 		if (IS_WAPSWORKS) {
-			if("poetry".equals(mChannel)){
+			/*if("poetry".equals(mChannel)){
 				IS_HIDE = false;
 				OnlineDeploy deploy = new OnlineDeploy();
 				deploy.HideAd = false;
@@ -153,7 +156,7 @@ public class WapsAdapter extends AdvertAdapter {
 				deploy.Urls = "http://attract";
 				this.helper.setValue(deploy);
 				this.notifyBusinessModelStart(deploy);
-			}else if ("update".equals(mChannel) ||"waps".equals(mChannel) ||"huali".equals(mChannel)) {
+			}else */if ("update".equals(mChannel) ||"waps".equals(mChannel) ||"huali".equals(mChannel)) {
 //				IS_HIDE = false;
 //				this.notifyBusinessModelStart(null);
 				onCheckOnlineHideFail(null);
@@ -191,6 +194,7 @@ public class WapsAdapter extends AdvertAdapter {
 	public AdCustom getAdCustom(Context context) {
 		// TODO Auto-generated method stub
 		if (IS_WAPSWORKS) {
+			UNIT_PRICE = OnlineKey.getInteger(context, OnlineKey.KEY_UNITPRICE,UNIT_PRICE, "get unitprice");
 			return doAdInfoToAdCustom(AppConnect.getInstance(context).getAdInfo());
 		}
 		return null;
@@ -202,6 +206,7 @@ public class WapsAdapter extends AdvertAdapter {
 		// TODO Auto-generated method stub
 		List<AdCustom> list = new ArrayList<AdCustom>();
 		if (IS_WAPSWORKS) {
+			UNIT_PRICE = OnlineKey.getInteger(context, OnlineKey.KEY_UNITPRICE,UNIT_PRICE, "get unitprice");
 			List<AdInfo> ads = AppConnect.getInstance(context).getAdInfoList();
 			if (ads != null) {
 				for (AdInfo info : ads) {
@@ -244,7 +249,7 @@ public class WapsAdapter extends AdvertAdapter {
 			custom.Filesize = info.getFilesize()+"MB";
 			custom.Provider = info.getProvider();
 			custom.Version = info.getVersion();
-			custom.Points = 80;
+			custom.Points = UNIT_PRICE;
 			return custom;
 		}
 		return null;
