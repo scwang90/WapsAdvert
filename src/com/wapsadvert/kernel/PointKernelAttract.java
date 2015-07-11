@@ -4,34 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.andadvert.model.AdCustom;
+import com.andframe.application.AfApplication;
 import com.andframe.caches.AfPrivateCaches;
+import com.wapsadvert.kernel.event.WapsEvent;
 
 public class PointKernelAttract{
 
-//	public static class AdInfo{
-//		public Date mDate;
-//		public AdCustom mAdInfo;
-//		public AdInfo(AdCustom ad) {
-//			this.mAdInfo = ad;
-//			this.resetTime();
-//		}
-//		public void resetTime() {
-//			// TODO Auto-generated method stub
-//			this.mDate = mTime = new Date();
-//		}
-//		@Override
-//		public boolean equals(Object o) {
-//			// TODO Auto-generated method stub
-//			if (o instanceof AdInfo) {
-//				AdInfo info = AdInfo.class.cast(o);
-//				return mAdInfo.Package.equals(info.mAdInfo.Package);
-//			}else if (o instanceof AdCustom) {
-//				AdCustom info = AdCustom.class.cast(o);
-//				return mAdInfo.Package.equals(info.Package);
-//			}
-//			return super.equals(o);
-//		}
-//	}
 //	//用户的积分
 //	private static int mPoints = 0;
 //	//等待下载安装的 app
@@ -50,7 +28,19 @@ public class PointKernelAttract{
 	//缓存器
 	private static AfPrivateCaches mCache = AfPrivateCaches.getInstance(KEY_CACHE);
 
-	private static PointKernel kernel = new PointKernel(KEY_CACHE);
+	private static PointKernel kernel = new PointKernel(KEY_CACHE){
+		@Override
+		protected void doNotifyPointAttract(int accretion, int points) {
+			super.doNotifyPointAttract(accretion, points);
+			AfApplication.getApp().onEvent(WapsEvent.WAPS_POINT_ATTRACT,""+points);
+		}
+
+		@Override
+		protected void doNotifyPointCheat(int point, int cheat) {
+			super.doNotifyPointCheat(point, cheat);
+			AfApplication.getApp().onEvent(WapsEvent.WAPS_CHEAT_ATTRACT,""+point);
+		}
+	};
 
 //
 //	//点数获取定时器

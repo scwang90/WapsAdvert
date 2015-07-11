@@ -3,10 +3,8 @@ package com.wapsadvert.kernel;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Timer;
 
 import android.app.ActivityManager;
-import android.app.ActivityManager.RunningAppProcessInfo;
 import android.content.Context;
 import android.widget.Toast;
 
@@ -15,11 +13,10 @@ import com.andadvert.model.AdCustom;
 import com.andframe.application.AfApplication;
 import com.andframe.application.AfExceptionHandler;
 import com.andframe.caches.AfPrivateCaches;
-import com.andframe.helper.java.AfTimeSpan;
 import com.andframe.thread.AfTimerTask;
 import com.andframe.util.android.AfNetwork;
 
-public class PointKernel {
+public class PointKernel extends AfTimerTask{
 	
 	public static class AdInfo{
 		public Date mDate;
@@ -41,6 +38,7 @@ public class PointKernel {
 			return super.equals(o);
 		}
 	}
+
 	public static final int DEFAULE_POINT = -1;
 	//用户的积分
 	protected int mPoints = DEFAULE_POINT;
@@ -48,30 +46,20 @@ public class PointKernel {
 	protected List<AdInfo> mltMonitored = new ArrayList<AdInfo>();
 	//已经下载安装的 app
 	protected List<AdInfo> mltInstalled = new ArrayList<AdInfo>();
-	
-//	protected String KEY_CACHE = "93089433021020214102";
+
+	//	protected String KEY_CACHE = "93089433021020214102";
 	protected final String KEY_POINT = "91259234021020214102";
 	protected final String KEY_LIST_ADINFO = "15859874021020214102";
 	protected final String KEY_LIST_INSTALL = "27893935021020214102";
-	//定时器周期10秒钟
-	protected final long KEY_PERIOD = 60000;
-	
 	//缓存器
 	protected AfPrivateCaches mCache;// = AfPrivateCaches.getInstance(KEY_CACHE);
 
-	//点数获取定时器
-	protected Timer mTimer = null;
-	//开始监听的时间
-	protected Date mTime = new Date();
-	//监听时间的长度（一个小时关闭监听）
-	protected AfTimeSpan mSpan = AfTimeSpan.FromHours(1);
-	
 	public PointKernel(String key) {
 		// TODO Auto-generated constructor stub
 		mCache = AfPrivateCaches.getInstance(key);
 		doReadCache();
 		if (mltMonitored.size() > 0) {
-			doStartTimer();
+			PointTimer.doStartTimer(this);
 		}
 	}
 	/**
@@ -89,42 +77,31 @@ public class PointKernel {
 		for (AdInfo element : mltMonitored) {
 			if (element.equals(info)) {
 				element.mDate = new Date();
-				mTime = new Date();
+				PointTimer.resetTime();
 				return false;
 			}
 		}
 		mltMonitored.add(new AdInfo(info));
 		doUpdateCache();//更新缓存
-		doStartTimer();
+		PointTimer.doStartTimer(this);
 		return true;
 	}
-	
-	public void doStartTimer() {
-		if (mTimer == null) {
-			mTime = new Date();
-			mTimer = new Timer();
-			mTimer.schedule(new AfTimerTask() {
-				@Override
-				protected void onTimer() {
-					// TODO Auto-generated method stub
-					doCheckAttractPoint();
-					if (AfTimeSpan.FromDate(mTime, new Date()).GreaterThan(mSpan)) {
-						doStopTimer();
-					}
-				}
-			}, KEY_PERIOD, KEY_PERIOD);
-		}
+
+	@Override
+	protected void onTimer() {
+		// TODO Auto-generated method stub
+		doCheckAttractPoint();
 	}
-	
+
 	protected void doCheckAttractPoint() {
 		// TODO Auto-generated method stub
 		String service = Context.ACTIVITY_SERVICE;
 		AfApplication app = AfApplication.getApp();
 		ActivityManager am = (ActivityManager) app.getSystemService(service);
-		List<RunningAppProcessInfo> proces = am.getRunningAppProcesses();
-		List<AdInfo> ltInstalled = new ArrayList<PointKernel.AdInfo>();
+		List<ActivityManager.RunningAppProcessInfo> proces = am.getRunningAppProcesses();
+		List<AdInfo> ltInstalled = new ArrayList<AdInfo>();
 		for (AdInfo adinfo : mltMonitored) {
-			for (RunningAppProcessInfo proce : proces) {
+			for (ActivityManager.RunningAppProcessInfo proce : proces) {
 				if (proce.processName.equals(adinfo.info.Package)) {
 					if(AfApplication.getNetworkStatus() == AfNetwork.TYPE_NONE){
 						String currency = AdvertAdapter.getInstance().getCurrency();
@@ -147,6 +124,11 @@ public class PointKernel {
 
 	protected void doUpdateCache() {
 		// TODO Auto-generated method stub
+		int point = mCache.getInt(KEY_POINT,mPoints);
+		if (mPoints - point > 500){
+			doNotifyPointCheat(point, mPoints);
+			mPoints = point;
+		}
 		mCache.put(KEY_POINT, mPoints);
 		mCache.putList(KEY_LIST_ADINFO, mltMonitored, AdInfo.class);
 		mCache.putList(KEY_LIST_INSTALL, mltInstalled, AdInfo.class);
@@ -158,7 +140,7 @@ public class PointKernel {
 		mltMonitored = mCache.getList(KEY_LIST_ADINFO, AdInfo.class);
 		mltInstalled = mCache.getList(KEY_LIST_INSTALL, AdInfo.class);
 	}
-	
+
 	protected void doDivertInstalled(AdInfo adinfo) {
 		// TODO Auto-generated method stub
 		for (AdInfo element : mltInstalled) {
@@ -168,20 +150,18 @@ public class PointKernel {
 		}
 		adinfo.mDate = new Date();
 		mltInstalled.add(adinfo);
-		mPoints = mPoints += adinfo.info.Points;
-		doNotifyAttractPoint(adinfo.info.Points,mPoints);
+		mPoints = mPoints + adinfo.info.Points;
+		doNotifyPointAttract(adinfo.info.Points, mPoints);
 	}
 
-	protected void doNotifyAttractPoint(int accretion, int points) {
+	protected void doNotifyPointAttract(int accretion, int points) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
-	public void doStopTimer() {
-		if (mTimer != null) {
-			mTimer.cancel();
-			mTimer = null;
-		}
+	protected void doNotifyPointCheat(int point, int cheat) {
+		// TODO Auto-generated method stub
+
 	}
 
 	public int getPoint() {
@@ -202,7 +182,7 @@ public class PointKernel {
 		mCache.put(KEY_POINT, mPoints);
 		return mPoints;
 	}
-	
+
 	public boolean hasMonitored(AdCustom custom) {
 		// TODO Auto-generated method stub
 		for (AdInfo info : mltMonitored) {
@@ -212,7 +192,7 @@ public class PointKernel {
 		}
 		return false;
 	}
-	
+
 	public boolean hasInstalled(AdCustom custom) {
 		// TODO Auto-generated method stub
 		for (AdInfo info : mltInstalled) {

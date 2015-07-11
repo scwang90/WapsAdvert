@@ -138,7 +138,7 @@ public class WapsAdapter extends AdvertAdapter {
 			}else {
 				IS_WAPSWORKS = false;
 			}
-			UNIT_PRICE = OnlineKey.getInteger(context, OnlineKey.KEY_UNITPRICE,UNIT_PRICE, "get unitprice");
+			UNIT_PRICE = OnlineKey.getInteger(context, OnlineKey.KEY_UNITPRICE, UNIT_PRICE, "get unitprice");
 		} catch (Throwable e) {
 			// TODO: handle exception
 			IS_WAPSWORKS = false;

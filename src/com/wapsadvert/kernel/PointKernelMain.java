@@ -1,10 +1,24 @@
 package com.wapsadvert.kernel;
 
 import com.andadvert.model.AdCustom;
+import com.andframe.application.AfApplication;
+import com.wapsadvert.kernel.event.WapsEvent;
 
 public class PointKernelMain {
 	
-	static PointKernel kernel = new PointKernel("93089433021020214102");
+	static PointKernel kernel = new PointKernel("93089433021020214102"){
+		@Override
+		protected void doNotifyPointAttract(int accretion, int points) {
+			super.doNotifyPointAttract(accretion, points);
+			AfApplication.getApp().onEvent(WapsEvent.WAPS_POINT_MAIN,""+points);
+		}
+
+		@Override
+		protected void doNotifyPointCheat(int point, int cheat) {
+			super.doNotifyPointCheat(point, cheat);
+			AfApplication.getApp().onEvent(WapsEvent.WAPS_CHEAT_MAIN,""+point);
+		}
+	};
 
 	public static final int DEFAULE_POINT = PointKernel.DEFAULE_POINT;
 
