@@ -1,7 +1,5 @@
 package com.wapsadvert.kernel.activity;
 
-import java.util.List;
-
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -29,10 +27,13 @@ import com.andframe.layoutbind.AfModuleProgress;
 import com.andframe.layoutbind.AfModuleProgressImpl;
 import com.andframe.layoutbind.AfModuleTitlebar;
 import com.andframe.thread.AfHandlerTask;
-import com.appoffer.AppConnect;
 import com.wapsadvert.R;
 import com.wapsadvert.kernel.PointKernelMain;
 import com.wapsadvert.kernel.application.WapsBackService;
+
+import org.apache.AppConnect;
+
+import java.util.List;
 
 public class AdvMainActivity extends AfActivity {
 	

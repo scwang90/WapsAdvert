@@ -1,7 +1,5 @@
 package com.attract.activity;
 
-import java.util.List;
-
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -29,12 +27,15 @@ import com.andframe.layoutbind.AfModuleProgress;
 import com.andframe.layoutbind.AfModuleProgressImpl;
 import com.andframe.layoutbind.AfModuleTitlebar;
 import com.andframe.thread.AfHandlerTask;
-import com.appoffer.AppConnect;
 import com.attract.application.AdvAttractAdapter;
 import com.attract.fragment.AttractFragmentBase;
 import com.attract.kernel.AttractStatistics;
 import com.wapsadvert.R;
 import com.wapsadvert.kernel.PointKernelAttract;
+
+import org.apache.AppConnect;
+
+import java.util.List;
 
 public class AdvAttractActivity extends AfActivity implements OnClickListener {
 	

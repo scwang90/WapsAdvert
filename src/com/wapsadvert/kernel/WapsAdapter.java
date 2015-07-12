@@ -1,8 +1,5 @@
 package com.wapsadvert.kernel;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
@@ -17,33 +14,40 @@ import com.andadvert.util.DS;
 import com.andframe.application.AfApplication;
 import com.andframe.application.AfExceptionHandler;
 import com.andframe.caches.AfPrivateCaches;
-import com.appoffer.AdInfo;
-import com.appoffer.AppConnect;
-import com.appoffer.UpdatePointsNotifier;
 import com.wapsadvert.kernel.activity.AdvMainActivity;
+
+import org.apache.AdInfo;
+import org.apache.AppConnect;
+import org.apache.UpdatePointsNotifier;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 万普广告适配器
+ *
  * @author 树朾
  */
 public class WapsAdapter extends AdvertAdapter {
 
-	private static final String APP_ID = "b6a563e2e4451f98b47370b05827cd9a";
+    private static String APP_ID = "b6a563e2e4451f98b47370b05827cd9a";
 
-	public static final String KEY_INITUNINSTALLAD = "10505902520282114102";
+    public static final String KEY_INITUNINSTALLAD = "10505902520282114102";
 
-	public static final String KEY_ISWAPSWORKS = "05143911204192114102";
+    public static final String KEY_ISWAPSWORKS = "05143911204192114102";
 
-	private static int UNIT_PRICE = 70;
+    private static int UNIT_PRICE = 70;
 
-	protected static boolean IS_WAPSWORKS = true;
-	
-	/** 躲避广告结束日期 */
+    protected static boolean IS_WAPSWORKS = true;
+
+    /**
+     * 躲避广告结束日期
+     */
 //	protected static Date ENDDATE = new Date(0);
 //	 private String mChannel = "poetry";
-	 private String mChannel = "google";
+    private String mChannel = "google";
 //	 private String mChannel = "appchina";
-	// private String mChannel = "liqu";
+    // private String mChannel = "liqu";
 //	 private String mChannel = "goapk";
 //	 private String mChannel = "wandoujia";
 
@@ -67,88 +71,83 @@ public class WapsAdapter extends AdvertAdapter {
 //	 private String mChannel = "waps";
 //	 private String mChannel = "hide";
 
-	 private String mDefChannel = mChannel;
+    private String mDefChannel = mChannel;
 
-	 //	protected static String UNIT_POINT = "daa48666f050fbd0";//"积分";
-	protected static String UNIT_POINT = "092c0e35ab4a3811";//"墨点";
-	
-	static{
-		if (UNIT_POINT != null && UNIT_POINT.length() > 4) {
-//			String key = Application.getApp().getDesKey();
-//			UNIT_POINT = new AfDesHelper(key).decryptNoException(UNIT_POINT);
-			UNIT_POINT = DS.d(UNIT_POINT );
-		}
-	}
-	
-	public static void initialize(AfApplication application,String defchannel){
-		application.setSingleton(AdvertAdapter.KEY_ADVERT, new WapsAdapter(defchannel));
-	}
-	
-	private WapsAdapter(String defchannel) {
-		// TODO Auto-generated constructor stub
-		mDefChannel = defchannel;
-		mChannel = getChannel();
-//		String mchanel = AfApplication.getApp().getMetaData("chanel");
-//		if (AfStringUtil.isNotEmpty(mchanel)) {
-//			mChannel = mchanel;
-//		}
-	}
-	
-	@Override
-	public String getDefChannel() {
-		// TODO Auto-generated method stub
-		return mDefChannel;
-	}
+    //	protected static String UNIT_POINT = "daa48666f050fbd0";//"积分";
+    protected static String UNIT_POINT = "092c0e35ab4a3811";//"墨点";
 
-	@Override
-	public String getChannel() {
-		// TODO Auto-generated method stub
-		String channel = super.getChannel();
-		if (DEFAULT_CHANNEL.equals(channel)) {
-			return mChannel;
-		}
-		return channel;
-	}
+    static {
+        if (UNIT_POINT != null && UNIT_POINT.length() > 4) {
+            UNIT_POINT = DS.d(UNIT_POINT);
+        }
+    }
 
-	@Override
-	public boolean isSupportPoint() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-	
-	@Override
-	public boolean isSupportCustom() {
-		// TODO Auto-generated method stub
-		return true;
-	}
+    public static void initialize(AfApplication application, String defchannel, String appId) {
+        APP_ID = appId;
+        application.setSingleton(AdvertAdapter.KEY_ADVERT, new WapsAdapter(defchannel));
+    }
 
-	protected void onCheckOnlineHideFail(Throwable ex){
+    private WapsAdapter(String defchannel) {
+        // TODO Auto-generated constructor stub
+        mDefChannel = defchannel;
+        mChannel = getChannel();
+    }
+
+    @Override
+    public String getDefChannel() {
+        // TODO Auto-generated method stub
+        return mDefChannel;
+    }
+
+    @Override
+    public String getChannel() {
+        // TODO Auto-generated method stub
+        String channel = super.getChannel();
+        if (DEFAULT_CHANNEL.equals(channel)) {
+            return mChannel;
+        }
+        return channel;
+    }
+
+    @Override
+    public boolean isSupportPoint() {
+        // TODO Auto-generated method stub
+        return true;
+    }
+
+    @Override
+    public boolean isSupportCustom() {
+        // TODO Auto-generated method stub
+        return true;
+    }
+
+    protected void onCheckOnlineHideFail(Throwable ex) {
 //		Calendar calendar = Calendar.getInstance();
 //		calendar.set(2014, 8-1, 29);
 //		Date ENDDATE = calendar.getTime();
 //		IS_HIDE = !new Date().after(ENDDATE);
-	}
-	
-	@Override
-	public void initInstance(Context context) {
-		// TODO Auto-generated method stub
-		try {
-			if (AfPrivateCaches.getInstance().getBoolean(KEY_ISWAPSWORKS, true)) {
-				AppConnect.getInstance(APP_ID, mChannel, context);
-			}else {
-				IS_WAPSWORKS = false;
-			}
-			UNIT_PRICE = OnlineKey.getInteger(context, OnlineKey.KEY_UNITPRICE, UNIT_PRICE, "get unitprice");
-		} catch (Throwable e) {
-			// TODO: handle exception
-			IS_WAPSWORKS = false;
-			AfExceptionHandler.handler(e, "waps initInstance error");
-		}
-		
+    }
+
+    @Override
+    public void initInstance(Context context) {
+        // TODO Auto-generated method stub
+        try {
+            if (AfPrivateCaches.getInstance().getBoolean(KEY_ISWAPSWORKS, true)) {
+                AppConnect.getInstance(APP_ID, mChannel, context);
+            } else {
+                IS_WAPSWORKS = false;
+            }
+            UNIT_PRICE = OnlineKey.getInteger(context, OnlineKey.KEY_UNITPRICE, UNIT_PRICE, "get unitprice");
+        } catch (Throwable e) {
+            // TODO: handle exception
+            IS_WAPSWORKS = false;
+            AfExceptionHandler.handler(e, "waps initInstance error");
+        }
+
 //		IS_WAPSWORKS = date1.after(date2);
-		if (IS_WAPSWORKS) {
-			/*if("poetry".equals(mChannel)){
-				IS_HIDE = false;
+        if (IS_WAPSWORKS) {
+            /*if("poetry".equals(mChannel)){
+                IS_HIDE = false;
 				OnlineDeploy deploy = new OnlineDeploy();
 				deploy.HideAd = false;
 				deploy.Name = "poetry";
@@ -156,195 +155,199 @@ public class WapsAdapter extends AdvertAdapter {
 				deploy.Urls = "http://attract";
 				this.helper.setValue(deploy);
 				this.notifyBusinessModelStart(deploy);
-			}else */if ("update".equals(mChannel) ||"waps".equals(mChannel) ||"huali".equals(mChannel)) {
+			}else */
+            if ("update".equals(mChannel) || "waps".equals(mChannel) || "huali".equals(mChannel)) {
 //				IS_HIDE = false;
 //				this.notifyBusinessModelStart(null);
-				onCheckOnlineHideFail(null);
-				doCheckOnlineHide(context);
-			}else if(!"hide".equals(mChannel)){
-				onCheckOnlineHideFail(null);
-				doCheckOnlineHide(context);
-			}
-			 //预加载自定义广告内容（仅在使用了自定义广告、抽屉广告或迷你广告的情况，才需要添加）
-			 AppConnect.getInstance(context).initAdInfo();
-			// 预加载功能广告内容（仅在使用到功能广告的情况，才需要添加）
-			// AppConnect.getInstance(context).initFunAd(context);
-			// 预加载插屏广告内容（仅在使用到插屏广告的情况，才需要添加）
-			AppConnect.getInstance(context).initPopAd(context);
-			// 禁用错误报告
-			// AppConnect.getInstance(context).setCrashReport(false);
-			// 初始化卸载广告
-			try {
-				if (AfPrivateCaches.getInstance().getBoolean(KEY_INITUNINSTALLAD, true)) {
-					AppConnect.getInstance(context).initUninstallAd(context);
-				}else {
-					/**
-					 * 经过日志验证以下通知会发生，注释掉
-					 */
-					//new NotiftyMail(SginType.TITLE, "initUninstall", "false").sendTask();
-				}
-			} catch (Throwable e) {
-				// TODO: handle exception
-				AfExceptionHandler.handler(e, "initUninstallAd异常");
-			}
-		}
-	}
+                onCheckOnlineHideFail(null);
+                doCheckOnlineHide(context);
+            } else if (!"hide".equals(mChannel)) {
+                onCheckOnlineHideFail(null);
+                doCheckOnlineHide(context);
+            }
+            //预加载自定义广告内容（仅在使用了自定义广告、抽屉广告或迷你广告的情况，才需要添加）
+            AppConnect.getInstance(context).initAdInfo();
+            // 预加载功能广告内容（仅在使用到功能广告的情况，才需要添加）
+            // AppConnect.getInstance(context).initFunAd(context);
+            // 预加载插屏广告内容（仅在使用到插屏广告的情况，才需要添加）
+            AppConnect.getInstance(context).initPopAd(context);
+            // 禁用错误报告
+            AppConnect.getInstance(context).setCrashReport(false);
+            // 初始化卸载广告
+            try {
+                if (AfPrivateCaches.getInstance().getBoolean(KEY_INITUNINSTALLAD, true)) {
+                    AppConnect.getInstance(context).initUninstallAd(context);
+                } else {
+                    /**
+                     * 经过日志验证以下通知会发生，注释掉
+                     */
+                    //new NotiftyMail(SginType.TITLE, "initUninstall", "false").sendTask();
+                }
+            } catch (Throwable e) {
+                // TODO: handle exception
+                AfExceptionHandler.handler(e, "initUninstallAd异常");
+            }
+        }
+    }
 
-	@Override
-	public AdCustom getAdCustom(Context context) {
-		// TODO Auto-generated method stub
-		if (IS_WAPSWORKS) {
-			UNIT_PRICE = OnlineKey.getInteger(context, OnlineKey.KEY_UNITPRICE,UNIT_PRICE, "get unitprice");
-			return doAdInfoToAdCustom(AppConnect.getInstance(context).getAdInfo());
-		}
-		return null;
-	}
-	
-	@Override
-	@SuppressWarnings("unchecked")
-	public List<AdCustom> getAdCustomList(Context context) {
-		// TODO Auto-generated method stub
-		List<AdCustom> list = new ArrayList<AdCustom>();
-		if (IS_WAPSWORKS) {
-			UNIT_PRICE = OnlineKey.getInteger(context, OnlineKey.KEY_UNITPRICE,UNIT_PRICE, "get unitprice");
-			List<AdInfo> ads = AppConnect.getInstance(context).getAdInfoList();
-			if (ads != null) {
-				for (AdInfo info : ads) {
-					list.add(doAdInfoToAdCustom(info));
-				}
-			}
-		}
-		return list;
-	}
-	
-	@Override
-	public void showDetailAd(Context context, AdCustom adinfo) {
-		// TODO Auto-generated method stub
-		if (IS_WAPSWORKS) {
-			AppConnect.getInstance(context).clickAd(context, adinfo.Id);
-		}
-	}
-	
-	@Override
-	public void downloadAd(Context context, AdCustom adinfo) {
-		// TODO Auto-generated method stub
-		if (IS_WAPSWORKS) {
-			AppConnect.getInstance(context).downloadAd(context, adinfo.Id);
-		}
-	}
+    @Override
+    public AdCustom getAdCustom(Context context) {
+        // TODO Auto-generated method stub
+        if (IS_WAPSWORKS) {
+            UNIT_PRICE = OnlineKey.getInteger(context, OnlineKey.KEY_UNITPRICE, UNIT_PRICE, "get unitprice");
+            return doAdInfoToAdCustom(AppConnect.getInstance(context).getAdInfo());
+        }
+        return null;
+    }
 
-	private AdCustom doAdInfoToAdCustom(AdInfo info) {
-		// TODO Auto-generated method stub
-		if (info != null && IS_WAPSWORKS) {
-			AdCustom custom = new AdCustom();
-			custom.Action = info.getAction();
-			custom.Icon = info.getAdIcon();
-			custom.Id = info.getAdId();
-			custom.Name = info.getAdName();
-			custom.Package = info.getAdPackage();
-			custom.Points = info.getAdPoints();
-			custom.Text = info.getAdText();
-			custom.Description = info.getDescription();
-			custom.ImageUrls = info.getImageUrls();
-			custom.Filesize = info.getFilesize()+"MB";
-			custom.Provider = info.getProvider();
-			custom.Version = info.getVersion();
-			custom.Points = UNIT_PRICE;
-			return custom;
-		}
-		return null;
-	}
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<AdCustom> getAdCustomList(Context context) {
+        // TODO Auto-generated method stub
+        List<AdCustom> list = new ArrayList<AdCustom>();
+        if (IS_WAPSWORKS) {
+            UNIT_PRICE = OnlineKey.getInteger(context, OnlineKey.KEY_UNITPRICE, UNIT_PRICE, "get unitprice");
+            List<AdInfo> ads = AppConnect.getInstance(context).getAdInfoList();
+            if (ads != null) {
+                for (AdInfo info : ads) {
+                    list.add(doAdInfoToAdCustom(info));
+                }
+            }
+        }
+        return list;
+    }
 
-	@Override
-	public void uninstallAd(Context context) {
-		// TODO Auto-generated method stub
-		if (IS_WAPSWORKS) {
-			AppConnect.getInstance(context).close();
-		}
-	}
+    @Override
+    public void showDetailAd(Context context, AdCustom adinfo) {
+        // TODO Auto-generated method stub
+        if (IS_WAPSWORKS) {
+            AppConnect.getInstance(context).clickAd(context, adinfo.Id);
+        }
+    }
 
-	@Override
-	public String getCurrency() {
-		return UNIT_POINT;
-	}
-	
-	@Override
-	public boolean isHide() {
-		// TODO Auto-generated method stub
-		if (!IS_WAPSWORKS) {
-			return true;
-		}
+    @Override
+    public void downloadAd(Context context, AdCustom adinfo) {
+        // TODO Auto-generated method stub
+        if (IS_WAPSWORKS) {
+            AppConnect.getInstance(context).downloadAd(context, adinfo.Id);
+        }
+    }
+
+    private AdCustom doAdInfoToAdCustom(AdInfo info) {
+        // TODO Auto-generated method stub
+        if (info != null && IS_WAPSWORKS) {
+            AdCustom custom = new AdCustom();
+            custom.Action = info.getAction();
+            custom.Icon = info.getAdIcon();
+            custom.Id = info.getAdId();
+            custom.Name = info.getAdName();
+            custom.Package = info.getAdPackage();
+            custom.Points = info.getAdPoints();
+            custom.Text = info.getAdText();
+            custom.Description = info.getDescription();
+            custom.ImageUrls = info.getImageUrls();
+            custom.Filesize = info.getFilesize() + "MB";
+            custom.Provider = info.getProvider();
+            custom.Version = info.getVersion();
+            custom.Points = info.getAdPoints();
+            if (custom.Points == 0){
+                custom.Points = UNIT_PRICE;
+            }
+            return custom;
+        }
+        return null;
+    }
+
+    @Override
+    public void uninstallAd(Context context) {
+        // TODO Auto-generated method stub
+        if (IS_WAPSWORKS) {
+            AppConnect.getInstance(context).close();
+        }
+    }
+
+    @Override
+    public String getCurrency() {
+        return UNIT_POINT;
+    }
+
+    @Override
+    public boolean isHide() {
+        // TODO Auto-generated method stub
+        if (!IS_WAPSWORKS) {
+            return true;
+        }
 //		if (IS_HIDE && !"hide".equals(mChannel)) {
 //			doCheckOnlineHide(AfApplication.getApp());
 //		}
-		return IS_HIDE;
-	}
+        return IS_HIDE;
+    }
 
-	@Override
-	public String getConfig(Context context, String key, String vdefault) {
-		// TODO Auto-generated method stub
-		try {
-			String value = AppConnect.getInstance(context).getConfig(key, vdefault);
-			if ("".equals(value) && !"".equals(vdefault)) {
-				return vdefault;
-			}
-			return value;
-		} catch (Throwable e) {
-			// TODO: handle exception
-			return vdefault;
-		}
-	}
+    @Override
+    public String getConfig(Context context, String key, String vdefault) {
+        // TODO Auto-generated method stub
+        try {
+            String value = AppConnect.getInstance(context).getConfig(key, vdefault);
+            if ("".equals(value) && !"".equals(vdefault)) {
+                return vdefault;
+            }
+            return value;
+        } catch (Throwable e) {
+            // TODO: handle exception
+            return vdefault;
+        }
+    }
 
-	@Override
-	public void showOffers(Context context) {
-		// TODO Auto-generated method stub
-		if (IS_WAPSWORKS) {
+    @Override
+    public void showOffers(Context context) {
+        // TODO Auto-generated method stub
+        if (IS_WAPSWORKS) {
 //			AppConnect.getInstance(context).showOffers(context);
-			context.startActivity(new Intent(context, AdvMainActivity.class));
-		}
-	}
+            context.startActivity(new Intent(context, AdvMainActivity.class));
+        }
+    }
 
-	@Override
-	public void showAppOffers(Context context) {
-		// TODO Auto-generated method stub
-		if (IS_WAPSWORKS) {
+    @Override
+    public void showAppOffers(Context context) {
+        // TODO Auto-generated method stub
+        if (IS_WAPSWORKS) {
 //			AppConnect.getInstance(context).showAppOffers(context);
-			context.startActivity(new Intent(context, AdvMainActivity.class));
-		}
-	}
-	
-	@Override
-	public void showGameOffers(Context context) {
-		// TODO Auto-generated method stub
-		if (IS_WAPSWORKS) {
-//			AppConnect.getInstance(context).showGameOffers(context);
-			context.startActivity(new Intent(context, AdvMainActivity.class));
-		}
-	}
+            context.startActivity(new Intent(context, AdvMainActivity.class));
+        }
+    }
 
-	@Override
-	public void showBannerAd(Context context, LinearLayout layout) {
-		// TODO Auto-generated method stub
-		if (IS_WAPSWORKS) {
+    @Override
+    public void showGameOffers(Context context) {
+        // TODO Auto-generated method stub
+        if (IS_WAPSWORKS) {
+//			AppConnect.getInstance(context).showGameOffers(context);
+            context.startActivity(new Intent(context, AdvMainActivity.class));
+        }
+    }
+
+    @Override
+    public void showBannerAd(Context context, LinearLayout layout) {
+        // TODO Auto-generated method stub
+        if (IS_WAPSWORKS) {
 //			AppConnect.getInstance(context).showBannerAd(context, layout);
 //			AppConnect.getInstance(context).showPopAd(context);
-		}
-	}
+        }
+    }
 
-	@Override
-	public void showPopAd(Context context) {
-		// TODO Auto-generated method stub
-		if (IS_WAPSWORKS) {
-			AppConnect.getInstance(context).showPopAd(context);
-		}
-	}
+    @Override
+    public void showPopAd(Context context) {
+        // TODO Auto-generated method stub
+        if (IS_WAPSWORKS) {
+            AppConnect.getInstance(context).showPopAd(context);
+        }
+    }
 
-	@Override
-	public void awardPoints(Context context, int award,
-			final PointsNotifier notifier) {
-		// TODO Auto-generated method stub
-		if (IS_WAPSWORKS) {
-			notifier.getPoints(getCurrency(), PointKernelMain.awardPoints(award));
+    @Override
+    public void awardPoints(Context context, int award,
+                            final PointsNotifier notifier) {
+        // TODO Auto-generated method stub
+        if (IS_WAPSWORKS) {
+            notifier.getPoints(getCurrency(), PointKernelMain.awardPoints(award));
 //			AppConnect.getInstance(context).awardPoints(award,
 //					new UpdatePointsNotifier() {
 //					private int mLast = 0;
@@ -368,21 +371,21 @@ public class WapsAdapter extends AdvertAdapter {
 //							notifier.getPoints(currency, mLast = point);
 //						}
 //					});
-		} else {
-			notifier.getPointsFailed("");
-		}
-	}
+        } else {
+            notifier.getPointsFailed("");
+        }
+    }
 
-	@Override
-	public void spendPoints(Context context, int spend,
-			final PointsNotifier notifier) {
-		// TODO Auto-generated method stub
-		if (IS_WAPSWORKS) {
-			if (PointKernelMain.getPoint() < spend) {
-				notifier.getPointsFailed(getCurrency()+"余额不足"+spend);
-				return ;
-			}		
-			notifier.getPoints(getCurrency(), PointKernelMain.spendPoints(spend));
+    @Override
+    public void spendPoints(Context context, int spend,
+                            final PointsNotifier notifier) {
+        // TODO Auto-generated method stub
+        if (IS_WAPSWORKS) {
+            if (PointKernelMain.getPoint() < spend) {
+                notifier.getPointsFailed(getCurrency() + "余额不足" + spend);
+                return;
+            }
+            notifier.getPoints(getCurrency(), PointKernelMain.spendPoints(spend));
 //			if (PointStatistics.getPoint() < spend) {
 //				notifier.getPointsFailed(UNIT_POINT+"余额不足"+spend);
 //				return ;
@@ -411,71 +414,72 @@ public class WapsAdapter extends AdvertAdapter {
 //							notifier.getPoints(currency, mLast = point);
 //						}
 //					});
-		} else {
-			notifier.getPointsFailed("");
-		}
-	}
+        } else {
+            notifier.getPointsFailed("");
+        }
+    }
 
-	@Override
-	public void getPoints(Context context, final PointsNotifier notifier) {
-		// TODO Auto-generated method stub
-		if (IS_WAPSWORKS) {
-			int point = PointKernelMain.getPoint();
-			if (point != PointKernelMain.DEFAULE_POINT) {
-				String currency = getCurrency();
-				notifier.getPoints(currency , PointKernelMain.getPoint());
-				PointStatistics.doStaticsPoint(point, currency);
-				return;
-			}
-			AppConnect.getInstance(context).getPoints(
-					new UpdatePointsNotifier() {
-						private int mLast = 0;
-						private int mCount = 0;
-						@Override
-						public void getUpdatePointsFailed(String error) {
-							// TODO Auto-generated method stub
-							notifier.getPointsFailed(error);
-						}
+    @Override
+    public void getPoints(Context context, final PointsNotifier notifier) {
+        // TODO Auto-generated method stub
+        if (IS_WAPSWORKS) {
+            int point = PointKernelMain.getPoint();
+            if (point != PointKernelMain.DEFAULE_POINT) {
+                String currency = getCurrency();
+                notifier.getPoints(currency, PointKernelMain.getPoint());
+                PointStatistics.doStaticsPoint(point, currency);
+                return;
+            }
+            AppConnect.getInstance(context).getPoints(
+                    new UpdatePointsNotifier() {
+                        private int mLast = 0;
+                        private int mCount = 0;
 
-						@Override
-						public void getUpdatePoints(String currency, int point) {
-							// TODO Auto-generated method stub
+                        @Override
+                        public void getUpdatePointsFailed(String error) {
+                            // TODO Auto-generated method stub
+                            notifier.getPointsFailed(error);
+                        }
+
+                        @Override
+                        public void getUpdatePoints(String currency, int point) {
+                            // TODO Auto-generated method stub
 //							UNIT_POINT = currency;
-							currency = getCurrency();
-							if (++mCount > 1) {
-								//new NotiftyMail(SginType.ALL,"多次调用 getpoint", "count="+mCount+" point="+point+" last="+mLast).sendTask();
-								if (mLast == point) {
-									return;
-								}
-							}
-							PointKernelMain.awardPoints(point-PointKernelMain.getPoint());
-							PointStatistics.doStaticsPoint(point, currency);
-							notifier.getPoints(currency, mLast = point);
-						}
-					});
-		} else {
-			notifier.getPointsFailed("");
-		}
-	}
+                            currency = getCurrency();
+                            if (++mCount > 1) {
+                                //new NotiftyMail(SginType.ALL,"多次调用 getpoint", "count="+mCount+" point="+point+" last="+mLast).sendTask();
+                                if (mLast == point) {
+                                    return;
+                                }
+                            }
+                            PointKernelMain.awardPoints(point - PointKernelMain.getPoint());
+                            PointStatistics.doStaticsPoint(point, currency);
+                            notifier.getPoints(currency, mLast = point);
+                        }
+                    });
+        } else {
+            notifier.getPointsFailed("");
+        }
+    }
 
-	@Override
-	public View getPopAdView(Context context) {
-		// TODO Auto-generated method stub
-		if (IS_WAPSWORKS) {
-			return AppConnect.getInstance(context).getPopAdView(context);
-		} else {
-			return super.getPopAdView(context);
-		}
-	}
+    @Override
+    public View getPopAdView(Context context) {
+        // TODO Auto-generated method stub
+        if (IS_WAPSWORKS) {
+            return AppConnect.getInstance(context).getPopAdView(context);
+        } else {
+            return super.getPopAdView(context);
+        }
+    }
 
-	@Override
-	public boolean showMore(Context context) {
-		// TODO Auto-generated method stub
-		if (IS_WAPSWORKS) {
-			AppConnect.getInstance(context).showMore(context);
-			return true;
-		} else {
-			return false;
-		}
-	}
+    @Override
+    public boolean showMore(Context context) {
+        // TODO Auto-generated method stub
+        if (IS_WAPSWORKS) {
+            AppConnect.getInstance(context).showMore(context);
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

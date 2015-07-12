@@ -6,6 +6,7 @@ import java.util.List;
 
 import android.app.ActivityManager;
 import android.content.Context;
+import android.os.Message;
 import android.widget.Toast;
 
 import com.andadvert.AdvertAdapter;
@@ -13,10 +14,11 @@ import com.andadvert.model.AdCustom;
 import com.andframe.application.AfApplication;
 import com.andframe.application.AfExceptionHandler;
 import com.andframe.caches.AfPrivateCaches;
+import com.andframe.thread.AfHandlerTimerTask;
 import com.andframe.thread.AfTimerTask;
 import com.andframe.util.android.AfNetwork;
 
-public class PointKernel extends AfTimerTask{
+public class PointKernel extends AfHandlerTimerTask{
 	
 	public static class AdInfo{
 		public Date mDate;
@@ -88,9 +90,9 @@ public class PointKernel extends AfTimerTask{
 	}
 
 	@Override
-	protected void onTimer() {
-		// TODO Auto-generated method stub
+	protected boolean onHandleTimer(Message msg) {
 		doCheckAttractPoint();
+		return true;
 	}
 
 	protected void doCheckAttractPoint() {
