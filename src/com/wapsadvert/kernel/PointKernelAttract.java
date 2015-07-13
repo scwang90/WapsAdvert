@@ -6,6 +6,7 @@ import java.util.List;
 import com.andadvert.model.AdCustom;
 import com.andframe.application.AfApplication;
 import com.andframe.caches.AfPrivateCaches;
+import com.attract.kernel.AttractStatistics;
 import com.wapsadvert.kernel.event.WapsEvent;
 
 public class PointKernelAttract{
@@ -32,6 +33,7 @@ public class PointKernelAttract{
 		@Override
 		protected void doNotifyPointAttract(int accretion, int points) {
 			super.doNotifyPointAttract(accretion, points);
+			AttractStatistics.doStaticsPoint(points);
 			AfApplication.getApp().onEvent(WapsEvent.WAPS_POINT_ATTRACT,""+points);
 		}
 

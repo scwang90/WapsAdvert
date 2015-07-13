@@ -1,5 +1,7 @@
 package com.wapsadvert.kernel;
 
+import com.andadvert.AdvertAdapter;
+import com.andadvert.PointStatistics;
 import com.andadvert.model.AdCustom;
 import com.andframe.application.AfApplication;
 import com.wapsadvert.kernel.event.WapsEvent;
@@ -10,6 +12,8 @@ public class PointKernelMain {
 		@Override
 		protected void doNotifyPointAttract(int accretion, int points) {
 			super.doNotifyPointAttract(accretion, points);
+			String currency = AdvertAdapter.getInstance().getCurrency();
+			PointStatistics.doStaticsPoint(points,currency);
 			AfApplication.getApp().onEvent(WapsEvent.WAPS_POINT_MAIN,""+points);
 		}
 

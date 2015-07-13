@@ -156,11 +156,21 @@ public class PointKernel extends AfHandlerTimerTask{
 		doNotifyPointAttract(adinfo.info.Points, mPoints);
 	}
 
+	/**
+	 * 子类监听点数增加
+	 * @param accretion 增量
+	 * @param points 结果
+	 */
 	protected void doNotifyPointAttract(int accretion, int points) {
 		// TODO Auto-generated method stub
 
 	}
 
+	/**
+	 * 子类监听点数作弊
+	 * @param point 正常点数
+	 * @param cheat 作弊结果点数
+	 */
 	protected void doNotifyPointCheat(int point, int cheat) {
 		// TODO Auto-generated method stub
 
