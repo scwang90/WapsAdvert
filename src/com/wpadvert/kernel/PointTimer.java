@@ -1,4 +1,4 @@
-package com.wapsadvert.kernel;
+package com.wpadvert.kernel;
 
 import android.os.Message;
 

@@ -1,4 +1,8 @@
-package com.wapsadvert.kernel.activity;
+package com.wpadvert.kernel.activity;
+
+import java.util.List;
+
+import org.apache.AppConnect;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -27,13 +31,9 @@ import com.andframe.layoutbind.AfModuleProgress;
 import com.andframe.layoutbind.AfModuleProgressImpl;
 import com.andframe.layoutbind.AfModuleTitlebar;
 import com.andframe.thread.AfHandlerTask;
-import com.wapsadvert.R;
-import com.wapsadvert.kernel.PointKernelMain;
-import com.wapsadvert.kernel.application.WapsBackService;
-
-import org.apache.AppConnect;
-
-import java.util.List;
+import com.wpadvert.R;
+import com.wpadvert.kernel.PointKernelMain;
+import com.wpadvert.kernel.application.WpBackService;
 
 public class AdvMainActivity extends AfActivity {
 	
@@ -60,7 +60,7 @@ public class AdvMainActivity extends AfActivity {
 		mSelector.SelectFrame(mProgress);
 		
 		postTask(new LoadingTask());
-		if (WapsBackService.SetBackground(this)) {
+		if (WpBackService.SetBackground(this)) {
 			mTitlebar.getLayout().setBackgroundColor(0x99000000);
 		}
 	}

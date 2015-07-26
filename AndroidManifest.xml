@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.wapsadvert"
+    package="com.wpadvert"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -11,7 +11,7 @@
         android:allowBackup="true">
         <activity  android:name="com.attract.activity.AdvAttractActivity"
             android:screenOrientation="portrait"></activity>
-        <activity  android:name="com.wapsadvert.kernel.activity.AdvMainActivity"
+        <activity  android:name="com.wpadvert.kernel.activity.AdvMainActivity"
             android:screenOrientation="portrait"></activity>
     </application>
 

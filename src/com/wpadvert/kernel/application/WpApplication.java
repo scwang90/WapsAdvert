@@ -1,12 +1,12 @@
-package com.wapsadvert.kernel.application;
+package com.wpadvert.kernel.application;
 
-import com.andframe.activity.framework.AfActivity;
 import com.andframe.activity.AfMainActivity;
+import com.andframe.activity.framework.AfActivity;
 import com.andframe.application.AfApplication;
 import com.attract.application.AttractApplication;
-import com.wapsadvert.kernel.activity.WapsMainActivity;
+import com.wpadvert.kernel.activity.WpMainActivity;
 
-public class WapsApplication extends AfApplication{
+public class WpApplication extends AfApplication{
 
 	@Override
 	public boolean isDebug() {
@@ -17,7 +17,7 @@ public class WapsApplication extends AfApplication{
 	@Override
 	public Class<? extends AfMainActivity> getForegroundClass() {
 		// TODO Auto-generated method stub
-		return WapsMainActivity.class;
+		return WpMainActivity.class;
 	}
 	
 //	@Override
@@ -60,7 +60,7 @@ public class WapsApplication extends AfApplication{
 		// TODO Auto-generated method stub
 		super.onCreate();
 		try {
-			AttractApplication.initialize(new WapsAttractCongfig());
+			AttractApplication.initialize(new WpAttractCongfig());
 		} catch (Throwable e) {
 			// TODO: handle exception
 		}

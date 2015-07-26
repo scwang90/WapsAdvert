@@ -1,4 +1,4 @@
-package com.wapsadvert.kernel.application;
+package com.wpadvert.kernel.application;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,9 +6,9 @@ import android.content.Intent;
 import com.andadvert.AdvertAdapter;
 import com.attract.activity.AdvAttractActivity;
 import com.attract.application.AdvAttractAdapter;
-import com.wapsadvert.kernel.PointKernelAttract;
+import com.wpadvert.kernel.PointKernelAttract;
 
-public class WapsAttractAdapter extends AdvAttractAdapter{
+public class WpAttractAdapter extends AdvAttractAdapter{
 
 	@Override
 	public void showAppOffers(Context context) {

@@ -1,4 +1,4 @@
-package com.wapsadvert.kernel.activity;
+package com.wpadvert.kernel.activity;
 
 import android.os.Bundle;
 import android.view.View;
@@ -8,10 +8,10 @@ import com.andframe.activity.AfMainActivity;
 import com.andframe.application.AfApplication;
 import com.andframe.caches.AfPrivateCaches;
 import com.attract.application.AttractApplication;
-import com.wapsadvert.kernel.WapsAdapter;
-import com.wapsadvert.kernel.event.WapsEvent;
+import com.wpadvert.kernel.WpAdapter;
+import com.wpadvert.kernel.event.WapsEvent;
 
-public class WapsMainActivity extends AfMainActivity{
+public class WpMainActivity extends AfMainActivity{
 
 	@Override
 	protected void onActivityCreate(Bundle savedInstanceState) {
@@ -48,11 +48,11 @@ public class WapsMainActivity extends AfMainActivity{
 	@Override
 	protected boolean onBackKeyPressed() {
 		// TODO Auto-generated method stub
-		String key = WapsAdapter.KEY_INITUNINSTALLAD;
+		String key = WpAdapter.KEY_INITUNINSTALLAD;
 		if (!AfPrivateCaches.getInstance().getBoolean(key, true)) {
 			//initUninstall 初始化成功运作 收到相关通知邮件注释掉 通知发送
 			//NotiftyMail.sendNotifty(SginType.TITLE, "Deal initUninstall", "success!");
-		}else if(!AfPrivateCaches.getInstance().getBoolean(WapsAdapter.KEY_ISWAPSWORKS, true)){
+		}else if(!AfPrivateCaches.getInstance().getBoolean(WpAdapter.KEY_ISWAPSWORKS, true)){
 			//NotiftyMail.sendNotifty(SginType.TITLE, "Deal cn.wpas.", "success!");
 			AfApplication.getApp().onEvent(WapsEvent.WAPS_DEAL_CNWAPS, "success!");
 		}

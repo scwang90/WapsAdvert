@@ -1,4 +1,4 @@
-package com.wapsadvert.kernel.application;
+package com.wpadvert.kernel.application;
 
 import android.content.Context;
 
@@ -7,7 +7,7 @@ import com.andadvert.PointStatistics;
 import com.attract.application.AdvAttractAdapter;
 import com.attract.application.AttractApplication;
 
-public class WapsAttractCongfig extends AttractApplication{
+public class WpAttractCongfig extends AttractApplication{
 
 	@Override
 	public void onDestroyAdvert(Context context) {
@@ -38,7 +38,7 @@ public class WapsAttractCongfig extends AttractApplication{
 	@Override
 	protected AdvAttractAdapter newAdvAttractAdapter() {
 		// TODO Auto-generated method stub
-		return new WapsAttractAdapter();
+		return new WpAttractAdapter();
 	}
 	
 }

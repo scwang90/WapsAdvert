@@ -1,8 +1,8 @@
-package com.wapsadvert.kernel.application;
+package com.wpadvert.kernel.application;
 
 import android.app.Activity;
 
-public class WapsBackService {
+public class WpBackService {
 	
 	public interface IBackService{
 		boolean SetBackground(Activity activity);

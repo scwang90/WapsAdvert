@@ -1,4 +1,4 @@
-package com.wapsadvert.kernel;
+package com.wpadvert.kernel;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,7 +14,7 @@ import com.andadvert.util.DS;
 import com.andframe.application.AfApplication;
 import com.andframe.application.AfExceptionHandler;
 import com.andframe.caches.AfPrivateCaches;
-import com.wapsadvert.kernel.activity.AdvMainActivity;
+import com.wpadvert.kernel.activity.AdvMainActivity;
 
 import org.apache.AdInfo;
 import org.apache.AppConnect;
@@ -28,7 +28,7 @@ import java.util.List;
  *
  * @author 树朾
  */
-public class WapsAdapter extends AdvertAdapter {
+public class WpAdapter extends AdvertAdapter {
 
     private static String APP_ID = "b6a563e2e4451f98b47370b05827cd9a";
 
@@ -84,10 +84,10 @@ public class WapsAdapter extends AdvertAdapter {
 
     public static void initialize(AfApplication application, String defchannel, String appId) {
         APP_ID = appId;
-        application.setSingleton(AdvertAdapter.KEY_ADVERT, new WapsAdapter(defchannel));
+        application.setSingleton(AdvertAdapter.KEY_ADVERT, new WpAdapter(defchannel));
     }
 
-    private WapsAdapter(String defchannel) {
+    private WpAdapter(String defchannel) {
         // TODO Auto-generated constructor stub
         mDefChannel = defchannel;
         mChannel = getChannel();

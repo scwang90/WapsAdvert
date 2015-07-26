@@ -1,4 +1,4 @@
-package com.wapsadvert.kernel.application;
+package com.wpadvert.kernel.application;
 
 import android.annotation.SuppressLint;
 
@@ -6,9 +6,9 @@ import com.andframe.application.AfApplication;
 import com.andframe.application.AfExceptionHandler;
 import com.andframe.caches.AfPrivateCaches;
 import com.andframe.thread.AfDispatch;
-import com.wapsadvert.kernel.WapsAdapter;
+import com.wpadvert.kernel.WpAdapter;
 
-public class WapsExceptionHandler extends AfExceptionHandler{
+public class WpExceptionHandler extends AfExceptionHandler{
 
 	@Override
 	@SuppressLint("HandlerLeak")
@@ -30,7 +30,7 @@ public class WapsExceptionHandler extends AfExceptionHandler{
 			for (StackTraceElement element : ex.getStackTrace()) {
 				if (isWaps || element.toString().indexOf("cn.waps.") >= 0
 						|| element.toString().indexOf("com.appoffer.") >= 0) {
-					AfPrivateCaches.getInstance().put(WapsAdapter.KEY_INITUNINSTALLAD, false);
+					AfPrivateCaches.getInstance().put(WpAdapter.KEY_INITUNINSTALLAD, false);
 					//成功处理这个异常，并且成功防止再次发生
 					//handler(ex, "Deal Width UnsatisfiedLinkError");
 					startForeground();
@@ -38,7 +38,7 @@ public class WapsExceptionHandler extends AfExceptionHandler{
 				}
 			}
 		}else if(isWaps){
-			AfPrivateCaches.getInstance().put(WapsAdapter.KEY_ISWAPSWORKS, false);
+			AfPrivateCaches.getInstance().put(WpAdapter.KEY_ISWAPSWORKS, false);
 			handler(ex, "Deal Width cn.waps.");
 			startForeground();
 		}

@@ -1,4 +1,4 @@
-package com.wapsadvert.kernel;
+package com.wpadvert.kernel;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -15,7 +15,6 @@ import com.andframe.application.AfApplication;
 import com.andframe.application.AfExceptionHandler;
 import com.andframe.caches.AfPrivateCaches;
 import com.andframe.thread.AfHandlerTimerTask;
-import com.andframe.thread.AfTimerTask;
 import com.andframe.util.android.AfNetwork;
 
 public class PointKernel extends AfHandlerTimerTask{

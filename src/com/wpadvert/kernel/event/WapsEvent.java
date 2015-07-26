@@ -1,4 +1,4 @@
-package com.wapsadvert.kernel.event;
+package com.wpadvert.kernel.event;
 
 public class WapsEvent {
 	/** ID前缀 */
