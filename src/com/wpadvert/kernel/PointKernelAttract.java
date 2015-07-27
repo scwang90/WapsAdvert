@@ -7,7 +7,7 @@ import com.andadvert.model.AdCustom;
 import com.andframe.application.AfApplication;
 import com.andframe.caches.AfPrivateCaches;
 import com.attract.kernel.AttractStatistics;
-import com.wpadvert.kernel.event.WapsEvent;
+import com.wpadvert.kernel.event.WpEvent;
 
 public class PointKernelAttract{
 
@@ -34,13 +34,13 @@ public class PointKernelAttract{
 		protected void doNotifyPointAttract(int accretion, int points) {
 			super.doNotifyPointAttract(accretion, points);
 			AttractStatistics.doStaticsPoint(points);
-			AfApplication.getApp().onEvent(WapsEvent.WAPS_POINT_ATTRACT,""+points);
+			AfApplication.getApp().onEvent(WpEvent.WP_POINT_ATTRACT,""+points);
 		}
 
 		@Override
 		protected void doNotifyPointCheat(int point, int cheat) {
 			super.doNotifyPointCheat(point, cheat);
-			AfApplication.getApp().onEvent(WapsEvent.WAPS_CHEAT_ATTRACT,""+point);
+			AfApplication.getApp().onEvent(WpEvent.WP_CHEAT_ATTRACT,""+point);
 		}
 	};
 

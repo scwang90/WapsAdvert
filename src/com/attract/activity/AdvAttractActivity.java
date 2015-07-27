@@ -2,8 +2,6 @@ package com.attract.activity;
 
 import java.util.List;
 
-import org.apache.AppConnect;
-
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -35,6 +33,7 @@ import com.attract.application.AdvAttractAdapter;
 import com.attract.fragment.AttractFragmentBase;
 import com.attract.kernel.AttractStatistics;
 import com.wpadvert.R;
+import com.wpadvert.kernel.Apache;
 import com.wpadvert.kernel.PointKernelAttract;
 
 public class AdvAttractActivity extends AfActivity implements OnClickListener {
@@ -118,7 +117,7 @@ public class AdvAttractActivity extends AfActivity implements OnClickListener {
 	protected void downloadAd(AdCustom ad) {
 		// TODO Auto-generated method stub
 		AbActivity.event(this, "downloadAd.attract", ad.Name);
-		AppConnect connect = AppConnect.getInstance(getActivity());
+		Apache connect = Apache.getInstance(getActivity());
 		connect.downloadAd(getActivity(), ad.Id);
 		AttractStatistics.doStaticsPoint();
 		PointKernelAttract.doStatisticsAdInfo(ad);

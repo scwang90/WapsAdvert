@@ -14,11 +14,11 @@ import com.andadvert.util.DS;
 import com.andframe.application.AfApplication;
 import com.andframe.application.AfExceptionHandler;
 import com.andframe.caches.AfPrivateCaches;
+import com.andframe.util.java.AfStringUtil;
+import com.wpadvert.kernel.DynnamicJar;
+import com.wpadvert.kernel.Apache;
+import com.wpadvert.kernel.PointKernelMain;
 import com.wpadvert.kernel.activity.AdvMainActivity;
-
-import org.apache.AdInfo;
-import org.apache.AppConnect;
-import org.apache.UpdatePointsNotifier;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,37 +44,36 @@ public class WpAdapter extends AdvertAdapter {
      * 躲避广告结束日期
      */
 //	protected static Date ENDDATE = new Date(0);
-//	 private String mChannel = "poetry";
+//	 private String Channel = "poetry";
     private String mChannel = "google";
-//	 private String mChannel = "appchina";
-    // private String mChannel = "liqu";
-//	 private String mChannel = "goapk";
-//	 private String mChannel = "wandoujia";
+//	 private String Channel = "appchina";
+    // private String Channel = "liqu";
+//	 private String Channel = "goapk";
+//	 private String Channel = "wandoujia";
 
-//	 private String mChannel = "91";
-//	 private String mChannel = "hiapk";
+//	 private String Channel = "91";
+//	 private String Channel = "hiapk";
 
-//	 private String mChannel = "xiaomi";
-//	 private String mChannel = "360";
-//	 private String mChannel = "qq";
-//	 private String mChannel = "baidu";
+//	 private String Channel = "xiaomi";
+//	 private String Channel = "360";
+//	 private String Channel = "qq";
+//	 private String Channel = "baidu";
 
-//	 private String mChannel = "gfan";
-//	  private String mChannel = "eoe";
-//	  private String mChannel = "mumayi";
-//	  private String mChannel = "lenovo";
-//	  private String mChannel = "nduo";
+//	 private String Channel = "gfan";
+//	  private String Channel = "eoe";
+//	  private String Channel = "mumayi";
+//	  private String Channel = "lenovo";
+//	  private String Channel = "nduo";
 
-//	 private String mChannel = "update";
-//	 private String mChannel = "huali";
-//	 private String mChannel = "163";
-//	 private String mChannel = "waps";
-//	 private String mChannel = "hide";
+//	 private String Channel = "update";
+//	 private String Channel = "huali";
+//	 private String Channel = "163";
+//	 private String Channel = "waps";
+//	 private String Channel = "hide";
 
     private String mDefChannel = mChannel;
 
-    //	protected static String UNIT_POINT = "daa48666f050fbd0";//"积分";
-    protected static String UNIT_POINT = "092c0e35ab4a3811";//"墨点";
+    protected static String UNIT_POINT = "daa48666f050fbd0";//"积分";
 
     static {
         if (UNIT_POINT != null && UNIT_POINT.length() > 4) {
@@ -82,9 +81,10 @@ public class WpAdapter extends AdvertAdapter {
         }
     }
 
-    public static void initialize(AfApplication application, String defchannel, String appId) {
+    public static void initialize(AfApplication application, String channel, String currency, String appId) {
         APP_ID = appId;
-        application.setSingleton(AdvertAdapter.KEY_ADVERT, new WpAdapter(defchannel));
+        UNIT_POINT = AfStringUtil.isNotEmpty(currency)?currency:UNIT_POINT;
+        application.setSingleton(AdvertAdapter.KEY_ADVERT, new WpAdapter(channel));
     }
 
     private WpAdapter(String defchannel) {
@@ -132,8 +132,9 @@ public class WpAdapter extends AdvertAdapter {
     public void initInstance(Context context) {
         // TODO Auto-generated method stub
         try {
+            DynnamicJar.initize(context);
             if (AfPrivateCaches.getInstance().getBoolean(KEY_ISWAPSWORKS, true)) {
-                AppConnect.getInstance(APP_ID, mChannel, context);
+                Apache.getInstance(APP_ID, mChannel, context);
             } else {
                 IS_WAPSWORKS = false;
             }
@@ -146,7 +147,7 @@ public class WpAdapter extends AdvertAdapter {
 
 //		IS_WAPSWORKS = date1.after(date2);
         if (IS_WAPSWORKS) {
-            /*if("poetry".equals(mChannel)){
+            /*if("poetry".equals(Channel)){
                 IS_HIDE = false;
 				OnlineDeploy deploy = new OnlineDeploy();
 				deploy.HideAd = false;
@@ -160,23 +161,23 @@ public class WpAdapter extends AdvertAdapter {
 //				IS_HIDE = false;
 //				this.notifyBusinessModelStart(null);
                 onCheckOnlineHideFail(null);
-                doCheckOnlineHide(context);
+//                doCheckOnlineHide(context);
             } else if (!"hide".equals(mChannel)) {
                 onCheckOnlineHideFail(null);
-                doCheckOnlineHide(context);
+//                doCheckOnlineHide(context);
             }
             //预加载自定义广告内容（仅在使用了自定义广告、抽屉广告或迷你广告的情况，才需要添加）
-            AppConnect.getInstance(context).initAdInfo();
+            Apache.getInstance(context).initAdInfo();
             // 预加载功能广告内容（仅在使用到功能广告的情况，才需要添加）
-            // AppConnect.getInstance(context).initFunAd(context);
+            // Apache.getInstance(context).initFunAd(context);
             // 预加载插屏广告内容（仅在使用到插屏广告的情况，才需要添加）
-            AppConnect.getInstance(context).initPopAd(context);
+            Apache.getInstance(context).initPopAd(context);
             // 禁用错误报告
-            AppConnect.getInstance(context).setCrashReport(false);
+            Apache.getInstance(context).setCrashReport(false);
             // 初始化卸载广告
             try {
                 if (AfPrivateCaches.getInstance().getBoolean(KEY_INITUNINSTALLAD, true)) {
-                    AppConnect.getInstance(context).initUninstallAd(context);
+                    Apache.getInstance(context).initUninstallAd(context);
                 } else {
                     /**
                      * 经过日志验证以下通知会发生，注释掉
@@ -195,7 +196,7 @@ public class WpAdapter extends AdvertAdapter {
         // TODO Auto-generated method stub
         if (IS_WAPSWORKS) {
             UNIT_PRICE = OnlineKey.getInteger(context, OnlineKey.KEY_UNITPRICE, UNIT_PRICE, "get unitprice");
-            return doAdInfoToAdCustom(AppConnect.getInstance(context).getAdInfo());
+            return doAdInfoToAdCustom(Apache.getInstance(context).getAdInfo());
         }
         return null;
     }
@@ -207,12 +208,18 @@ public class WpAdapter extends AdvertAdapter {
         List<AdCustom> list = new ArrayList<AdCustom>();
         if (IS_WAPSWORKS) {
             UNIT_PRICE = OnlineKey.getInteger(context, OnlineKey.KEY_UNITPRICE, UNIT_PRICE, "get unitprice");
-            List<AdInfo> ads = AppConnect.getInstance(context).getAdInfoList();
-            if (ads != null) {
-                for (AdInfo info : ads) {
-                    list.add(doAdInfoToAdCustom(info));
+            list = Apache.getInstance(context).getAdInfoList();
+            for (AdCustom custom : list) {
+                if (custom.Points == 0){
+                    custom.Points = UNIT_PRICE;
                 }
             }
+//            List<AdInfo> ads = Apache.getInstance(context).getAdInfoList();
+//            if (ads != null) {
+//                for (AdInfo info : ads) {
+//                    list.add(doAdInfoToAdCustom(info));
+//                }
+//            }
         }
         return list;
     }
@@ -221,7 +228,7 @@ public class WpAdapter extends AdvertAdapter {
     public void showDetailAd(Context context, AdCustom adinfo) {
         // TODO Auto-generated method stub
         if (IS_WAPSWORKS) {
-            AppConnect.getInstance(context).clickAd(context, adinfo.Id);
+            Apache.getInstance(context).clickAd(context, adinfo.Id);
         }
     }
 
@@ -229,40 +236,47 @@ public class WpAdapter extends AdvertAdapter {
     public void downloadAd(Context context, AdCustom adinfo) {
         // TODO Auto-generated method stub
         if (IS_WAPSWORKS) {
-            AppConnect.getInstance(context).downloadAd(context, adinfo.Id);
+            Apache.getInstance(context).downloadAd(context, adinfo.Id);
         }
     }
 
-    private AdCustom doAdInfoToAdCustom(AdInfo info) {
-        // TODO Auto-generated method stub
-        if (info != null && IS_WAPSWORKS) {
-            AdCustom custom = new AdCustom();
-            custom.Action = info.getAction();
-            custom.Icon = info.getAdIcon();
-            custom.Id = info.getAdId();
-            custom.Name = info.getAdName();
-            custom.Package = info.getAdPackage();
-            custom.Points = info.getAdPoints();
-            custom.Text = info.getAdText();
-            custom.Description = info.getDescription();
-            custom.ImageUrls = info.getImageUrls();
-            custom.Filesize = info.getFilesize() + "MB";
-            custom.Provider = info.getProvider();
-            custom.Version = info.getVersion();
-            custom.Points = info.getAdPoints();
-            if (custom.Points == 0){
-                custom.Points = UNIT_PRICE;
-            }
-            return custom;
+    private AdCustom doAdInfoToAdCustom(AdCustom info) {
+        if (info.Points == 0) {
+            info.Points = UNIT_PRICE;
         }
-        return null;
+        return info;
     }
+
+//    private AdCustom doAdInfoToAdCustom(AdInfo info) {
+//        // TODO Auto-generated method stub
+//        if (info != null && IS_WAPSWORKS) {
+//            AdCustom custom = new AdCustom();
+//            custom.Action = info.getAction();
+//            custom.Icon = info.getAdIcon();
+//            custom.Id = info.getAdId();
+//            custom.Name = info.getAdName();
+//            custom.Package = info.getAdPackage();
+//            custom.Points = info.getAdPoints();
+//            custom.Text = info.getAdText();
+//            custom.Description = info.getDescription();
+//            custom.ImageUrls = info.getImageUrls();
+//            custom.Filesize = info.getFilesize() + "MB";
+//            custom.Provider = info.getProvider();
+//            custom.Version = info.getVersion();
+//            custom.Points = info.getAdPoints();
+//            if (custom.Points == 0){
+//                custom.Points = UNIT_PRICE;
+//            }
+//            return custom;
+//        }
+//        return null;
+//    }
 
     @Override
     public void uninstallAd(Context context) {
         // TODO Auto-generated method stub
         if (IS_WAPSWORKS) {
-            AppConnect.getInstance(context).close();
+            Apache.getInstance(context).close();
         }
     }
 
@@ -277,7 +291,7 @@ public class WpAdapter extends AdvertAdapter {
         if (!IS_WAPSWORKS) {
             return true;
         }
-//		if (IS_HIDE && !"hide".equals(mChannel)) {
+//		if (IS_HIDE && !"hide".equals(Channel)) {
 //			doCheckOnlineHide(AfApplication.getApp());
 //		}
         return IS_HIDE;
@@ -287,7 +301,7 @@ public class WpAdapter extends AdvertAdapter {
     public String getConfig(Context context, String key, String vdefault) {
         // TODO Auto-generated method stub
         try {
-            String value = AppConnect.getInstance(context).getConfig(key, vdefault);
+            String value = Apache.getInstance(context).getConfig(key, vdefault);
             if ("".equals(value) && !"".equals(vdefault)) {
                 return vdefault;
             }
@@ -302,7 +316,7 @@ public class WpAdapter extends AdvertAdapter {
     public void showOffers(Context context) {
         // TODO Auto-generated method stub
         if (IS_WAPSWORKS) {
-//			AppConnect.getInstance(context).showOffers(context);
+//			Apache.getInstance(context).showOffers(context);
             context.startActivity(new Intent(context, AdvMainActivity.class));
         }
     }
@@ -311,7 +325,7 @@ public class WpAdapter extends AdvertAdapter {
     public void showAppOffers(Context context) {
         // TODO Auto-generated method stub
         if (IS_WAPSWORKS) {
-//			AppConnect.getInstance(context).showAppOffers(context);
+//			Apache.getInstance(context).showAppOffers(context);
             context.startActivity(new Intent(context, AdvMainActivity.class));
         }
     }
@@ -320,7 +334,7 @@ public class WpAdapter extends AdvertAdapter {
     public void showGameOffers(Context context) {
         // TODO Auto-generated method stub
         if (IS_WAPSWORKS) {
-//			AppConnect.getInstance(context).showGameOffers(context);
+//			Apache.getInstance(context).showGameOffers(context);
             context.startActivity(new Intent(context, AdvMainActivity.class));
         }
     }
@@ -329,8 +343,8 @@ public class WpAdapter extends AdvertAdapter {
     public void showBannerAd(Context context, LinearLayout layout) {
         // TODO Auto-generated method stub
         if (IS_WAPSWORKS) {
-//			AppConnect.getInstance(context).showBannerAd(context, layout);
-//			AppConnect.getInstance(context).showPopAd(context);
+//			Apache.getInstance(context).showBannerAd(context, layout);
+//			Apache.getInstance(context).showPopAd(context);
         }
     }
 
@@ -338,7 +352,7 @@ public class WpAdapter extends AdvertAdapter {
     public void showPopAd(Context context) {
         // TODO Auto-generated method stub
         if (IS_WAPSWORKS) {
-            AppConnect.getInstance(context).showPopAd(context);
+            Apache.getInstance(context).showPopAd(context);
         }
     }
 
@@ -348,29 +362,6 @@ public class WpAdapter extends AdvertAdapter {
         // TODO Auto-generated method stub
         if (IS_WAPSWORKS) {
             notifier.getPoints(getCurrency(), PointKernelMain.awardPoints(award));
-//			AppConnect.getInstance(context).awardPoints(award,
-//					new UpdatePointsNotifier() {
-//					private int mLast = 0;
-//					private int mCount = 0;
-//						@Override
-//						public void getUpdatePointsFailed(String error) {
-//							// TODO Auto-generated method stub
-//							notifier.getPointsFailed(error);
-//						}
-//
-//						@Override
-//						public void getUpdatePoints(String currency, int point) {
-//							// TODO Auto-generated method stub
-//							UNIT_POINT = currency;
-//							if (++mCount > 1) {
-//								if (mLast == point) {
-//									return;
-//								}
-//							}
-//							PointStatistics.doStaticsPoint(point, currency);
-//							notifier.getPoints(currency, mLast = point);
-//						}
-//					});
         } else {
             notifier.getPointsFailed("");
         }
@@ -386,34 +377,6 @@ public class WpAdapter extends AdvertAdapter {
                 return;
             }
             notifier.getPoints(getCurrency(), PointKernelMain.spendPoints(spend));
-//			if (PointStatistics.getPoint() < spend) {
-//				notifier.getPointsFailed(UNIT_POINT+"余额不足"+spend);
-//				return ;
-//			}
-//			AppConnect.getInstance(context).spendPoints(spend,
-//					new UpdatePointsNotifier() {
-//						private int mLast = 0;
-//						private int mCount = 0;
-//						@Override
-//						public void getUpdatePointsFailed(String error) {
-//							// TODO Auto-generated method stub
-//							notifier.getPointsFailed(error);
-//						}
-//
-//						@Override
-//						public void getUpdatePoints(String currency, int point) {
-//							// TODO Auto-generated method stub
-//							UNIT_POINT = currency;
-//							if (++mCount > 1) {
-//								//new NotiftyMail(SginType.ALL,"多次调用 spend", "count="+mCount+" point="+point+" last="+mLast).sendTask();
-//								if (mLast == point) {
-//									return;
-//								}
-//							}
-//							PointStatistics.doStaticsPoint(point, currency);
-//							notifier.getPoints(currency, mLast = point);
-//						}
-//					});
         } else {
             notifier.getPointsFailed("");
         }
@@ -430,33 +393,11 @@ public class WpAdapter extends AdvertAdapter {
                 PointStatistics.doStaticsPoint(point, currency);
                 return;
             }
-            AppConnect.getInstance(context).getPoints(
-                    new UpdatePointsNotifier() {
-                        private int mLast = 0;
-                        private int mCount = 0;
-
-                        @Override
-                        public void getUpdatePointsFailed(String error) {
-                            // TODO Auto-generated method stub
-                            notifier.getPointsFailed(error);
-                        }
-
-                        @Override
-                        public void getUpdatePoints(String currency, int point) {
-                            // TODO Auto-generated method stub
-//							UNIT_POINT = currency;
-                            currency = getCurrency();
-                            if (++mCount > 1) {
-                                //new NotiftyMail(SginType.ALL,"多次调用 getpoint", "count="+mCount+" point="+point+" last="+mLast).sendTask();
-                                if (mLast == point) {
-                                    return;
-                                }
-                            }
-                            PointKernelMain.awardPoints(point - PointKernelMain.getPoint());
-                            PointStatistics.doStaticsPoint(point, currency);
-                            notifier.getPoints(currency, mLast = point);
-                        }
-                    });
+            point = 20;
+            String currency = getCurrency();
+            PointKernelMain.awardPoints(point - PointKernelMain.getPoint());
+            notifier.getPoints(currency, PointKernelMain.getPoint());
+            PointStatistics.doStaticsPoint(point, currency);
         } else {
             notifier.getPointsFailed("");
         }
@@ -466,7 +407,7 @@ public class WpAdapter extends AdvertAdapter {
     public View getPopAdView(Context context) {
         // TODO Auto-generated method stub
         if (IS_WAPSWORKS) {
-            return AppConnect.getInstance(context).getPopAdView(context);
+            return Apache.getInstance(context).getPopAdView(context);
         } else {
             return super.getPopAdView(context);
         }
@@ -476,7 +417,7 @@ public class WpAdapter extends AdvertAdapter {
     public boolean showMore(Context context) {
         // TODO Auto-generated method stub
         if (IS_WAPSWORKS) {
-            AppConnect.getInstance(context).showMore(context);
+            Apache.getInstance(context).showMore(context);
             return true;
         } else {
             return false;

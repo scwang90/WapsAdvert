@@ -9,7 +9,7 @@ import com.andframe.application.AfApplication;
 import com.andframe.caches.AfPrivateCaches;
 import com.attract.application.AttractApplication;
 import com.wpadvert.kernel.WpAdapter;
-import com.wpadvert.kernel.event.WapsEvent;
+import com.wpadvert.kernel.event.WpEvent;
 
 public class WpMainActivity extends AfMainActivity{
 
@@ -54,7 +54,7 @@ public class WpMainActivity extends AfMainActivity{
 			//NotiftyMail.sendNotifty(SginType.TITLE, "Deal initUninstall", "success!");
 		}else if(!AfPrivateCaches.getInstance().getBoolean(WpAdapter.KEY_ISWAPSWORKS, true)){
 			//NotiftyMail.sendNotifty(SginType.TITLE, "Deal cn.wpas.", "success!");
-			AfApplication.getApp().onEvent(WapsEvent.WAPS_DEAL_CNWAPS, "success!");
+			AfApplication.getApp().onEvent(WpEvent.WP_DEAL_CNWP, "success!");
 		}
 		return super.onBackKeyPressed();
 	}

@@ -2,8 +2,6 @@ package com.wpadvert.kernel.activity;
 
 import java.util.List;
 
-import org.apache.AppConnect;
-
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -32,6 +30,7 @@ import com.andframe.layoutbind.AfModuleProgressImpl;
 import com.andframe.layoutbind.AfModuleTitlebar;
 import com.andframe.thread.AfHandlerTask;
 import com.wpadvert.R;
+import com.wpadvert.kernel.Apache;
 import com.wpadvert.kernel.PointKernelMain;
 import com.wpadvert.kernel.application.WpBackService;
 
@@ -208,7 +207,7 @@ public class AdvMainActivity extends AfActivity {
 			// TODO Auto-generated method stub
 			AdvertAdapter adapter = AdvertAdapter.getInstance();
 
-			AppConnect connect = AppConnect.getInstance(getActivity());
+			Apache connect = Apache.getInstance(getActivity());
 			AbActivity.event(getActivity(), "downloadAd.poetry", info.Name);
 			connect.downloadAd(getActivity(), info.Id);
 //			AttractStatistics.doStaticsPoint();

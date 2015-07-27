@@ -4,7 +4,7 @@ import com.andadvert.AdvertAdapter;
 import com.andadvert.PointStatistics;
 import com.andadvert.model.AdCustom;
 import com.andframe.application.AfApplication;
-import com.wpadvert.kernel.event.WapsEvent;
+import com.wpadvert.kernel.event.WpEvent;
 
 public class PointKernelMain {
 	
@@ -14,13 +14,13 @@ public class PointKernelMain {
 			super.doNotifyPointAttract(accretion, points);
 			String currency = AdvertAdapter.getInstance().getCurrency();
 			PointStatistics.doStaticsPoint(points,currency);
-			AfApplication.getApp().onEvent(WapsEvent.WAPS_POINT_MAIN,""+points);
+			AfApplication.getApp().onEvent(WpEvent.WP_POINT_MAIN,""+points);
 		}
 
 		@Override
 		protected void doNotifyPointCheat(int point, int cheat) {
 			super.doNotifyPointCheat(point, cheat);
-			AfApplication.getApp().onEvent(WapsEvent.WAPS_CHEAT_MAIN,""+point);
+			AfApplication.getApp().onEvent(WpEvent.WP_CHEAT_MAIN,""+point);
 		}
 	};
 
