@@ -25,7 +25,6 @@ import java.util.List;
 
 /**
  * 万普广告适配器
- *
  * @author 树朾
  */
 public class WpAdapter extends AdvertAdapter {
@@ -241,7 +240,7 @@ public class WpAdapter extends AdvertAdapter {
     }
 
     private AdCustom doAdInfoToAdCustom(AdCustom info) {
-        if (info.Points == 0) {
+        if (info != null && info.Points == 0) {
             info.Points = UNIT_PRICE;
         }
         return info;

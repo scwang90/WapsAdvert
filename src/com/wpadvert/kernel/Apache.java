@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.widget.LinearLayout;
 
 import com.andadvert.model.AdCustom;
+import com.andframe.application.AfExceptionHandler;
 import com.andframe.util.java.AfReflecter;
 
 import java.lang.reflect.Method;
@@ -22,7 +23,12 @@ public class Apache {
     Object connect;
 
     private Apache(Object instance) {
-        connect = instance;
+        if (instance == null){
+            connect = new Object();
+            AfExceptionHandler.handler(new RuntimeException("connect=null"),"Apache.init");
+        } else {
+            connect = instance;
+        }
     }
 
     public static Apache getInstance(Context context) {
