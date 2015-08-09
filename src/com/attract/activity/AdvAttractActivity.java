@@ -1,7 +1,5 @@
 package com.attract.activity;
 
-import java.util.List;
-
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -16,7 +14,6 @@ import android.widget.TextView;
 import com.andadvert.AdvertAdapter;
 import com.andadvert.model.AdCustom;
 import com.andadvert.util.DS;
-import com.andcloud.activity.AbActivity;
 import com.andframe.activity.AfActivity;
 import com.andframe.activity.framework.AfView;
 import com.andframe.adapter.AfListAdapter;
@@ -35,6 +32,9 @@ import com.attract.kernel.AttractStatistics;
 import com.wpadvert.R;
 import com.wpadvert.kernel.Apache;
 import com.wpadvert.kernel.PointKernelAttract;
+import com.wpadvert.kernel.event.WpEvent;
+
+import java.util.List;
 
 public class AdvAttractActivity extends AfActivity implements OnClickListener {
 	
@@ -112,11 +112,11 @@ public class AdvAttractActivity extends AfActivity implements OnClickListener {
 		}
 		return super.onBackKeyPressed();
 	}
-	
 
 	protected void downloadAd(AdCustom ad) {
 		// TODO Auto-generated method stub
-		AbActivity.event(this, "downloadAd.attract", ad.Name);
+		//触发统计下载事件
+		AfApplication.getApp().onEvent(WpEvent.WP_POINT_ATTRACT_DONWLOAD);
 		Apache connect = Apache.getInstance(getActivity());
 		connect.downloadAd(getActivity(), ad.Id);
 		AttractStatistics.doStaticsPoint();
