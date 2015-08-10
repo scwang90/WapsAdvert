@@ -6,7 +6,6 @@ import android.graphics.Bitmap;
 import android.widget.LinearLayout;
 
 import com.andadvert.model.AdCustom;
-import com.andframe.application.AfExceptionHandler;
 import com.andframe.util.java.AfReflecter;
 
 import java.lang.reflect.Method;
@@ -25,13 +24,15 @@ public class Apache {
     private Apache(Object instance) {
         if (instance == null){
             connect = new Object();
-            AfExceptionHandler.handler(new RuntimeException("connect=null"),"Apache.init");
+            //出现null很正常！只要没有初始化万普就会这样
+//            AfExceptionHandler.handler(new RuntimeException("connect=null"),"Apache.init");
         } else {
             connect = instance;
         }
     }
 
     public static Apache getInstance(Context context) {
+        DynnamicJar.initize(context);
         Class<?> clazz = DynnamicJar.loadClass(context, "org.apache.AppConnect");
         Class<?>[] types = new Class<?>[]{Context.class};
         Method method = AfReflecter.getMethod(clazz, "getInstance", types);
@@ -40,6 +41,7 @@ public class Apache {
     }
 
     public static Apache getInstance(String s, Context context) {
+        DynnamicJar.initize(context);
         Class<?> clazz = DynnamicJar.loadClass(context, "org.apache.AppConnect");
         Class<?>[] types = new Class<?>[]{String.class,Context.class};
         Method method = AfReflecter.getMethod(clazz, "getInstance", types);
@@ -48,6 +50,7 @@ public class Apache {
     }
 
     public static Apache getInstance(String s, String s1, Context context) {
+        DynnamicJar.initize(context);
         Class<?> clazz = DynnamicJar.loadClass(context, "org.apache.AppConnect");
         Class<?>[] types = new Class<?>[]{String.class,String.class,Context.class};
         Method method = AfReflecter.getMethod(clazz, "getInstance", types);

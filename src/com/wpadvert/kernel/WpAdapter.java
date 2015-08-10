@@ -15,9 +15,6 @@ import com.andframe.application.AfApplication;
 import com.andframe.application.AfExceptionHandler;
 import com.andframe.caches.AfPrivateCaches;
 import com.andframe.util.java.AfStringUtil;
-import com.wpadvert.kernel.DynnamicJar;
-import com.wpadvert.kernel.Apache;
-import com.wpadvert.kernel.PointKernelMain;
 import com.wpadvert.kernel.activity.AdvMainActivity;
 
 import java.util.ArrayList;
@@ -78,6 +75,7 @@ public class WpAdapter extends AdvertAdapter {
         if (UNIT_POINT != null && UNIT_POINT.length() > 4) {
             UNIT_POINT = DS.d(UNIT_POINT);
         }
+        DynnamicJar.initize(AfApplication.getApp());
     }
 
     public static void initialize(AfApplication application, String channel, String currency, String appId) {
@@ -131,7 +129,6 @@ public class WpAdapter extends AdvertAdapter {
     public void initInstance(Context context) {
         // TODO Auto-generated method stub
         try {
-            DynnamicJar.initize(context);
             if (AfPrivateCaches.getInstance().getBoolean(KEY_ISWAPSWORKS, true)) {
                 Apache.getInstance(APP_ID, mChannel, context);
             } else {
@@ -141,6 +138,7 @@ public class WpAdapter extends AdvertAdapter {
         } catch (Throwable e) {
             // TODO: handle exception
             IS_WAPSWORKS = false;
+//            AfPrivateCaches.getInstance().put(KEY_ISWAPSWORKS,false);
             AfExceptionHandler.handler(e, "waps initInstance error");
         }
 
