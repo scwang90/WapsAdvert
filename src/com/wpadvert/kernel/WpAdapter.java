@@ -1,5 +1,8 @@
 package com.wpadvert.kernel;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
@@ -16,9 +19,6 @@ import com.andframe.application.AfExceptionHandler;
 import com.andframe.caches.AfPrivateCaches;
 import com.andframe.util.java.AfStringUtil;
 import com.wpadvert.kernel.activity.AdvMainActivity;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 万普广告适配器

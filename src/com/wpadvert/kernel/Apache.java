@@ -1,5 +1,11 @@
 package com.wpadvert.kernel;
 
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -7,12 +13,6 @@ import android.widget.LinearLayout;
 
 import com.andadvert.model.AdCustom;
 import com.andframe.util.java.AfReflecter;
-
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by SCWANG on 2015-07-26.
@@ -232,7 +232,8 @@ public class Apache {
         AfReflecter.doMethod(connect, "checkUpdate", context);
     }
 
-    public List getAdInfoList() {
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	public List getAdInfoList() {
 //        return connect.getAdInfoList();
         List<AdCustom> customs = new ArrayList<AdCustom>();
         List<Object> list = AfReflecter.doMethod(connect, "getAdInfoList", List.class);
@@ -244,7 +245,8 @@ public class Apache {
         return customs;
     }
 
-    public Map getConfigMap() {
+    @SuppressWarnings("rawtypes")
+	public Map getConfigMap() {
 //        return connect.getConfigMap();
         return AfReflecter.doMethod(connect, "getConfigMap", Map.class);
     }
@@ -274,7 +276,8 @@ public class Apache {
         AfReflecter.doMethod(connect, "setAdBackColor", i);
     }
 
-    public void setRunnableMap(HashMap hashMap) {
+    @SuppressWarnings("rawtypes")
+	public void setRunnableMap(HashMap hashMap) {
 //        connect.setRunnableMap(hashMap);
         AfReflecter.doMethod(connect, "setRunnableMap", hashMap);
     }

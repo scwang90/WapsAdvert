@@ -1,11 +1,10 @@
 package com.wpadvert.kernel;
 
-import android.content.Context;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 
+import android.content.Context;
 import dalvik.system.DexClassLoader;
 
 /**

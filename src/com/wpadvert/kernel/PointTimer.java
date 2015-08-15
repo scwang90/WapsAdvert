@@ -1,15 +1,15 @@
 package com.wpadvert.kernel;
 
+import java.util.Date;
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.Timer;
+
 import android.os.Message;
 
 import com.andframe.helper.java.AfTimeSpan;
 import com.andframe.thread.AfHandlerTimerTask;
 import com.andframe.thread.AfTimerTask;
-
-import java.util.Date;
-import java.util.LinkedHashSet;
-import java.util.Set;
-import java.util.Timer;
 
 /**
  * Created by SCWANG on 2015-07-11.

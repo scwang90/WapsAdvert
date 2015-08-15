@@ -1,5 +1,7 @@
 package com.wpadvert.kernel.activity;
 
+import java.util.List;
+
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -32,8 +34,6 @@ import com.wpadvert.kernel.Apache;
 import com.wpadvert.kernel.PointKernelMain;
 import com.wpadvert.kernel.application.WpBackService;
 import com.wpadvert.kernel.event.WpEvent;
-
-import java.util.List;
 
 public class AdvMainActivity extends AfActivity {
 	
@@ -181,7 +181,7 @@ public class AdvMainActivity extends AfActivity {
 			// TODO Auto-generated method stub
 			if (v.getTag() instanceof AdCustom) {
 				final AdCustom info = AdCustom.class.cast(v.getTag());
-				AdvertAdapter adapter = AdvertAdapter.getInstance();
+//				AdvertAdapter adapter = AdvertAdapter.getInstance();
 				
 //				if (adapter.isHide()) {
 					doShowDialog("温馨提示", "确定下载【"+info.Name+"】吗？"
