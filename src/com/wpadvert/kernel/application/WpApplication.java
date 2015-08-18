@@ -49,11 +49,11 @@ public class WpApplication extends AfApplication{
 //	}
 	
 	@Override
-	public synchronized void notifyForegroundClosed(AfMainActivity activity) {
+	public synchronized void notifyForegroundClosed(AfActivity activity) {
 		// TODO Auto-generated method stub
 		super.notifyForegroundClosed(activity);
 		AttractApplication.getApp().notifyForegroundClosed();
-	}
+}
 	
 	@Override
 	public void onCreate() {
