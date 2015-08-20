@@ -48,7 +48,6 @@ public class AdvAttractActivity extends AfActivity implements OnClickListener {
 
 	@Override
 	protected void onCreate(Bundle bundle, AfIntent intent) throws Exception {
-		// TODO Auto-generated method stub
 		AdvertAdapter.getInstance().initInstance(this);
 		
 		super.onCreate(bundle, intent);
@@ -67,7 +66,6 @@ public class AdvAttractActivity extends AfActivity implements OnClickListener {
 //		mTitlebar.setOnGoBackListener(new OnClickListener() {
 //			@Override
 //			public void onClick(View v) {
-//				// TODO Auto-generated method stub
 //				onBackKeyPressed();
 //			}
 //		});
@@ -77,7 +75,6 @@ public class AdvAttractActivity extends AfActivity implements OnClickListener {
 	
 	@Override
 	public void onClick(View v) {
-		// TODO Auto-generated method stub
 		if (v != null && v.getId() == AfModuleTitlebar.ID_GOBACK) {
 			if (!onBackKeyPressed()) {
 				this.finish();
@@ -87,7 +84,6 @@ public class AdvAttractActivity extends AfActivity implements OnClickListener {
 	
 	@Override
 	protected boolean onBackKeyPressed() {
-		// TODO Auto-generated method stub
 		backTime = System.currentTimeMillis();
 		int point = PointKernelAttract.getComPoint();
 		String currency = AdvAttractAdapter.getInstance().getCurrency();
@@ -99,7 +95,6 @@ public class AdvAttractActivity extends AfActivity implements OnClickListener {
 					new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int index) {
-							// TODO Auto-generated method stub
 							AdCustom ad = PointKernelAttract.getNewAdCustom(mAdapter.getList());
 							if (ad != null) {
 								AfPrivateCaches.getInstance().put(AttractFragmentBase.KEY_IMPORTUNE, false);
@@ -114,7 +109,6 @@ public class AdvAttractActivity extends AfActivity implements OnClickListener {
 	}
 
 	protected void downloadAd(AdCustom ad) {
-		// TODO Auto-generated method stub
 		//触发统计下载事件
 		AfApplication.getApp().onEvent(WpEvent.WP_POINT_ATTRACT_DONWLOAD);
 		Apache connect = Apache.getInstance(getActivity());
@@ -125,7 +119,6 @@ public class AdvAttractActivity extends AfActivity implements OnClickListener {
 	
 	@Override
 	protected void onPause() {
-		// TODO Auto-generated method stub
 		super.onPause();
 		long now = System.currentTimeMillis();
 		if(now-backTime > 1000){
@@ -135,7 +128,6 @@ public class AdvAttractActivity extends AfActivity implements OnClickListener {
 
 	@Override
 	protected void onDestroy() {
-		// TODO Auto-generated method stub
 		super.onDestroy();
 		AdvertAdapter.getInstance().uninstallAd(this);
 	}
@@ -144,7 +136,6 @@ public class AdvAttractActivity extends AfActivity implements OnClickListener {
 
 		@Override
 		protected void onWorking(Message msg) throws Exception {
-			// TODO Auto-generated method stub
 			AdvertAdapter adapter = AdvertAdapter.getInstance();
 			List<AdCustom> ltdata = adapter.getAdCustomList(getActivity());
 			while (ltdata == null || ltdata.size() == 0) {
@@ -156,7 +147,6 @@ public class AdvAttractActivity extends AfActivity implements OnClickListener {
 		
 		@Override
 		protected void onException(Throwable e) {
-			// TODO Auto-generated method stub
 			super.onException(e);
 			/**
 			 * 异常名称:
@@ -169,7 +159,6 @@ public class AdvAttractActivity extends AfActivity implements OnClickListener {
 
 		@Override
 		protected boolean onHandle(Message msg) {
-			// TODO Auto-generated method stub
 			if (mAdapter != null) {
 				mListView.setAdapter(mAdapter);
 			}else {
@@ -184,12 +173,10 @@ public class AdvAttractActivity extends AfActivity implements OnClickListener {
 
 		public AdvAdapter(Context context, List<AdCustom> ltdata) {
 			super(context, ltdata);
-			// TODO Auto-generated constructor stub
 		}
 
 		@Override
 		protected IAfLayoutItem<AdCustom> getItemLayout(AdCustom data) {
-			// TODO Auto-generated method stub
 			return new IAfLayoutItem<AdCustom>() {
 
 				private ImageView mIvImage;
@@ -202,7 +189,6 @@ public class AdvAttractActivity extends AfActivity implements OnClickListener {
 				
 				@Override
 				public void onHandle(AfView view) {
-					// TODO Auto-generated method stub
 					mTvTip = view.findViewByID(R.id.advitem_tip);
 					mTvTitle = view.findViewByID(R.id.advitem_title);
 					mTvDowntry = view.findViewByID(R.id.adbar_downtry);
@@ -219,7 +205,6 @@ public class AdvAttractActivity extends AfActivity implements OnClickListener {
 
 				@Override
 				public void onBinding(AdCustom model,int index) {
-					// TODO Auto-generated method stub
 					mRlLayout.setTag(model);
 					mTvDownload.setTag(model);
 
@@ -234,7 +219,6 @@ public class AdvAttractActivity extends AfActivity implements OnClickListener {
 
 				@Override
 				public int getLayoutId() {
-					// TODO Auto-generated method stub
 					return R.layout.wa_listitem_advattract;
 				}
 			};
@@ -242,7 +226,6 @@ public class AdvAttractActivity extends AfActivity implements OnClickListener {
 
 		@Override
 		public void onClick(View v) {
-			// TODO Auto-generated method stub
 			if (v.getTag() instanceof AdCustom) {
 				downloadAd(AdCustom.class.cast(v.getTag()));
 //				doShowDialog("温馨提示", "    软件正在下载中，请" +

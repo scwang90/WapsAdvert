@@ -15,7 +15,6 @@ public class WpBackService {
 	}
 
 	public static boolean SetBackground(Activity activity) {
-		// TODO Auto-generated method stub
 		if (mIBackService != null) {
 			return mIBackService.SetBackground(activity);
 		}

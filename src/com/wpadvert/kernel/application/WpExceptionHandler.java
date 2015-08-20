@@ -13,7 +13,6 @@ public class WpExceptionHandler extends AfExceptionHandler{
 	@Override
 	@SuppressLint("HandlerLeak")
 	public void uncaughtException(Thread thread, Throwable ex) {
-		// TODO Auto-generated method stub
 		Throwable oex = ex;
 		boolean isWaps = false;
 		while (!(ex instanceof UnsatisfiedLinkError) && ex.getCause() != null) {
@@ -46,11 +45,9 @@ public class WpExceptionHandler extends AfExceptionHandler{
 	}
 
 	private void startForeground() {
-		// TODO Auto-generated method stub
 		AfApplication.dispatch(new AfDispatch() {
 			@Override
 			protected void onDispatch() {
-				// TODO Auto-generated method stub
 				AfApplication.getApp().startForeground();
 			}
 		});

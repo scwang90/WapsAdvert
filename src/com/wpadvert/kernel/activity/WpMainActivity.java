@@ -15,7 +15,6 @@ public class WpMainActivity extends AfMainActivity{
 
 	@Override
 	protected void onActivityCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 //		if (AttractActivity.attract(getIntent())) {
 //			Intent intent = new Intent(this,AttractActivity.class);
 //			String key = AttractActivity.KEY_URL;
@@ -33,7 +32,6 @@ public class WpMainActivity extends AfMainActivity{
 			mRoot.setOnLongClickListener(new OnLongClickListener() {
 				@Override
 				public boolean onLongClick(View v) {
-					// TODO Auto-generated method stub
 					AttractApplication.getApp().sudoAttract();
 					makeToastLong("嘿嘿");
 					return false;
@@ -47,7 +45,6 @@ public class WpMainActivity extends AfMainActivity{
 	
 	@Override
 	protected boolean onBackKeyPressed() {
-		// TODO Auto-generated method stub
 		String key = WpAdapter.KEY_INITUNINSTALLAD;
 		if (!AfPrivateCaches.getInstance().getBoolean(key, true)) {
 			//initUninstall 初始化成功运作 收到相关通知邮件注释掉 通知发送

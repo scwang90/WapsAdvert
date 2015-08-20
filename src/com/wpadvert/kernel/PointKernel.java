@@ -28,7 +28,6 @@ public class PointKernel extends AfHandlerTimerTask{
 		}
 		@Override
 		public boolean equals(Object o) {
-			// TODO Auto-generated method stub
 			if (o instanceof AdInfo) {
 				AdInfo info = AdInfo.class.cast(o);
 				return this.info.Package.equals(info.info.Package);
@@ -56,7 +55,6 @@ public class PointKernel extends AfHandlerTimerTask{
 	protected AfPrivateCaches mCache;// = AfPrivateCaches.getInstance(KEY_CACHE);
 
 	public PointKernel(String key) {
-		// TODO Auto-generated constructor stub
 		mCache = AfPrivateCaches.getInstance(key);
 		doReadCache();
 		if (mltMonitored.size() > 0) {
@@ -69,7 +67,6 @@ public class PointKernel extends AfHandlerTimerTask{
 	 * @return 成功监听（不在已经监听列表里面）
 	 */
 	public boolean doStatisticsAdInfo(AdCustom info) {
-		// TODO Auto-generated method stub
 		for (AdInfo element : mltInstalled) {
 			if (element.equals(info)) {
 				return false;
@@ -95,7 +92,6 @@ public class PointKernel extends AfHandlerTimerTask{
 	}
 
 	protected void doCheckAttractPoint() {
-		// TODO Auto-generated method stub
 		String service = Context.ACTIVITY_SERVICE;
 		AfApplication app = AfApplication.getApp();
 		ActivityManager am = (ActivityManager) app.getSystemService(service);
@@ -124,7 +120,6 @@ public class PointKernel extends AfHandlerTimerTask{
 	}
 
 	protected void doUpdateCache() {
-		// TODO Auto-generated method stub
 		int point = mCache.getInt(KEY_POINT,mPoints);
 		if (mPoints - point > 500){
 			doNotifyPointCheat(point, mPoints);
@@ -136,14 +131,12 @@ public class PointKernel extends AfHandlerTimerTask{
 	}
 
 	protected void doReadCache() {
-		// TODO Auto-generated method stub
 		mPoints = mCache.getInt(KEY_POINT, mPoints);
 		mltMonitored = mCache.getList(KEY_LIST_ADINFO, AdInfo.class);
 		mltInstalled = mCache.getList(KEY_LIST_INSTALL, AdInfo.class);
 	}
 
 	protected void doDivertInstalled(AdInfo adinfo) {
-		// TODO Auto-generated method stub
 		for (AdInfo element : mltInstalled) {
 			if (element.equals(adinfo)) {
 				return ;
@@ -161,7 +154,6 @@ public class PointKernel extends AfHandlerTimerTask{
 	 * @param points 结果
 	 */
 	protected void doNotifyPointAttract(int accretion, int points) {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -171,31 +163,26 @@ public class PointKernel extends AfHandlerTimerTask{
 	 * @param cheat 作弊结果点数
 	 */
 	protected void doNotifyPointCheat(int point, int cheat) {
-		// TODO Auto-generated method stub
 
 	}
 
 	public int getPoint() {
-		// TODO Auto-generated method stub
 		return mPoints;
 	}
 
 	public int spendPoints(int spend) {
-		// TODO Auto-generated method stub
 		mPoints = mPoints - spend;
 		mCache.put(KEY_POINT, mPoints);
 		return mPoints;
 	}
 
 	public int awardPoints(int award) {
-		// TODO Auto-generated method stub
 		mPoints = mPoints + award;
 		mCache.put(KEY_POINT, mPoints);
 		return mPoints;
 	}
 
 	public boolean hasMonitored(AdCustom custom) {
-		// TODO Auto-generated method stub
 		for (AdInfo info : mltMonitored) {
 			if (info.equals(custom)) {
 				return true;
@@ -205,7 +192,6 @@ public class PointKernel extends AfHandlerTimerTask{
 	}
 
 	public boolean hasInstalled(AdCustom custom) {
-		// TODO Auto-generated method stub
 		for (AdInfo info : mltInstalled) {
 			if (info.equals(custom)) {
 				return true;
@@ -218,7 +204,6 @@ public class PointKernel extends AfHandlerTimerTask{
 	 * @return
 	 */
 	public int getComPoint() {
-		// TODO Auto-generated method stub
 		int point = mPoints;
 		for (AdInfo ad : mltMonitored) {
 			point += ad.info.Points;

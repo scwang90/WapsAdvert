@@ -58,7 +58,6 @@ public class PointKernelAttract{
 //	}
 //	
 //	public static void doStatisticsAdInfo(AdCustom info) {
-//		// TODO Auto-generated method stub
 //		for (AdInfo element : mltInstalled) {
 //			if (element.equals(info)) {
 //				return ;
@@ -83,7 +82,6 @@ public class PointKernelAttract{
 //			mTimer.schedule(new AfTimerTask() {
 //				@Override
 //				protected void onTimer() {
-//					// TODO Auto-generated method stub
 //					doCheckAttractPoint();
 //					if (AfTimeSpan.FromDate(mTime, new Date()).GreaterThan(mSpan)) {
 //						doStopTimer();
@@ -94,7 +92,6 @@ public class PointKernelAttract{
 //	}
 //	
 //	protected static void doCheckAttractPoint() {
-//		// TODO Auto-generated method stub
 //		String service = Context.ACTIVITY_SERVICE;
 //		AfApplication app = AfApplication.getApp();
 //		ActivityManager am = (ActivityManager) app.getSystemService(service);
@@ -123,21 +120,18 @@ public class PointKernelAttract{
 //	}
 //
 //	protected static void doUpdateCache() {
-//		// TODO Auto-generated method stub
 //		mCache.put(KEY_POINT, mPoints);
 //		//mCache.putList(KEY_LIST_ADINFO, mltAdInfo, AdInfo.class);
 //		mCache.putList(KEY_LIST_INSTALL, mltInstalled, AdInfo.class);
 //	}
 //
 //	protected static void doReadCache() {
-//		// TODO Auto-generated method stub
 //		mPoints = mCache.getInt(KEY_POINT, mPoints);
 //		mltAdInfo = mCache.getList(KEY_LIST_ADINFO, AdInfo.class);
 //		mltInstalled = mCache.getList(KEY_LIST_INSTALL, AdInfo.class);
 //	}
 //	
 //	protected static void doDivertInstalled(AdInfo adinfo) {
-//		// TODO Auto-generated method stub
 //		for (AdInfo element : mltInstalled) {
 //			if (element.equals(adinfo)) {
 //				return ;
@@ -150,7 +144,6 @@ public class PointKernelAttract{
 //	}
 //
 //	private static void doNotifyAttractPoint(int accretion, int points) {
-//		// TODO Auto-generated method stub
 //		
 //	}
 //
@@ -162,12 +155,10 @@ public class PointKernelAttract{
 //	}
 //
 //	public static int getPoint() {
-//		// TODO Auto-generated method stub
 //		return mPoints;
 //	}
 //
 //	public static int getComPoint() {
-//		// TODO Auto-generated method stub
 //		int point = mPoints;
 //		for (AdInfo ad : mltAdInfo) {
 //			point += ad.mAdInfo.Points;
@@ -177,14 +168,12 @@ public class PointKernelAttract{
 //	
 //
 //	public static int spendPoints(int spend) {
-//		// TODO Auto-generated method stub
 //		mPoints = mPoints - spend;
 //		mCache.put(KEY_POINT, mPoints);
 //		return mPoints;
 //	}
 //
 //	public static int awardPoints(int award) {
-//		// TODO Auto-generated method stub
 //		mPoints = mPoints + award;
 //		mCache.put(KEY_POINT, mPoints);
 //		return mPoints;
@@ -213,14 +202,12 @@ public class PointKernelAttract{
 	 * @return
 	 */
 	public static int getComPoint() {
-		// TODO Auto-generated method stub
 		return kernel.getComPoint();
 	}
 	/**
 	 * @return 是否已经下载监听过
 	 */
 	public static boolean isDownloaded() {
-		// TODO Auto-generated method stub
 		return mCache.getBoolean(KEY_DOWNLOAD, false);
 	}
 	/**
@@ -229,7 +216,6 @@ public class PointKernelAttract{
 	 * @return AdCustom or null
 	 */
 	public static AdCustom getNewAdCustom(List<AdCustom> list) {
-		// TODO Auto-generated method stub
 		list = new ArrayList<AdCustom>(list);
 		for (int i = 0; i < list.size(); i++) {
 			AdCustom info = list.get(i);

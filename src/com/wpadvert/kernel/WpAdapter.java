@@ -85,20 +85,17 @@ public class WpAdapter extends AdvertAdapter {
     }
 
     private WpAdapter(String defchannel) {
-        // TODO Auto-generated constructor stub
         mDefChannel = defchannel;
         mChannel = getChannel();
     }
 
     @Override
     public String getDefChannel() {
-        // TODO Auto-generated method stub
         return mDefChannel;
     }
 
     @Override
     public String getChannel() {
-        // TODO Auto-generated method stub
         String channel = super.getChannel();
         if (DEFAULT_CHANNEL.equals(channel)) {
             return mChannel;
@@ -108,13 +105,11 @@ public class WpAdapter extends AdvertAdapter {
 
     @Override
     public boolean isSupportPoint() {
-        // TODO Auto-generated method stub
         return true;
     }
 
     @Override
     public boolean isSupportCustom() {
-        // TODO Auto-generated method stub
         return true;
     }
 
@@ -127,7 +122,6 @@ public class WpAdapter extends AdvertAdapter {
 
     @Override
     public void initInstance(Context context) {
-        // TODO Auto-generated method stub
         try {
             if (AfPrivateCaches.getInstance().getBoolean(KEY_ISWAPSWORKS, true)) {
                 Apache.getInstance(APP_ID, mChannel, context);
@@ -136,7 +130,6 @@ public class WpAdapter extends AdvertAdapter {
             }
             UNIT_PRICE = OnlineKey.getInteger(context, OnlineKey.KEY_UNITPRICE, UNIT_PRICE, "get unitprice");
         } catch (Throwable e) {
-            // TODO: handle exception
             IS_WAPSWORKS = false;
 //            AfPrivateCaches.getInstance().put(KEY_ISWAPSWORKS,false);
             AfExceptionHandler.handler(e, "waps initInstance error");
@@ -182,7 +175,6 @@ public class WpAdapter extends AdvertAdapter {
                     //new NotiftyMail(SginType.TITLE, "initUninstall", "false").sendTask();
                 }
             } catch (Throwable e) {
-                // TODO: handle exception
                 AfExceptionHandler.handler(e, "initUninstallAd异常");
             }
         }
@@ -190,7 +182,6 @@ public class WpAdapter extends AdvertAdapter {
 
     @Override
     public AdCustom getAdCustom(Context context) {
-        // TODO Auto-generated method stub
         if (IS_WAPSWORKS) {
             UNIT_PRICE = OnlineKey.getInteger(context, OnlineKey.KEY_UNITPRICE, UNIT_PRICE, "get unitprice");
             return doAdInfoToAdCustom(Apache.getInstance(context).getAdInfo());
@@ -201,7 +192,6 @@ public class WpAdapter extends AdvertAdapter {
     @Override
     @SuppressWarnings("unchecked")
     public List<AdCustom> getAdCustomList(Context context) {
-        // TODO Auto-generated method stub
         List<AdCustom> list = new ArrayList<AdCustom>();
         if (IS_WAPSWORKS) {
             UNIT_PRICE = OnlineKey.getInteger(context, OnlineKey.KEY_UNITPRICE, UNIT_PRICE, "get unitprice");
@@ -223,7 +213,6 @@ public class WpAdapter extends AdvertAdapter {
 
     @Override
     public void showDetailAd(Context context, AdCustom adinfo) {
-        // TODO Auto-generated method stub
         if (IS_WAPSWORKS) {
             Apache.getInstance(context).clickAd(context, adinfo.Id);
         }
@@ -231,7 +220,6 @@ public class WpAdapter extends AdvertAdapter {
 
     @Override
     public void downloadAd(Context context, AdCustom adinfo) {
-        // TODO Auto-generated method stub
         if (IS_WAPSWORKS) {
             Apache.getInstance(context).downloadAd(context, adinfo.Id);
         }
@@ -245,7 +233,6 @@ public class WpAdapter extends AdvertAdapter {
     }
 
 //    private AdCustom doAdInfoToAdCustom(AdInfo info) {
-//        // TODO Auto-generated method stub
 //        if (info != null && IS_WAPSWORKS) {
 //            AdCustom custom = new AdCustom();
 //            custom.Action = info.getAction();
@@ -271,7 +258,6 @@ public class WpAdapter extends AdvertAdapter {
 
     @Override
     public void uninstallAd(Context context) {
-        // TODO Auto-generated method stub
         if (IS_WAPSWORKS) {
             Apache.getInstance(context).close();
         }
@@ -284,7 +270,6 @@ public class WpAdapter extends AdvertAdapter {
 
     @Override
     public boolean isHide() {
-        // TODO Auto-generated method stub
         if (!IS_WAPSWORKS) {
             return true;
         }
@@ -296,7 +281,6 @@ public class WpAdapter extends AdvertAdapter {
 
     @Override
     public String getConfig(Context context, String key, String vdefault) {
-        // TODO Auto-generated method stub
         try {
             String value = Apache.getInstance(context).getConfig(key, vdefault);
             if ("".equals(value) && !"".equals(vdefault)) {
@@ -304,14 +288,12 @@ public class WpAdapter extends AdvertAdapter {
             }
             return value;
         } catch (Throwable e) {
-            // TODO: handle exception
             return vdefault;
         }
     }
 
     @Override
     public void showOffers(Context context) {
-        // TODO Auto-generated method stub
         if (IS_WAPSWORKS) {
 //			Apache.getInstance(context).showOffers(context);
             context.startActivity(new Intent(context, AdvMainActivity.class));
@@ -320,7 +302,6 @@ public class WpAdapter extends AdvertAdapter {
 
     @Override
     public void showAppOffers(Context context) {
-        // TODO Auto-generated method stub
         if (IS_WAPSWORKS) {
 //			Apache.getInstance(context).showAppOffers(context);
             context.startActivity(new Intent(context, AdvMainActivity.class));
@@ -329,7 +310,6 @@ public class WpAdapter extends AdvertAdapter {
 
     @Override
     public void showGameOffers(Context context) {
-        // TODO Auto-generated method stub
         if (IS_WAPSWORKS) {
 //			Apache.getInstance(context).showGameOffers(context);
             context.startActivity(new Intent(context, AdvMainActivity.class));
@@ -338,7 +318,6 @@ public class WpAdapter extends AdvertAdapter {
 
     @Override
     public void showBannerAd(Context context, LinearLayout layout) {
-        // TODO Auto-generated method stub
         if (IS_WAPSWORKS) {
 //			Apache.getInstance(context).showBannerAd(context, layout);
 //			Apache.getInstance(context).showPopAd(context);
@@ -347,7 +326,6 @@ public class WpAdapter extends AdvertAdapter {
 
     @Override
     public void showPopAd(Context context) {
-        // TODO Auto-generated method stub
         if (IS_WAPSWORKS) {
             Apache.getInstance(context).showPopAd(context);
         }
@@ -356,7 +334,6 @@ public class WpAdapter extends AdvertAdapter {
     @Override
     public void awardPoints(Context context, int award,
                             final PointsNotifier notifier) {
-        // TODO Auto-generated method stub
         if (IS_WAPSWORKS) {
             notifier.getPoints(getCurrency(), PointKernelMain.awardPoints(award));
         } else {
@@ -367,7 +344,6 @@ public class WpAdapter extends AdvertAdapter {
     @Override
     public void spendPoints(Context context, int spend,
                             final PointsNotifier notifier) {
-        // TODO Auto-generated method stub
         if (IS_WAPSWORKS) {
             if (PointKernelMain.getPoint() < spend) {
                 notifier.getPointsFailed(getCurrency() + "余额不足" + spend);
@@ -381,7 +357,6 @@ public class WpAdapter extends AdvertAdapter {
 
     @Override
     public void getPoints(Context context, final PointsNotifier notifier) {
-        // TODO Auto-generated method stub
         if (IS_WAPSWORKS) {
             int point = PointKernelMain.getPoint();
             if (point != PointKernelMain.DEFAULE_POINT) {
@@ -402,7 +377,6 @@ public class WpAdapter extends AdvertAdapter {
 
     @Override
     public View getPopAdView(Context context) {
-        // TODO Auto-generated method stub
         if (IS_WAPSWORKS) {
             return Apache.getInstance(context).getPopAdView(context);
         } else {
@@ -412,7 +386,6 @@ public class WpAdapter extends AdvertAdapter {
 
     @Override
     public boolean showMore(Context context) {
-        // TODO Auto-generated method stub
         if (IS_WAPSWORKS) {
             Apache.getInstance(context).showMore(context);
             return true;

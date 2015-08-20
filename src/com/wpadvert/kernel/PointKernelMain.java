@@ -51,12 +51,10 @@ public class PointKernelMain {
 //			this.resetTime();
 //		}
 //		public void resetTime() {
-//			// TODO Auto-generated method stub
 //			this.mDate = mTime = new Date();
 //		}
 //		@Override
 //		public boolean equals(Object o) {
-//			// TODO Auto-generated method stub
 //			if (o instanceof AdInfo) {
 //				AdInfo info = AdInfo.class.cast(o);
 //				return mAdInfo.Package.equals(info.mAdInfo.Package);
@@ -98,7 +96,6 @@ public class PointKernelMain {
 //	}
 //	
 //	public static void doStatisticsAdInfo(AdCustom info) {
-//		// TODO Auto-generated method stub
 //		for (AdInfo element : mltInstalled) {
 //			if (element.equals(info)) {
 //				return ;
@@ -122,7 +119,6 @@ public class PointKernelMain {
 //			mTimer.schedule(new AfTimerTask() {
 //				@Override
 //				protected void onTimer() {
-//					// TODO Auto-generated method stub
 //					doCheckAttractPoint();
 //					if (AfTimeSpan.FromDate(mTime, new Date()).GreaterThan(mSpan)) {
 //						doStopTimer();
@@ -133,7 +129,6 @@ public class PointKernelMain {
 //	}
 //	
 //	protected static void doCheckAttractPoint() {
-//		// TODO Auto-generated method stub
 //		String service = Context.ACTIVITY_SERVICE;
 //		AfApplication app = AfApplication.getApp();
 //		ActivityManager am = (ActivityManager) app.getSystemService(service);
@@ -162,21 +157,18 @@ public class PointKernelMain {
 //	}
 //
 //	protected static void doUpdateCache() {
-//		// TODO Auto-generated method stub
 //		mCache.put(KEY_POINT, mPoints);
 //		mCache.putList(KEY_LIST_ADINFO, mltAdInfo, AdInfo.class);
 //		mCache.putList(KEY_LIST_INSTALL, mltInstalled, AdInfo.class);
 //	}
 //
 //	protected static void doReadCache() {
-//		// TODO Auto-generated method stub
 //		mPoints = mCache.getInt(KEY_POINT, mPoints);
 //		mltAdInfo = mCache.getList(KEY_LIST_ADINFO, AdInfo.class);
 //		mltInstalled = mCache.getList(KEY_LIST_INSTALL, AdInfo.class);
 //	}
 //	
 //	protected static void doDivertInstalled(AdInfo adinfo) {
-//		// TODO Auto-generated method stub
 //		for (AdInfo element : mltInstalled) {
 //			if (element.equals(adinfo)) {
 //				return ;
@@ -189,7 +181,6 @@ public class PointKernelMain {
 //	}
 //
 //	private static void doNotifyAttractPoint(int accretion, int points) {
-//		// TODO Auto-generated method stub
 //		
 //	}
 //
@@ -201,19 +192,16 @@ public class PointKernelMain {
 //	}
 //
 //	public static int getPoint() {
-//		// TODO Auto-generated method stub
 //		return mPoints;
 //	}
 //
 //	public static int spendPoints(int spend) {
-//		// TODO Auto-generated method stub
 //		mPoints = mPoints - spend;
 //		mCache.put(KEY_POINT, mPoints);
 //		return mPoints;
 //	}
 //
 //	public static int awardPoints(int award) {
-//		// TODO Auto-generated method stub
 //		mPoints = mPoints + award;
 //		mCache.put(KEY_POINT, mPoints);
 //		return mPoints;

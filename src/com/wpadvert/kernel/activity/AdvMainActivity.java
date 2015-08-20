@@ -45,7 +45,6 @@ public class AdvMainActivity extends AfActivity {
 
 	@Override
 	protected void onCreate(Bundle bundle, AfIntent intent) throws Exception {
-		// TODO Auto-generated method stub
 //		AdvertAdapter.getInstance().initInstance(this);
 		
 		super.onCreate(bundle, intent);
@@ -67,7 +66,6 @@ public class AdvMainActivity extends AfActivity {
 	
 	@Override
 	protected void onDestroy() {
-		// TODO Auto-generated method stub
 		super.onDestroy();
 		AdvertAdapter.getInstance().uninstallAd(this);
 	}
@@ -76,7 +74,6 @@ public class AdvMainActivity extends AfActivity {
 
 		@Override
 		protected void onWorking(Message msg) throws Exception {
-			// TODO Auto-generated method stub
 			AdvertAdapter adapter = AdvertAdapter.getInstance();
 			List<AdCustom> ltdata = adapter.getAdCustomList(getActivity());
 			while (ltdata == null || ltdata.size() == 0) {
@@ -88,14 +85,12 @@ public class AdvMainActivity extends AfActivity {
 		
 		@Override
 		protected void onException(Throwable e) {
-			// TODO Auto-generated method stub
 			super.onException(e);
 			//ExceptionHandler.handler(e, "");
 		}
 
 		@Override
 		protected boolean onHandle(Message msg) {
-			// TODO Auto-generated method stub
 			if (mAdapter != null) {
 				mListView.setAdapter(mAdapter);
 				mSelector.SelectFrame(mListView);
@@ -108,12 +103,10 @@ public class AdvMainActivity extends AfActivity {
 
 		public AdvAdapter(Context context, List<AdCustom> ltdata) {
 			super(context, ltdata);
-			// TODO Auto-generated constructor stub
 		}
 
 		@Override
 		protected IAfLayoutItem<AdCustom> getItemLayout(AdCustom data) {
-			// TODO Auto-generated method stub
 			return new IAfLayoutItem<AdCustom>() {
 
 				private ImageView mIvImage;
@@ -127,7 +120,6 @@ public class AdvMainActivity extends AfActivity {
 				
 				@Override
 				public void onHandle(AfView view) {
-					// TODO Auto-generated method stub
 					mTvTip = view.findViewByID(R.id.advpitem_tip);
 					mTvTitle = view.findViewByID(R.id.advpitem_title);
 					mTvFileSize = view.findViewByID(R.id.advpitem_filesize);
@@ -145,7 +137,6 @@ public class AdvMainActivity extends AfActivity {
 
 				@Override
 				public void onBinding(AdCustom model,int index) {
-					// TODO Auto-generated method stub
 					mRlLayout.setTag(model);
 					mTvDownload.setTag(model);
 
@@ -170,7 +161,6 @@ public class AdvMainActivity extends AfActivity {
 
 				@Override
 				public int getLayoutId() {
-					// TODO Auto-generated method stub
 					return R.layout.wa_listitem_advpoetry;
 				}
 			};
@@ -178,7 +168,6 @@ public class AdvMainActivity extends AfActivity {
 
 		@Override
 		public void onClick(View v) {
-			// TODO Auto-generated method stub
 			if (v.getTag() instanceof AdCustom) {
 				final AdCustom info = AdCustom.class.cast(v.getTag());
 //				AdvertAdapter adapter = AdvertAdapter.getInstance();
@@ -188,13 +177,11 @@ public class AdvMainActivity extends AfActivity {
 							,"下载",new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
-							// TODO Auto-generated method stub
 							doDownloadAdv(info);
 						}
 					},"取消",new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
-							// TODO Auto-generated method stub
 							AbActivity.event(getActivity(), "downloadAd.cancel", info.Name);
 						}
 					});
@@ -205,7 +192,6 @@ public class AdvMainActivity extends AfActivity {
 		}
 
 		protected void doDownloadAdv(AdCustom info) {
-			// TODO Auto-generated method stub
 			AdvertAdapter adapter = AdvertAdapter.getInstance();
 
 			Apache connect = Apache.getInstance(getActivity());
