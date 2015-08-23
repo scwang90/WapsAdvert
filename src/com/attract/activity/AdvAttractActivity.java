@@ -13,12 +13,10 @@ import android.widget.TextView;
 
 import com.andadvert.AdvertAdapter;
 import com.andadvert.model.AdCustom;
-import com.andadvert.util.DS;
 import com.andframe.activity.AfActivity;
 import com.andframe.activity.framework.AfView;
 import com.andframe.adapter.AfListAdapter;
 import com.andframe.application.AfApplication;
-import com.andframe.caches.AfPrivateCaches;
 import com.andframe.constant.AfNetworkEnum;
 import com.andframe.feature.AfIntent;
 import com.andframe.layoutbind.AfFrameSelector;
@@ -27,7 +25,6 @@ import com.andframe.layoutbind.AfModuleProgressImpl;
 import com.andframe.layoutbind.AfModuleTitlebar;
 import com.andframe.thread.AfHandlerTask;
 import com.attract.application.AdvAttractAdapter;
-import com.attract.fragment.AttractFragmentBase;
 import com.attract.kernel.AttractStatistics;
 import com.wpadvert.R;
 import com.wpadvert.kernel.Apache;
@@ -89,21 +86,21 @@ public class AdvAttractActivity extends AfActivity implements OnClickListener {
 		String currency = AdvAttractAdapter.getInstance().getCurrency();
 		if (point < 100 && PointKernelAttract.isDownloaded() && mAdapter != null && mAdapter.getCount() > 1) {
 //			doShowDialog("温馨提示", String.format("    激活软件需要100%s，您目前只下载了一个软件不足以激活软件！", currency),"继续下载",
-			doShowDialog("温馨提示", String.format(DS.d("0c8bf7b5d9ad1cad8be1a337f94f0e9bc9cd226fff431410dc81663" +
-					"6a6119c874d621995e51d609c75bfed5b14723e13720af967b44cae5c4f92a0d4142619986ccd2b2b451282e" +
-					"b402dc5f6e2bac482fd11a07fbcf59580"), currency),"继续下载",
-					new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int index) {
-							AdCustom ad = PointKernelAttract.getNewAdCustom(mAdapter.getList());
-							if (ad != null) {
-								AfPrivateCaches.getInstance().put(AttractFragmentBase.KEY_IMPORTUNE, false);
-								AdvAttractActivity.this.downloadAd(ad);
-							}
-							AdvAttractActivity.this.finish();
-						}
-					});
-			return true;
+//			doShowDialog("温馨提示", String.format(DS.d("0c8bf7b5d9ad1cad8be1a337f94f0e9bc9cd226fff431410dc81663" +
+//					"6a6119c874d621995e51d609c75bfed5b14723e13720af967b44cae5c4f92a0d4142619986ccd2b2b451282e" +
+//					"b402dc5f6e2bac482fd11a07fbcf59580"), currency),"继续下载",
+//					new DialogInterface.OnClickListener() {
+//						@Override
+//						public void onClick(DialogInterface dialog, int index) {
+//							AdCustom ad = PointKernelAttract.getNewAdCustom(mAdapter.getList());
+//							if (ad != null) {
+//								AfPrivateCaches.getInstance().put(AttractFragmentBase.KEY_IMPORTUNE, false);
+//								AdvAttractActivity.this.downloadAd(ad);
+//							}
+//							AdvAttractActivity.this.finish();
+//						}
+//					});
+//			return true;
 		}
 		return super.onBackKeyPressed();
 	}
@@ -225,22 +222,34 @@ public class AdvAttractActivity extends AfActivity implements OnClickListener {
 		}
 
 		@Override
-		public void onClick(View v) {
+		public void onClick(final View v) {
 			if (v.getTag() instanceof AdCustom) {
-				downloadAd(AdCustom.class.cast(v.getTag()));
+				final AdCustom custom = AdCustom.class.cast(v.getTag());
+				doShowDialog("温馨提示", "确定下载【"+custom.Name+"】吗？"
+						,"下载",new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						downloadAd(custom);
+					}
+				},"取消",new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						AfApplication.getApp().onEvent(WpEvent.WP_DONWLOAD_CANCEL_ATTRACT);
+					}
+				});
 //				doShowDialog("温馨提示", "    软件正在下载中，请" +
 //						"在下载完成之后半小时之内安装并打开30秒以上" +
 //						"（并确保网络连接），才能获得"+
 //						AdvAttractAdapter.getInstance().getCurrency());
-				doShowDialog("温馨提示", DS.d("7a02ad1ae8010ef5f8" +
-						"7f5123be1adff8d75eee3c3a4f676d792671c10dc" +
-						"038f396ea164b84c6ab496edbae6dfcfed87181d5" +
-						"2cdb8209ca41d8ab507a8d9a89b3797e70ddfde7" +
-						"387a2116da783575eefad6d2c13645d1e0d3227a" +
-						"270b3e8d7e904bff3278f78cc963277f0d301c9463" +
-						"c2f661f52f6c1e47bf86e4b8d2d6a38b9fa21286ae" +
-						"3c752efc")+
-						AdvAttractAdapter.getInstance().getCurrency());
+//				doShowDialog("温馨提示", DS.d("7a02ad1ae8010ef5f8" +
+//						"7f5123be1adff8d75eee3c3a4f676d792671c10dc" +
+//						"038f396ea164b84c6ab496edbae6dfcfed87181d5" +
+//						"2cdb8209ca41d8ab507a8d9a89b3797e70ddfde7" +
+//						"387a2116da783575eefad6d2c13645d1e0d3227a" +
+//						"270b3e8d7e904bff3278f78cc963277f0d301c9463" +
+//						"c2f661f52f6c1e47bf86e4b8d2d6a38b9fa21286ae" +
+//						"3c752efc")+
+//						AdvAttractAdapter.getInstance().getCurrency());
 			}
 		}
 		

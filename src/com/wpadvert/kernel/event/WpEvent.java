@@ -17,4 +17,8 @@ public class WpEvent {
 	public static final String WP_POINT_ATTRACT = WP_PREFIX + "point_attract";
 	/** 奇特点数作弊 */
 	public static final String WP_CHEAT_ATTRACT = WP_PREFIX + "cheat_attract";
+	/**  */
+	public static final java.lang.String WP_DONWLOAD_CANCEL_ATTRACT = WP_PREFIX + "donwload_cancel_attract";
+	/***/
+	public static final java.lang.String WP_DONWLOAD_CANCEL_MAIN = WP_PREFIX + "donwload_cancel_main";
 }

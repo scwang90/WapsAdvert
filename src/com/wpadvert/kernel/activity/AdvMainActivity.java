@@ -1,7 +1,5 @@
 package com.wpadvert.kernel.activity;
 
-import java.util.List;
-
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -34,6 +32,8 @@ import com.wpadvert.kernel.Apache;
 import com.wpadvert.kernel.PointKernelMain;
 import com.wpadvert.kernel.application.WpBackService;
 import com.wpadvert.kernel.event.WpEvent;
+
+import java.util.List;
 
 public class AdvMainActivity extends AfActivity {
 	
@@ -182,7 +182,7 @@ public class AdvMainActivity extends AfActivity {
 					},"取消",new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
-							AbActivity.event(getActivity(), "downloadAd.cancel", info.Name);
+							AfApplication.getApp().onEvent(WpEvent.WP_DONWLOAD_CANCEL_MAIN);
 						}
 					});
 //					return;
