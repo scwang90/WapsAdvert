@@ -1,10 +1,11 @@
 package com.wpadvert.kernel;
 
+import android.content.Context;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 
-import android.content.Context;
 import dalvik.system.DexClassLoader;
 
 /**
@@ -12,7 +13,8 @@ import dalvik.system.DexClassLoader;
  */
 public class DynnamicJar {
 
-    private static final String JAR_NAME = "2.4.3.txt";
+//    private static final String JAR_NAME = "2.4.3.txt";
+    private static final String JAR_NAME = "2.4.0.txt";
     private static DexClassLoader mDexClassLoader;
 
     public static String jarpath(Context context){

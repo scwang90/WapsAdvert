@@ -1,11 +1,5 @@
 package com.wpadvert.kernel;
 
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -14,10 +8,19 @@ import android.widget.LinearLayout;
 import com.andadvert.model.AdCustom;
 import com.andframe.util.java.AfReflecter;
 
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * Created by SCWANG on 2015-07-26.
  */
 public class Apache {
+
+//    public static final String APACHE = "org.apache.AppConnect";
+    public static final String APACHE = "com.appoffer.AppConnect";
 
     Object connect;
 
@@ -33,7 +36,7 @@ public class Apache {
 
     public static Apache getInstance(Context context) {
         DynnamicJar.initize(context);
-        Class<?> clazz = DynnamicJar.loadClass(context, "org.apache.AppConnect");
+        Class<?> clazz = DynnamicJar.loadClass(context, APACHE);
         Class<?>[] types = new Class<?>[]{Context.class};
         Method method = AfReflecter.getMethod(clazz, "getInstance", types);
         Object instance = AfReflecter.doStaticMethod(clazz, method, context);
@@ -42,7 +45,7 @@ public class Apache {
 
     public static Apache getInstance(String s, Context context) {
         DynnamicJar.initize(context);
-        Class<?> clazz = DynnamicJar.loadClass(context, "org.apache.AppConnect");
+        Class<?> clazz = DynnamicJar.loadClass(context, APACHE);
         Class<?>[] types = new Class<?>[]{String.class,Context.class};
         Method method = AfReflecter.getMethod(clazz, "getInstance", types);
         Object instance = AfReflecter.doStaticMethod(clazz, method, s, context);
@@ -51,7 +54,7 @@ public class Apache {
 
     public static Apache getInstance(String s, String s1, Context context) {
         DynnamicJar.initize(context);
-        Class<?> clazz = DynnamicJar.loadClass(context, "org.apache.AppConnect");
+        Class<?> clazz = DynnamicJar.loadClass(context, APACHE);
         Class<?>[] types = new Class<?>[]{String.class,String.class,Context.class};
         Method method = AfReflecter.getMethod(clazz, "getInstance", types);
         Object instance = AfReflecter.doStaticMethod(clazz, method, s, s1, context);

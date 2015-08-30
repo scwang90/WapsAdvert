@@ -1,8 +1,5 @@
 package com.wpadvert.kernel;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
@@ -19,6 +16,9 @@ import com.andframe.application.AfExceptionHandler;
 import com.andframe.caches.AfPrivateCaches;
 import com.andframe.util.java.AfStringUtil;
 import com.wpadvert.kernel.activity.AdvMainActivity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 万普广告适配器
@@ -167,7 +167,7 @@ public class WpAdapter extends AdvertAdapter {
             // 初始化卸载广告
             try {
                 if (AfPrivateCaches.getInstance().getBoolean(KEY_INITUNINSTALLAD, true)) {
-                    Apache.getInstance(context).initUninstallAd(context);
+//                    Apache.getInstance(context).initUninstallAd(context);
                 } else {
                     /**
                      * 经过日志验证以下通知会发生，注释掉
