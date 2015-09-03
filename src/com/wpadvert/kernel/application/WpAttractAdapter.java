@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.andadvert.AdvertAdapter;
+import com.andadvert.PointStatistics;
+import com.andadvert.util.DS;
 import com.attract.activity.AdvAttractActivity;
 import com.attract.application.AdvAttractAdapter;
 import com.wpadvert.kernel.PointKernelAttract;
@@ -55,10 +57,28 @@ public class WpAttractAdapter extends AdvAttractAdapter{
 	public String getChannel() {
 		return AdvertAdapter.getInstance().getChannel();
 	}
-	
+
+	@Override
+	public String getConfig(String key, String vdefault) {
+		return super.getConfig(key, vdefault);
+	}
+
+	@Override
+	public void initInstance(Context context) {
+		super.initInstance(context);
+		PointStatistics.stop();
+		AdvertAdapter.getInstance().initInstance(context);
+	}
+
+	@Override
+	public void uninstallAd(Context context) {
+		super.uninstallAd(context);
+		AdvertAdapter.getInstance().uninstallAd(context);
+	}
+
 	@Override
 	public String getCurrency() {
-		return "M币";//AdvertAdapter.getInstance().getCurrency();
+		return DS.d("0a9cc801b7a36654");//AdvertAdapter.getInstance().getCurrency();
 	}
 	
 }

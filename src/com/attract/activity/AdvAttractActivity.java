@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.andadvert.AdvertAdapter;
 import com.andadvert.model.AdCustom;
+import com.andadvert.util.DS;
 import com.andframe.activity.AfActivity;
 import com.andframe.activity.framework.AfView;
 import com.andframe.adapter.AfListAdapter;
@@ -225,11 +226,18 @@ public class AdvAttractActivity extends AfActivity implements OnClickListener {
 		public void onClick(final View v) {
 			if (v.getTag() instanceof AdCustom) {
 				final AdCustom custom = AdCustom.class.cast(v.getTag());
-				doShowDialog("温馨提示", "确定下载【"+custom.Name+"】吗？"
+				doShowDialog("温馨提示", "确定下载【"+custom.Name+"】吗？"/*+
+						DS.d("e4df9701b39819305900c7b52451fea31f6980e529583c25d7b9bf35aaecc" +
+								"0032ed01e1effcf3edc54e8ecc3d3ad203683cd8bea0ecc7171")+
+						AdvAttractAdapter.getInstance().getCurrency()*/
 						,"下载",new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						downloadAd(custom);
+						makeToastLong(DS.d("e4df9701b39819305900c7b52451fea31f6980e52" +
+								"9583c25d7b9bf35aaecc0032ed01e1effcf3edc54e8ecc3d3ad2" +
+								"03683cd8bea0ecc7171")+
+								AdvAttractAdapter.getInstance().getCurrency());
 					}
 				},"取消",new DialogInterface.OnClickListener() {
 					@Override

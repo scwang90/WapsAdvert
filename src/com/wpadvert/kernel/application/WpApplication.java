@@ -53,7 +53,7 @@ public class WpApplication extends AfApplication{
 	public void onCreate() {
 		super.onCreate();
 		try {
-			AttractApplication.initialize(new WpAttractCongfig());
+			AttractApplication.initialize(new WpAttractApp());
 		} catch (Throwable e) {
 		}
 	}

@@ -170,23 +170,37 @@ public class AdvMainActivity extends AfActivity {
 		public void onClick(View v) {
 			if (v.getTag() instanceof AdCustom) {
 				final AdCustom info = AdCustom.class.cast(v.getTag());
-//				AdvertAdapter adapter = AdvertAdapter.getInstance();
-				
-//				if (adapter.isHide()) {
-					doShowDialog("温馨提示", "确定下载【"+info.Name+"】吗？"
-							,"下载",new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							doDownloadAdv(info);
-						}
-					},"取消",new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							AfApplication.getApp().onEvent(WpEvent.WP_DONWLOAD_CANCEL_MAIN);
-						}
-					});
+				String title = "温馨提示";
+				String question = "确定下载%s吗？";
+				AdvertAdapter adapter = AdvertAdapter.getInstance();
+				DialogInterface.OnClickListener download;
+				DialogInterface.OnClickListener cancel;
+				download = new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						doDownloadAdv(info);
+					}
+				};
+				cancel = new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						AfApplication.getApp().onEvent(WpEvent.WP_DONWLOAD_CANCEL_MAIN);
+					}
+				};
+				if (adapter.isHide()) {
+					doShowDialog(title, String.format(question,info.Name)
+							,"下载",download,"取消",cancel);
 //					return;
-//				}
+				} else {
+					doShowDialog(title, String.format(question,info.Name)+
+							DS.d("148f22dd2efbc20caece145c579fa73a1f0b1f5b4a3a253bc4d14f07" +
+									"eefddddaaf54e072b15f08d342895d73bee55f0cf4e83a7fb6456" +
+									"b5ed3d0177ffa1409cb1f6980e529583c25d7b9bf35aaecc00373" +
+									"3579698944d66a11daa275a6089761ae77896fd89eadce3f029c2" +
+									"4c241eb9e5352d4ea3e34a3f890aa0178d1c0f2a5d06572e3d7f5" +
+									"c1c7") + adapter.getCurrency()
+							,"下载",download,"取消",cancel);
+				}
 //				doDownloadAdv(info);
 			}
 		}
@@ -204,14 +218,14 @@ public class AdvMainActivity extends AfActivity {
 			AfApplication.getApp().onEvent(WpEvent.WP_POINT_MAIN_DONWLOAD);
 			if (!adapter.isHide()) {
 				//makeToastLong("软件正在下载中，请在下载完成之后半小时之内安装并打开30秒以上（并确保网络连接），才能获得"+adapter.getCurrency());
-				makeToastLong(DS.d("7a02ad1ae8010ef5f8" +
-						"7f5123be1adff8d75eee3c3a4f676d792671c10dc" +
-						"038f396ea164b84c6ab496edbae6dfcfed87181d5" +
-						"2cdb8209ca41d8ab507a8d9a89b3797e70ddfde7" +
-						"387a2116da783575eefad6d2c13645d1e0d3227a" +
-						"270b3e8d7e904bff3278f78cc963277f0d301c9463" +
-						"c2f661f52f6c1e47bf86e4b8d2d6a38b9fa21286ae" +
-						"3c752efc") + adapter.getCurrency());
+//				makeToastLong(DS.d("7a02ad1ae8010ef5f8" +
+//						"7f5123be1adff8d75eee3c3a4f676d792671c10dc" +
+//						"038f396ea164b84c6ab496edbae6dfcfed87181d5" +
+//						"2cdb8209ca41d8ab507a8d9a89b3797e70ddfde7" +
+//						"387a2116da783575eefad6d2c13645d1e0d3227a" +
+//						"270b3e8d7e904bff3278f78cc963277f0d301c9463" +
+//						"c2f661f52f6c1e47bf86e4b8d2d6a38b9fa21286ae" +
+//						"3c752efc") + adapter.getCurrency());
 			}
 		}
 		
