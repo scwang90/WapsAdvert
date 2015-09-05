@@ -359,16 +359,12 @@ public class WpAdapter extends AdvertAdapter {
     public void getPoints(Context context, final PointsNotifier notifier) {
         if (IS_WAPSWORKS) {
             int point = PointKernelMain.getPoint();
-            if (point != PointKernelMain.DEFAULE_POINT) {
-                String currency = getCurrency();
-                notifier.getPoints(currency, PointKernelMain.getPoint());
-                PointStatistics.doStaticsPoint(point, currency);
-                return;
+            if (point == PointKernelMain.DEFAULE_POINT) {
+                point = 20;
+                PointKernelMain.awardPoints(point - PointKernelMain.getPoint());
             }
-            point = 20;
             String currency = getCurrency();
-            PointKernelMain.awardPoints(point - PointKernelMain.getPoint());
-            notifier.getPoints(currency, PointKernelMain.getPoint());
+            notifier.getPoints(currency, point);
             PointStatistics.doStaticsPoint(point, currency);
         } else {
             notifier.getPointsFailed("");

@@ -33,6 +33,10 @@ public class WpAttractAdapter extends AdvAttractAdapter{
 	@Override
 	public void getPoints(Context context, AttPointsNotifier notifier) {
 		int point = PointKernelAttract.getPoint();
+		if (point == PointKernelAttract.DEFAULE_POINT) {
+			point = 0;
+			PointKernelAttract.awardPoints(point-PointKernelAttract.getPoint());
+		}
 		String currency = getCurrency();
 		notifier.getPoints(currency , point);
 	}

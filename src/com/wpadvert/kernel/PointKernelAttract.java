@@ -1,13 +1,13 @@
 package com.wpadvert.kernel;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.andadvert.model.AdCustom;
 import com.andframe.application.AfApplication;
 import com.andframe.caches.AfPrivateCaches;
 import com.attract.kernel.AttractStatistics;
 import com.wpadvert.kernel.event.WpEvent;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PointKernelAttract{
 
@@ -20,12 +20,14 @@ public class PointKernelAttract{
 //
 	private static final String KEY_DOWNLOAD = "95976004134032214102";
 	private static final String KEY_CACHE = "52883484512041114102";
-//	private static final String KEY_POINT = "75282482634041114102";
+
+	public static final int DEFAULE_POINT = PointKernel.DEFAULE_POINT;
+	//	private static final String KEY_POINT = "75282482634041114102";
 //	private static final String KEY_LIST_ADINFO = "00678600734041114102";
 //	private static final String KEY_LIST_INSTALL = "96534570734041114102";
 //	//定时器周期10秒钟
 //	private static final long KEY_PERIOD = 60000;
-//	
+//
 	//缓存器
 	private static AfPrivateCaches mCache = AfPrivateCaches.getInstance(KEY_CACHE);
 
