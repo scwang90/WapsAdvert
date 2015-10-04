@@ -283,7 +283,7 @@ public class WpAdapter extends AdvertAdapter {
     public String getConfig(Context context, String key, String vdefault) {
         try {
             String value = Apache.getInstance(context).getConfig(key, vdefault);
-            if ("".equals(value) && !"".equals(vdefault)) {
+            if (AfStringUtil.isEmpty(value) && value != null) {
                 return vdefault;
             }
             return value;
