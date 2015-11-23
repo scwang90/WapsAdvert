@@ -18,6 +18,7 @@ dependencies {
     compile project(':AndAdvert')
     compile project(':Attract')
     compile project(':AndCloud')
+    compile project(':AndRestful')
 }
 
 android {

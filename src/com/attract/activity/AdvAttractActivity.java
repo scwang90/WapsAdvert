@@ -24,6 +24,7 @@ import com.andframe.layoutbind.AfFrameSelector;
 import com.andframe.layoutbind.AfModuleProgress;
 import com.andframe.layoutbind.AfModuleProgressImpl;
 import com.andframe.layoutbind.AfModuleTitlebar;
+import com.andframe.layoutbind.AfModuleTitlebarImpl;
 import com.andframe.thread.AfHandlerTask;
 import com.attract.application.AdvAttractAdapter;
 import com.attract.kernel.AttractStatistics;
@@ -53,7 +54,7 @@ public class AdvAttractActivity extends AfActivity implements OnClickListener {
 		mListView = findViewByID(R.id.advattract_list);
 
 		String currency = AdvAttractAdapter.getInstance().getCurrency();
-		mTitlebar = new AfModuleTitlebar(this);
+		mTitlebar = new AfModuleTitlebarImpl(this);
 		mTitlebar.setTitle("免费"+currency);
 		mTitlebar.setOnGoBackListener(this);
 		mProgress = new AfModuleProgressImpl(this);
@@ -73,7 +74,7 @@ public class AdvAttractActivity extends AfActivity implements OnClickListener {
 	
 	@Override
 	public void onClick(View v) {
-		if (v != null && v.getId() == AfModuleTitlebar.ID_GOBACK) {
+		if (v != null && v.getId() == mTitlebar.getBtGoBackId()) {
 			if (!onBackKeyPressed()) {
 				this.finish();
 			}

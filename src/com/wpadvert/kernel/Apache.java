@@ -19,8 +19,8 @@ import java.util.Map;
  */
 public class Apache {
 
-//    public static final String APACHE = "org.apache.AppConnect";
-    public static final String APACHE = "com.appoffer.AppConnect";
+    public static final String APACHE = "org.apache.AppConnect";
+//    public static final String APACHE = "com.appoffer.AppConnect";
 
     Object connect;
 

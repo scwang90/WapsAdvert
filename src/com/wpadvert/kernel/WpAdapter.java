@@ -39,34 +39,7 @@ public class WpAdapter extends AdvertAdapter {
     /**
      * 躲避广告结束日期
      */
-//	protected static Date ENDDATE = new Date(0);
-//	 private String Channel = "poetry";
     private String mChannel = "google";
-//	 private String Channel = "appchina";
-    // private String Channel = "liqu";
-//	 private String Channel = "goapk";
-//	 private String Channel = "wandoujia";
-
-//	 private String Channel = "91";
-//	 private String Channel = "hiapk";
-
-//	 private String Channel = "xiaomi";
-//	 private String Channel = "360";
-//	 private String Channel = "qq";
-//	 private String Channel = "baidu";
-
-//	 private String Channel = "gfan";
-//	  private String Channel = "eoe";
-//	  private String Channel = "mumayi";
-//	  private String Channel = "lenovo";
-//	  private String Channel = "nduo";
-
-//	 private String Channel = "update";
-//	 private String Channel = "huali";
-//	 private String Channel = "163";
-//	 private String Channel = "waps";
-//	 private String Channel = "hide";
-
     private String mDefChannel = mChannel;
 
     protected static String UNIT_POINT = "daa48666f050fbd0";//"积分";
@@ -76,6 +49,13 @@ public class WpAdapter extends AdvertAdapter {
             UNIT_POINT = DS.d(UNIT_POINT);
         }
         DynnamicJar.initize(AfApplication.getApp());
+    }
+
+    /**
+     * 获取全局 广告适配器
+     */
+    public static AdvertAdapter getWpInstance(){
+        return AfApplication.getApp().getSingleton(AdvertAdapter.KEY_ADVERT);
     }
 
     public static void initialize(AfApplication application, String channel, String currency, String appId) {

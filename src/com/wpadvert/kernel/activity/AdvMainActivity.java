@@ -26,7 +26,9 @@ import com.andframe.layoutbind.AfFrameSelector;
 import com.andframe.layoutbind.AfModuleProgress;
 import com.andframe.layoutbind.AfModuleProgressImpl;
 import com.andframe.layoutbind.AfModuleTitlebar;
+import com.andframe.layoutbind.AfModuleTitlebarImpl;
 import com.andframe.thread.AfHandlerTask;
+import com.andframe.util.StatusBarCompat;
 import com.wpadvert.R;
 import com.wpadvert.kernel.Apache;
 import com.wpadvert.kernel.PointKernelMain;
@@ -51,7 +53,8 @@ public class AdvMainActivity extends AfActivity {
 		setContentView(R.layout.wa_layout_advattract);
 		mListView = findViewByID(R.id.advattract_list);
 		
-		mTitlebar = new AfModuleTitlebar(this);
+		mTitlebar = new AfModuleTitlebarImpl(this);
+		StatusBarCompat.compatPadding(mTitlebar.getTarget());
 		mTitlebar.setTitle("热门应用推荐");
 		mProgress = new AfModuleProgressImpl(this);
 		mProgress.setDescription("正在加载");
@@ -60,7 +63,7 @@ public class AdvMainActivity extends AfActivity {
 		
 		postTask(new LoadingTask());
 		if (WpBackService.SetBackground(this)) {
-			mTitlebar.getLayout().setBackgroundColor(0x99000000);
+			mTitlebar.getTarget().setBackgroundColor(0x99000000);
 		}
 	}
 	
