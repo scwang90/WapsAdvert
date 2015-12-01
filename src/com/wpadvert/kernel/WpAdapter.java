@@ -15,10 +15,21 @@ import com.andframe.application.AfApplication;
 import com.andframe.application.AfExceptionHandler;
 import com.andframe.caches.AfPrivateCaches;
 import com.andframe.util.java.AfStringUtil;
+import com.andrestrequest.AndRestConfig;
+import com.andrestrequest.http.DefaultRequestHandler;
+import com.andrestrequest.http.MultiRequestHandler;
+import com.andrestrequest.http.Response;
+import com.andrestrequest.http.api.HttpMethod;
+import com.andrestrequest.http.api.RequestHandler;
+import com.google.gson.internal.LinkedHashTreeMap;
 import com.wpadvert.kernel.activity.AdvMainActivity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 /**
  * 万普广告适配器
@@ -54,8 +65,19 @@ public class WpAdapter extends AdvertAdapter {
     /**
      * 获取全局 广告适配器
      */
-    public static AdvertAdapter getWpInstance(){
+    public static WpAdapter getWpInstance(){
         return AfApplication.getApp().getSingleton(AdvertAdapter.KEY_ADVERT);
+    }
+
+    protected RequestHandler handler = MultiRequestHandler.getInstance("advert.properties");
+
+    public List<FlowAd> getFlowAdList() throws Exception {
+        Map<String, Object> params = new LinkedHashMap<>();
+        params.put("app_id",APP_ID);
+        params.put("format","json");
+        String url = "http://app.wapx.cn/action/apiAd/flowAd";
+        Response response = handler.doRequest(HttpMethod.POST, url, null, null, params);
+        return response.getBodyAsObjects(FlowAd.class);
     }
 
     public static void initialize(AfApplication application, String channel, String currency, String appId) {
