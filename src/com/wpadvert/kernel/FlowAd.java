@@ -1,5 +1,8 @@
 package com.wpadvert.kernel;
 
+import com.andframe.application.AfApplication;
+import com.andframe.helper.android.AfDeviceInfo;
+
 import java.util.HashMap;
 
 /**
@@ -8,16 +11,35 @@ import java.util.HashMap;
  */
 public class FlowAd extends HashMap{
 
+    static AfDeviceInfo deviceInfo;
+
+    private void ensureDeviceInfo() {
+        if (deviceInfo == null) {
+            deviceInfo = new AfDeviceInfo(AfApplication.getAppContext());
+        }
+    }
+
     public String getLaunchArea() {
         return "" + get("launch_area");
     }
 
     public String getClickUrl() {
-        return "" + get("click_url");
+        ensureDeviceInfo();
+        return "" + get("click_url") + "&udid=" + deviceInfo.getDeviceId();
     }
 
     public String getAdimg() {
         return "" + get("adimg");
+    }
+
+    public String getAdimg16_9() {
+        ensureDeviceInfo();
+        return "" + get("adimg") + "&res_type=16_9&udid=" + deviceInfo.getDeviceId();
+    }
+
+    public String getAdimg4_3() {
+        ensureDeviceInfo();
+        return "" + get("adimg") + "&res_type=4_3&udid=" + deviceInfo.getDeviceId();
     }
 
     public float getPrice() {

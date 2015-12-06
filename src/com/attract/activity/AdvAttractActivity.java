@@ -60,7 +60,7 @@ public class AdvAttractActivity extends AfActivity implements OnClickListener {
 		mProgress = new AfModuleProgressImpl(this);
 		mProgress.setDescription("正在加载");
 		mSelector = new AfFrameSelector(this, R.id.advattract_frame);
-		mSelector.SelectFrame(mProgress);
+		mSelector.selectFrame(mProgress);
 
 //		mTitlebar.setOnGoBackListener(new OnClickListener() {
 //			@Override
@@ -163,7 +163,7 @@ public class AdvAttractActivity extends AfActivity implements OnClickListener {
 			}else {
 				makeToastLong("数据加载失败！");
 			}
-			mSelector.SelectFrame(mListView);
+			mSelector.selectFrame(mListView);
 			return false;
 		}
 	}

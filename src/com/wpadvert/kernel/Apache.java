@@ -185,7 +185,7 @@ public class Apache {
         return doAdInfoToAdCustom(info);
     }
 
-    public void setCrashReport(boolean b) {
+    public void setCrashReport(Boolean b) {
 //        connect.setCrashReport(b);
         AfReflecter.doMethod(connect, "setCrashReport", b);
     }
@@ -207,7 +207,7 @@ public class Apache {
 
     public void initPopAd(Context context) {
 //        connect.initPopAd(context);
-        AfReflecter.doMethod(connect, "initPopAd", context);
+        AfReflecter.doMethod(connect, "initPopAd",new Class<?>[]{Context.class}, context);
     }
 
     public void initAdInfo() {

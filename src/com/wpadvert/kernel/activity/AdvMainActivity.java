@@ -59,7 +59,7 @@ public class AdvMainActivity extends AfActivity {
 		mProgress = new AfModuleProgressImpl(this);
 		mProgress.setDescription("正在加载");
 		mSelector = new AfFrameSelector(this, R.id.advattract_frame);
-		mSelector.SelectFrame(mProgress);
+		mSelector.selectFrame(mProgress);
 		
 		postTask(new LoadingTask());
 		if (WpBackService.SetBackground(this)) {
@@ -96,7 +96,7 @@ public class AdvMainActivity extends AfActivity {
 		protected boolean onHandle(Message msg) {
 			if (mAdapter != null) {
 				mListView.setAdapter(mAdapter);
-				mSelector.SelectFrame(mListView);
+				mSelector.selectFrame(mListView);
 			}
 			return false;
 		}

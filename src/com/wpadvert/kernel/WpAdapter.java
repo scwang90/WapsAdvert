@@ -69,7 +69,7 @@ public class WpAdapter extends AdvertAdapter {
         return AfApplication.getApp().getSingleton(AdvertAdapter.KEY_ADVERT);
     }
 
-    protected RequestHandler handler = MultiRequestHandler.getInstance("advert.properties");
+    protected RequestHandler handler = MultiRequestHandler.getInstance();
 
     public List<FlowAd> getFlowAdList() throws Exception {
         Map<String, Object> params = new LinkedHashMap<>();
