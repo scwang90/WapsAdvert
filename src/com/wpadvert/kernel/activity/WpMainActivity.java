@@ -7,6 +7,7 @@ import android.view.View.OnLongClickListener;
 import com.andframe.activity.AfMainActivity;
 import com.andframe.application.AfApplication;
 import com.andframe.caches.AfPrivateCaches;
+import com.andframe.feature.AfIntent;
 import com.attract.application.AttractApplication;
 import com.wpadvert.kernel.WpAdapter;
 import com.wpadvert.kernel.event.WpEvent;
@@ -14,7 +15,7 @@ import com.wpadvert.kernel.event.WpEvent;
 public class WpMainActivity extends AfMainActivity{
 
 	@Override
-	protected void onActivityCreate(Bundle savedInstanceState) {
+	protected void onActivityCreate(Bundle bundle, AfIntent intent) {
 //		if (AttractActivity.attract(getIntent())) {
 //			Intent intent = new Intent(this,AttractActivity.class);
 //			String key = AttractActivity.KEY_URL;
