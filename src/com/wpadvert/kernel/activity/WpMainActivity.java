@@ -30,7 +30,7 @@ public class WpMainActivity extends AfMainActivity{
 //		}
 //		super.onActivityCreate(savedInstanceState);
 		if (AfApplication.getApp().isDebug()) {
-			mRoot.setOnLongClickListener(new OnLongClickListener() {
+			mRootView.setOnLongClickListener(new OnLongClickListener() {
 				@Override
 				public boolean onLongClick(View v) {
 					AttractApplication.getApp().sudoAttract();
