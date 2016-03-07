@@ -14,11 +14,11 @@ apply plugin: 'com.android.library'
 
 dependencies {
     //compile fileTree(dir: 'libs', include: '*.jar')
-    compile project(':AndFrame')
-    compile project(':AndAdvert')
-    compile project(':Attract')
-    compile project(':AndCloud')
-    compile project(':AndRestful')
+    compile project(':andframe')
+    compile project(':andadvert')
+    compile project(':attract')
+    compile project(':andcloud')
+    compile project(':andrestful')
 }
 
 android {
