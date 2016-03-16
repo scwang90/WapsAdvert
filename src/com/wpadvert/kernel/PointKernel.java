@@ -126,8 +126,8 @@ public class PointKernel extends AfHandlerTimerTask{
 			mPoints = point;
 		}
 		mCache.put(KEY_POINT, mPoints);
-		mCache.putList(KEY_LIST_ADINFO, mltMonitored, AdInfo.class);
-		mCache.putList(KEY_LIST_INSTALL, mltInstalled, AdInfo.class);
+		mCache.putList(KEY_LIST_ADINFO, mltMonitored);
+		mCache.putList(KEY_LIST_INSTALL, mltInstalled);
 	}
 
 	protected void doReadCache() {
