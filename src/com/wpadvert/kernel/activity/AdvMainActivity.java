@@ -76,7 +76,7 @@ public class AdvMainActivity extends AfActivity {
 	private class LoadingTask extends AfHandlerTask{
 
 		@Override
-		protected void onWorking(Message msg) throws Exception {
+		protected void onWorking(/*Message msg*/) throws Exception {
 			AdvertAdapter adapter = AdvertAdapter.getInstance();
 			List<AdCustom> ltdata = adapter.getAdCustomList(getActivity());
 			while (ltdata == null || ltdata.size() == 0) {
@@ -93,7 +93,7 @@ public class AdvMainActivity extends AfActivity {
 		}
 
 		@Override
-		protected boolean onHandle(Message msg) {
+		protected boolean onHandle(/*Message msg*/) {
 			if (mAdapter != null) {
 				mListView.setAdapter(mAdapter);
 				mSelector.selectFrame(mListView);
