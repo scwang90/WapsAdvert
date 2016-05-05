@@ -27,6 +27,7 @@ import com.andframe.layoutbind.AfModuleProgressImpl;
 import com.andframe.layoutbind.AfModuleTitlebar;
 import com.andframe.layoutbind.AfModuleTitlebarImpl;
 import com.andframe.thread.AfHandlerTask;
+import com.andframe.util.android.AfStatusBarCompat;
 import com.wpadvert.R;
 import com.wpadvert.kernel.Apache;
 import com.wpadvert.kernel.PointKernelMain;
@@ -52,7 +53,7 @@ public class AdvMainActivity extends AfActivity {
 		mListView = findViewByID(R.id.advattract_list);
 		
 		mTitlebar = new AfModuleTitlebarImpl(this);
-		StatusBarCompat.compatPadding(mTitlebar.getTarget());
+		AfStatusBarCompat.compatPadding(mTitlebar.getTarget(), true);
 		mTitlebar.setTitle("热门应用推荐");
 		mProgress = new AfModuleProgressImpl(this);
 		mProgress.setDescription("正在加载");
