@@ -53,7 +53,7 @@ public class AdvMainActivity extends AfActivity {
 		mListView = findViewByID(R.id.advattract_list);
 		
 		mTitlebar = new AfModuleTitlebarImpl(this);
-		AfStatusBarCompat.compatPadding(mTitlebar.getTarget(), true);
+		AfStatusBarCompat.compatPadding(mTitlebar.getView(), true);
 		mTitlebar.setTitle("热门应用推荐");
 		mProgress = new AfModuleProgressImpl(this);
 		mProgress.setDescription("正在加载");
@@ -62,7 +62,7 @@ public class AdvMainActivity extends AfActivity {
 		
 		postTask(new LoadingTask());
 		if (WpBackService.SetBackground(this)) {
-			mTitlebar.getTarget().setBackgroundColor(0x99000000);
+			mTitlebar.getView().setBackgroundColor(0x99000000);
 		}
 	}
 	
