@@ -2,7 +2,6 @@ package com.wpadvert.kernel.activity;
 
 import android.os.Bundle;
 import android.view.View;
-import android.view.View.OnLongClickListener;
 
 import com.andframe.activity.AfMainActivity;
 import com.andframe.application.AfApplication;
@@ -15,7 +14,8 @@ import com.wpadvert.kernel.event.WpEvent;
 public class WpMainActivity extends AfMainActivity{
 
 	@Override
-	protected void onActivityCreate(Bundle bundle, AfIntent intent) {
+	protected void onCreate(Bundle bundle, AfIntent intent) throws Exception {
+		super.onCreate(bundle, intent);
 //		if (AttractActivity.attract(getIntent())) {
 //			Intent intent = new Intent(this,AttractActivity.class);
 //			String key = AttractActivity.KEY_URL;
@@ -30,7 +30,7 @@ public class WpMainActivity extends AfMainActivity{
 //		}
 //		super.onActivityCreate(savedInstanceState);
 		if (AfApplication.getApp().isDebug()) {
-			mRootView.setOnLongClickListener(new OnLongClickListener() {
+			mRootView.setOnLongClickListener(new View.OnLongClickListener() {
 				@Override
 				public boolean onLongClick(View v) {
 					AttractApplication.getApp().sudoAttract();
@@ -41,9 +41,8 @@ public class WpMainActivity extends AfMainActivity{
 		}
 //		ExceptionHandler.handler(new Throwable(), "异常测试");
 //		throw new NullPointerException("异常测试");
-	};
-	
-	
+	}
+
 	@Override
 	protected boolean onBackKeyPressed() {
 		String key = WpAdapter.KEY_INITUNINSTALLAD;
