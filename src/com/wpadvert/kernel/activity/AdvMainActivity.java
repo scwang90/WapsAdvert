@@ -88,7 +88,7 @@ public class AdvMainActivity extends AfActivity {
 		@Override
 		protected void onException(Throwable e) {
 			super.onException(e);
-			//ExceptionHandler.handler(e, "");
+			//ExceptionHandler.handle(e, "");
 		}
 
 		@Override

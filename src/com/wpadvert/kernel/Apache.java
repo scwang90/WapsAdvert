@@ -28,7 +28,7 @@ public class Apache {
         if (instance == null){
             connect = new Object();
             //出现null很正常！只要没有初始化万普就会这样
-//            AfExceptionHandler.handler(new RuntimeException("connect=null"),"Apache.init");
+//            AfExceptionHandler.handle(new RuntimeException("connect=null"),"Apache.init");
         } else {
             connect = instance;
         }

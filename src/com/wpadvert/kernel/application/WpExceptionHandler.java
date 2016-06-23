@@ -38,7 +38,7 @@ public class WpExceptionHandler extends AfExceptionHandler{
 			}
 		}else if(isWaps){
 			AfPrivateCaches.getInstance().put(WpAdapter.KEY_ISWAPSWORKS, false);
-			handler(ex, "Deal Width cn.waps.");
+			handle(ex, "Deal Width cn.waps.");
 			startForeground();
 		}
 		super.uncaughtException(thread, oex);

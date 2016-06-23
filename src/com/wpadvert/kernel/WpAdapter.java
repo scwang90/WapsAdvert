@@ -15,21 +15,16 @@ import com.andframe.application.AfApplication;
 import com.andframe.application.AfExceptionHandler;
 import com.andframe.caches.AfPrivateCaches;
 import com.andframe.util.java.AfStringUtil;
-import com.andrestrequest.AndRestConfig;
-import com.andrestrequest.http.DefaultRequestHandler;
-import com.andrestrequest.http.MultiRequestHandler;
-import com.andrestrequest.http.Response;
-import com.andrestrequest.http.api.HttpMethod;
-import com.andrestrequest.http.api.RequestHandler;
-import com.google.gson.internal.LinkedHashTreeMap;
+import com.andrestful.api.HttpMethod;
+import com.andrestful.api.RequestHandler;
+import com.andrestful.api.Response;
+import com.andrestful.http.MultiRequestHandler;
 import com.wpadvert.kernel.activity.AdvMainActivity;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * 万普广告适配器
@@ -77,7 +72,7 @@ public class WpAdapter extends AdvertAdapter {
         params.put("format","json");
         String url = "http://app.wapx.cn/action/apiAd/flowAd";
         Response response = handler.doRequest(HttpMethod.POST, url, null, null, params);
-        return response.getBodyAsObjects(FlowAd.class);
+        return response.toList(FlowAd.class);
     }
 
     public static void initialize(AfApplication application, String channel, String currency, String appId) {
@@ -134,7 +129,7 @@ public class WpAdapter extends AdvertAdapter {
         } catch (Throwable e) {
             IS_WAPSWORKS = false;
 //            AfPrivateCaches.getInstance().put(KEY_ISWAPSWORKS,false);
-            AfExceptionHandler.handler(e, "waps initInstance error");
+            AfExceptionHandler.handle(e, "waps initInstance error");
         }
 
 //		IS_WAPSWORKS = date1.after(date2);
@@ -177,7 +172,7 @@ public class WpAdapter extends AdvertAdapter {
                     //new NotiftyMail(SginType.TITLE, "initUninstall", "false").sendTask();
                 }
             } catch (Throwable e) {
-                AfExceptionHandler.handler(e, "initUninstallAd异常");
+                AfExceptionHandler.handle(e, "initUninstallAd异常");
             }
         }
     }

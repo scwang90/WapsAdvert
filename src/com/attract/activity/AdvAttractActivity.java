@@ -153,7 +153,7 @@ public class AdvAttractActivity extends AfActivity implements OnClickListener {
 			       异常信息:
 				Cannot execute task: the task is already running.
 			 */
-//			ExceptionHandler.handler(e, "");
+//			ExceptionHandler.handle(e, "");
 		}
 
 		@Override
