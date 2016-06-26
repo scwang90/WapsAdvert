@@ -1,9 +1,5 @@
 package com.wpadvert.kernel;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 import android.app.ActivityManager;
 import android.content.Context;
 import android.os.Message;
@@ -16,6 +12,10 @@ import com.andframe.application.AfExceptionHandler;
 import com.andframe.caches.AfPrivateCaches;
 import com.andframe.thread.AfHandlerTimerTask;
 import com.andframe.util.android.AfNetwork;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class PointKernel extends AfHandlerTimerTask{
 	
@@ -96,7 +96,7 @@ public class PointKernel extends AfHandlerTimerTask{
 		AfApplication app = AfApplication.getApp();
 		ActivityManager am = (ActivityManager) app.getSystemService(service);
 		List<ActivityManager.RunningAppProcessInfo> proces = am.getRunningAppProcesses();
-		List<AdInfo> ltInstalled = new ArrayList<AdInfo>();
+		List<AdInfo> ltInstalled = new ArrayList<>();
 		for (AdInfo adinfo : mltMonitored) {
 			for (ActivityManager.RunningAppProcessInfo proce : proces) {
 				if (proce.processName.equals(adinfo.info.Package)) {

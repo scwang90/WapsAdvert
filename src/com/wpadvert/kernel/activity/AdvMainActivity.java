@@ -53,7 +53,7 @@ public class AdvMainActivity extends AfActivity {
 		mListView = findViewByID(R.id.advattract_list);
 		
 		mTitlebar = new AfModuleTitlebarImpl(this);
-		AfStatusBarCompat.compatPadding(mTitlebar.getView(), true);
+		AfStatusBarCompat.compatPadding(mTitlebar.getView());
 		mTitlebar.setTitle("热门应用推荐");
 		mProgress = new AfModuleProgressImpl(this);
 		mProgress.setDescription("正在加载");
