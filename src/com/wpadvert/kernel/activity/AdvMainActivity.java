@@ -22,6 +22,7 @@ import com.andframe.application.AfApplication;
 import com.andframe.constant.AfNetworkEnum;
 import com.andframe.feature.AfIntent;
 import com.andframe.layoutbind.AfFrameSelector;
+import com.andframe.layoutbind.AfListItem;
 import com.andframe.layoutbind.AfModuleProgress;
 import com.andframe.layoutbind.AfModuleProgressImpl;
 import com.andframe.layoutbind.AfModuleTitlebar;
@@ -108,8 +109,8 @@ public class AdvMainActivity extends AfActivity {
 		}
 
 		@Override
-		protected IAfLayoutItem<AdCustom> getItemLayout(AdCustom data) {
-			return new IAfLayoutItem<AdCustom>() {
+		protected IListItem<AdCustom> getListItem(AdCustom data) {
+			return new AfListItem<AdCustom>() {
 
 				private ImageView mIvImage;
 				private TextView mTvTip;

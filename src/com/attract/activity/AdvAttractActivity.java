@@ -3,7 +3,6 @@ package com.attract.activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -21,6 +20,7 @@ import com.andframe.application.AfApplication;
 import com.andframe.constant.AfNetworkEnum;
 import com.andframe.feature.AfIntent;
 import com.andframe.layoutbind.AfFrameSelector;
+import com.andframe.layoutbind.AfListItem;
 import com.andframe.layoutbind.AfModuleProgress;
 import com.andframe.layoutbind.AfModuleProgressImpl;
 import com.andframe.layoutbind.AfModuleTitlebar;
@@ -174,9 +174,10 @@ public class AdvAttractActivity extends AfActivity implements OnClickListener {
 			super(context, ltdata);
 		}
 
+
 		@Override
-		protected IAfLayoutItem<AdCustom> getItemLayout(AdCustom data) {
-			return new IAfLayoutItem<AdCustom>() {
+		protected IListItem<AdCustom> getListItem(AdCustom data) {
+			return new AfListItem<AdCustom>() {
 
 				private ImageView mIvImage;
 				private TextView mTvTip;
