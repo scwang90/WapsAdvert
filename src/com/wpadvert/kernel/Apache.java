@@ -15,8 +15,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ *
  * Created by SCWANG on 2015-07-26.
  */
+@SuppressWarnings("unused")
 public class Apache {
 
     public static final String APACHE = "org.apache.AppConnect";
@@ -238,7 +240,7 @@ public class Apache {
     @SuppressWarnings({ "unchecked", "rawtypes" })
 	public List getAdInfoList() {
 //        return connect.getAdInfoList();
-        List<AdCustom> customs = new ArrayList<AdCustom>();
+        List<AdCustom> customs = new ArrayList<>();
         List<Object> list = AfReflecter.doMethod(connect, "getAdInfoList", List.class);
         if (list != null){
             for (Object info : list) {

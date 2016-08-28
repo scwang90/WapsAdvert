@@ -1,5 +1,6 @@
 package com.wpadvert.kernel;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
@@ -10,6 +11,7 @@ import com.andadvert.OnlineKey;
 import com.andadvert.PointStatistics;
 import com.andadvert.listener.PointsNotifier;
 import com.andadvert.model.AdCustom;
+import com.andadvert.model.AdNative;
 import com.andadvert.util.DS;
 import com.andframe.application.AfApplication;
 import com.andframe.application.AfExceptionHandler;
@@ -19,6 +21,7 @@ import com.andrestful.api.HttpMethod;
 import com.andrestful.api.RequestHandler;
 import com.andrestful.api.Response;
 import com.andrestful.http.MultiRequestHandler;
+import com.baidu.appx.BDNativeAd;
 import com.wpadvert.kernel.activity.AdvMainActivity;
 
 import java.util.ArrayList;
@@ -36,6 +39,9 @@ public class WpAdapter extends AdvertAdapter {
 
     public static final String KEY_INITUNINSTALLAD = "10505902520282114102";
 
+    /**
+     * 用于如果是因为 广告代码导致崩溃，则关闭广告功能
+     */
     public static final String KEY_ISWAPSWORKS = "05143911204192114102";
 
     private static int UNIT_PRICE = 70;
@@ -66,6 +72,78 @@ public class WpAdapter extends AdvertAdapter {
 
     protected RequestHandler handler = MultiRequestHandler.getInstance();
 
+    private BDNativeAd nativeAd = null;
+    private Activity nativeActivity = null;
+
+    @Override
+    public List<AdNative> getNativeAdList(Context context) {
+        if (context instanceof Activity) {
+            if (nativeAd == null || nativeActivity != context) {
+                if (nativeAd != null) {
+                    nativeAd.destroy();
+                }
+                nativeActivity = (Activity) context;
+                nativeAd = new BDNativeAd(nativeActivity, "wVs28LdYEBjDO3mfq9mZOfBBbsguGAKq", "wVs28LdYEBjDO3mfq9mZOfBBbsguGAKq");
+                nativeAd.loadAd();
+            }
+            ArrayList<BDNativeAd.AdInfo> infos = nativeAd.getAdInfos();
+            List<AdNative> customs = new ArrayList<>();
+            for (final BDNativeAd.AdInfo info : infos) {
+                AdNative adNative = new AdNative() {
+                    BDNativeAd.AdInfo minfo = info;
+                    public String getTitle() {
+                        return minfo.getTitle();
+                    }
+                    public String getDescription() {
+                        return minfo.getDescription();
+                    }
+                    public void didShow() {
+                        minfo.didShow();
+                    }
+                    public void didClick() {
+                        minfo.didClick();
+                    }
+                    public int getImageWidth() {
+                        return minfo.getImageWidth();
+                    }
+                    public int getIconWidth() {
+                        return minfo.getIconWidth();
+                    }
+                    public String getImageUrl() {
+                        return minfo.getImageUrl();
+                    }
+                    public int getImageHeight() {
+                        return minfo.getImageHeight();
+                    }
+                    public String getRating() {
+                        return minfo.getRating();
+                    }
+                    public int getIconHeight() {
+                        return minfo.getIconHeight();
+                    }
+                    public int getClickType() {
+                        return minfo.getClickType();
+                    }
+                    public String getClickUrl() {
+                        return minfo.getClickUrl();
+                    }
+                    public String getIconUrl() {
+                        return minfo.getIconUrl();
+                    }
+                    public String getFileSize() {
+                        return minfo.getFileSize();
+                    }
+                    public String getDownloadNum() {
+                        return minfo.getDownloadNum();
+                    }
+                };
+                customs.add(adNative);
+            }
+            return customs;
+        }
+        return super.getNativeAdList(context);
+    }
+
     public List<FlowAd> getFlowAdList() throws Exception {
         Map<String, Object> params = new LinkedHashMap<>();
         params.put("app_id",APP_ID);
@@ -81,7 +159,8 @@ public class WpAdapter extends AdvertAdapter {
         application.setSingleton(AdvertAdapter.KEY_ADVERT, new WpAdapter(channel));
     }
 
-    private WpAdapter(String defchannel) {
+    private WpAdapter(String defchannel)
+    {
         mDefChannel = defchannel;
         mChannel = getChannel();
     }
@@ -128,30 +207,14 @@ public class WpAdapter extends AdvertAdapter {
             UNIT_PRICE = OnlineKey.getInteger(context, OnlineKey.KEY_UNITPRICE, UNIT_PRICE, "get unitprice");
         } catch (Throwable e) {
             IS_WAPSWORKS = false;
-//            AfPrivateCaches.getInstance().put(KEY_ISWAPSWORKS,false);
             AfExceptionHandler.handle(e, "waps initInstance error");
         }
 
-//		IS_WAPSWORKS = date1.after(date2);
         if (IS_WAPSWORKS) {
-            /*if("poetry".equals(Channel)){
-                IS_HIDE = false;
-				OnlineDeploy deploy = new OnlineDeploy();
-				deploy.HideAd = false;
-				deploy.Name = "poetry";
-				deploy.Remark = "dpoetry";
-				deploy.Urls = "http://attract";
-				this.helper.setValue(deploy);
-				this.notifyBusinessModelStart(deploy);
-			}else */
             if ("update".equals(mChannel) || "waps".equals(mChannel) || "huali".equals(mChannel)) {
-//				IS_HIDE = false;
-//				this.notifyBusinessModelStart(null);
                 onCheckOnlineHideFail(null);
-//                doCheckOnlineHide(context);
             } else if (!"hide".equals(mChannel)) {
                 onCheckOnlineHideFail(null);
-//                doCheckOnlineHide(context);
             }
             //预加载自定义广告内容（仅在使用了自定义广告、抽屉广告或迷你广告的情况，才需要添加）
             Apache.getInstance(context).initAdInfo();
@@ -279,6 +342,9 @@ public class WpAdapter extends AdvertAdapter {
     @Override
     public String getConfig(Context context, String key, String vdefault) {
         try {
+            if (!IS_WAPSWORKS) {
+                return vdefault;
+            }
             String value = Apache.getInstance(context).getConfig(key, vdefault);
             if (AfStringUtil.isEmpty(value) && value != null) {
                 return vdefault;

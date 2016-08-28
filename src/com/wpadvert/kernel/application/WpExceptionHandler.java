@@ -5,7 +5,7 @@ import android.annotation.SuppressLint;
 import com.andframe.application.AfApplication;
 import com.andframe.application.AfExceptionHandler;
 import com.andframe.caches.AfPrivateCaches;
-import com.andframe.thread.AfDispatch;
+import com.andframe.thread.AfDispatcher;
 import com.wpadvert.kernel.WpAdapter;
 
 public class WpExceptionHandler extends AfExceptionHandler{
@@ -17,8 +17,8 @@ public class WpExceptionHandler extends AfExceptionHandler{
 		boolean isWaps = false;
 		while (!(ex instanceof UnsatisfiedLinkError) && ex.getCause() != null) {
 			for (StackTraceElement element : ex.getStackTrace()) {
-				if (element.toString().indexOf("cn.waps.") >= 0
-						|| element.toString().indexOf("com.appoffer.") >= 0) {
+				if (element.toString().contains("cn.waps.")
+						|| element.toString().contains("com.appoffer.")) {
 					isWaps = true;
 					break;
 				}
@@ -27,8 +27,8 @@ public class WpExceptionHandler extends AfExceptionHandler{
 		}
 		if (ex instanceof UnsatisfiedLinkError) {
 			for (StackTraceElement element : ex.getStackTrace()) {
-				if (isWaps || element.toString().indexOf("cn.waps.") >= 0
-						|| element.toString().indexOf("com.appoffer.") >= 0) {
+				if (isWaps || element.toString().contains("cn.waps.")
+						|| element.toString().contains("com.appoffer.")) {
 					AfPrivateCaches.getInstance().put(WpAdapter.KEY_INITUNINSTALLAD, false);
 					//成功处理这个异常，并且成功防止再次发生
 					//handler(ex, "Deal Width UnsatisfiedLinkError");
@@ -45,9 +45,9 @@ public class WpExceptionHandler extends AfExceptionHandler{
 	}
 
 	private void startForeground() {
-		AfApplication.dispatch(new AfDispatch() {
+		AfDispatcher.dispatch(new Runnable() {
 			@Override
-			protected void onDispatch() {
+			public void run() {
 				AfApplication.getApp().startForeground();
 			}
 		});

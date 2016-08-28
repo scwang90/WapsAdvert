@@ -79,7 +79,8 @@ public class AdvMainActivity extends AfActivity {
 		protected void onWorking(/*Message msg*/) throws Exception {
 			AdvertAdapter adapter = AdvertAdapter.getInstance();
 			List<AdCustom> ltdata = adapter.getAdCustomList(getActivity());
-			while (ltdata == null || ltdata.size() == 0) {
+			int recount = 0;
+			while (recount++ < 5 && (ltdata == null || ltdata.size() == 0)) {
 				Thread.sleep(1000);
 				ltdata = adapter.getAdCustomList(getActivity());
 			}
