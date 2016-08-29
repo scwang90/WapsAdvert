@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.Html;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -147,10 +148,16 @@ public class AdvMainActivity extends AfActivity {
 					mTvTip.setText(model.Provider);
 					mTvTitle.setText(model.Name);
 					mTvContent.setText(model.Text);
-					mIvImage.setImageBitmap(model.Icon);
 					mTvDownload.setText(model.Action);
 					mTvFileSize.setText(model.Filesize);
-					
+					if (model.Icon != null) {
+						mIvImage.setImageBitmap(model.Icon);
+					} else if (!TextUtils.isEmpty(model.IconUrl)) {
+						$(mIvImage).image(model.IconUrl);
+					} else {
+//						$(mIvImage).image(AfApplication.getApp().getLogoId());
+					}
+
 					AdvertAdapter adapter = AdvertAdapter.getInstance();
 					String currency = adapter.getCurrency();
 					String html = "送 <font color=\"#337FE5\">"+model.Points+"</font> "+currency;

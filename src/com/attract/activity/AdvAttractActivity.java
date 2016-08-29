@@ -3,6 +3,7 @@ package com.attract.activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -212,9 +213,16 @@ public class AdvAttractActivity extends AfActivity implements OnClickListener {
 					mTvTip.setText(model.Filesize);
 					mTvTitle.setText(model.Name);
 					mTvContent.setText(model.Text);
-					mIvImage.setImageBitmap(model.Icon);
 					mTvDownload.setText("送"+model.Points+currency);
 					mTvDowntry.setText("下载"+model.Action);
+
+					if (model.Icon != null) {
+						$(mIvImage).image(model.Icon);
+					} else if (!TextUtils.isEmpty(model.IconUrl)) {
+						$(mIvImage).image(model.IconUrl);
+					} else {
+//						$(mIvImage).image(AfApplication.getApp().getLogoId());
+					}
 				}
 
 				@Override
