@@ -30,7 +30,6 @@ import com.andframe.thread.AfHandlerTask;
 import com.attract.application.AdvAttractAdapter;
 import com.attract.kernel.AttractStatistics;
 import com.wpadvert.R;
-import com.wpadvert.kernel.Apache;
 import com.wpadvert.kernel.PointKernelAttract;
 import com.wpadvert.kernel.event.WpEvent;
 
@@ -86,7 +85,7 @@ public class AdvAttractActivity extends AfActivity implements OnClickListener {
 	protected boolean onBackKeyPressed() {
 		backTime = System.currentTimeMillis();
 		int point = PointKernelAttract.getComPoint();
-		String currency = AdvAttractAdapter.getInstance().getCurrency();
+//		String currency = AdvAttractAdapter.getInstance().getCurrency();
 		if (point < 100 && PointKernelAttract.isDownloaded() && mAdapter != null && mAdapter.getCount() > 1) {
 //			doShowDialog("温馨提示", String.format("    激活软件需要100%s，您目前只下载了一个软件不足以激活软件！", currency),"继续下载",
 //			doShowDialog("温馨提示", String.format(DS.d("0c8bf7b5d9ad1cad8be1a337f94f0e9bc9cd226fff431410dc81663" +
@@ -109,10 +108,11 @@ public class AdvAttractActivity extends AfActivity implements OnClickListener {
 	}
 
 	protected void downloadAd(AdCustom ad) {
+		AdvertAdapter.getInstance().downloadAd(getActivity(), ad);
 		//触发统计下载事件
 		AfApplication.getApp().onEvent(WpEvent.WP_POINT_ATTRACT_DONWLOAD);
-		Apache connect = Apache.getInstance(getActivity());
-		connect.downloadAd(getActivity(), ad.Id);
+//		Apache connect = Apache.getInstance(getActivity());
+//		connect.downloadAd(getActivity(), ad.Id);
 		AttractStatistics.doStaticsPoint();
 		PointKernelAttract.doStatisticsAdInfo(ad);
 	}

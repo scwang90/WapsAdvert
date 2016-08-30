@@ -31,7 +31,6 @@ import com.andframe.layoutbind.AfModuleTitlebarImpl;
 import com.andframe.thread.AfHandlerTask;
 import com.andframe.util.android.AfStatusBarCompat;
 import com.wpadvert.R;
-import com.wpadvert.kernel.Apache;
 import com.wpadvert.kernel.PointKernelMain;
 import com.wpadvert.kernel.application.WpBackService;
 import com.wpadvert.kernel.event.WpEvent;
@@ -66,12 +65,6 @@ public class AdvMainActivity extends AfActivity {
 		if (WpBackService.SetBackground(this)) {
 			mTitlebar.getView().setBackgroundColor(0x99000000);
 		}
-	}
-	
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-		AdvertAdapter.getInstance().uninstallAd(this);
 	}
 	
 	private class LoadingTask extends AfHandlerTask{
@@ -219,9 +212,10 @@ public class AdvMainActivity extends AfActivity {
 		protected void doDownloadAdv(AdCustom info) {
 			AdvertAdapter adapter = AdvertAdapter.getInstance();
 
-			Apache connect = Apache.getInstance(getActivity());
+//			Apache connect = Apache.getInstance(getActivity());
 			AbActivity.event(getActivity(), "downloadAd.poetry", info.Name);
-			connect.downloadAd(getActivity(), info.Id);
+			adapter.downloadAd(getActivity(), info);
+//			connect.downloadAd(getActivity(), info.Id);
 //			AttractStatistics.doStaticsPoint();
 //			AttractPointKernel.doStatisticsAdInfo(info);
 			PointKernelMain.doStatisticsAdInfo(info);
