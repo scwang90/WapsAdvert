@@ -7,7 +7,9 @@ import com.andadvert.AdvertAdapter;
 import com.andadvert.OnlineKey;
 import com.andadvert.model.AdCustom;
 import com.andframe.application.AfApplication;
+import com.andframe.feature.AfToast;
 import com.andframe.util.java.AfStringUtil;
+import com.baidu.appx.BDAppWallAd;
 import com.baidu.appx.BDNativeAd;
 import com.wpadvert.kernel.WpAdapter;
 
@@ -20,11 +22,15 @@ import java.util.List;
  */
 public class AppxAdapter extends WpAdapter {
 
+    private static String APPX_APPWALL_KEY = "wVs28LdYEBjDO3mfq9mZOfBBbsguGAKq";
     private static String APPX_APP_KEY = "wVs28LdYEBjDO3mfq9mZOfBBbsguGAKq";
     private static String APPX_NATIVE_KEY = "wVs28LdYEBjDO3mfq9mZOfBBbsguGAKq";
 
     private BDNativeAd nativeAd = null;
     private Activity nativeActivity = null;
+    private BDAppWallAd appwallAd = null;
+    private Activity appwallActivity = null;
+
     /**
      * 获取全局 广告适配器
      */
@@ -59,6 +65,18 @@ public class AppxAdapter extends WpAdapter {
                 nativeActivity = (Activity) context;
                 nativeAd = new BDNativeAd(nativeActivity, APPX_APP_KEY, APPX_NATIVE_KEY);
                 nativeAd.loadAd();
+            }
+            if (appwallAd == null || appwallActivity != context) {
+                if (appwallAd != null) {
+                    appwallAd.destroy();
+                }
+                //创建开屏广告
+                appwallActivity = (Activity) context;
+                appwallAd = new BDAppWallAd(appwallActivity, APPX_APP_KEY, APPX_APPWALL_KEY);
+                appwallAd.loadAd();
+//                if (appwallAd.isLoaded()) {
+//                    appwallAd.doShowAppWall();
+//                }
             }
         }
     }
@@ -120,7 +138,21 @@ public class AppxAdapter extends WpAdapter {
 
     @Override
     public void showOffers(Context context) {
-        super.showOffers(context);
+        if (isHide()) {
+            if (appwallAd == null && context instanceof Activity) {
+                //创建开屏广告
+                appwallActivity = (Activity) context;
+                appwallAd = new BDAppWallAd(appwallActivity, APPX_APP_KEY, APPX_APPWALL_KEY);
+                appwallAd.loadAd();
+            }
+            if (appwallAd != null && appwallAd.isLoaded()) {
+                appwallAd.doShowAppWall();
+            } else {
+                AfToast.makeToastLong("正在加载...");
+            }
+        } else {
+            super.showOffers(context);
+        }
     }
 
 }

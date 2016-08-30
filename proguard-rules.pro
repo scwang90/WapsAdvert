@@ -15,3 +15,7 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+
+-keep public class com.baidu.appx.**
+-keep public class com.baidu.appx.** { *; }
+-keep attributes *Annotation*,*Exceptions*,Signature
