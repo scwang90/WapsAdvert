@@ -20,7 +20,7 @@ public class AppxNative extends AdCustom {
         this.Name = info.getTitle();
         this.Description = info.getDescription();
         this.Action = "安装";
-        this.Filesize = info.getFileSize();
+        this.Filesize = "null".equals(info.getFileSize())?"4.12MB":info.getFileSize();
         this.Id = info.getClickUrl();
         this.Package = AfApplication.getApp().getPackageName();
         this.ImageUrls = new String[]{
