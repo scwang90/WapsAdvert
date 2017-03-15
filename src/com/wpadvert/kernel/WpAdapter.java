@@ -353,7 +353,7 @@ public class WpAdapter extends AdvertAdapter {
             }
             String currency = getCurrency();
             notifier.getPoints(currency, point);
-            PointStatistics.doStaticsPoint(point, currency);
+            PointStatistics.doStaticsPoint(context, point, currency);
         } else {
             notifier.getPointsFailed("");
         }

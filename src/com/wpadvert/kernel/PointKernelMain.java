@@ -14,7 +14,7 @@ public class PointKernelMain {
 			super.doNotifyPointAttract(accretion, points);
 			String currency = AdvertAdapter.getInstance().getCurrency();
 			final int point = PointStatistics.getPoint();
-			PointStatistics.doStaticsPoint(points,currency);
+			PointStatistics.doStaticsPoint(context, points,currency);
 			AfApplication.getApp().onEvent(WpEvent.WP_POINT_MAIN,point+"+"+(points-point)+"="+points);
 		}
 
