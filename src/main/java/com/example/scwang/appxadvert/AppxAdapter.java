@@ -2,13 +2,11 @@ package com.example.scwang.appxadvert;
 
 import android.app.Activity;
 import android.content.Context;
+import android.text.TextUtils;
+import android.widget.Toast;
 
-import com.andadvert.AdvertAdapter;
 import com.andadvert.OnlineKey;
 import com.andadvert.model.AdCustom;
-import com.andframe.application.AfApplication;
-import com.andframe.feature.AfToast;
-import com.andframe.util.java.AfStringUtil;
 import com.baidu.appx.BDAppWallAd;
 import com.baidu.appx.BDNativeAd;
 import com.wpadvert.kernel.WpAdapter;
@@ -17,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 万普广告适配器
+ * 百度广告适配器
  * @author 树朾
  */
 public class AppxAdapter extends WpAdapter {
@@ -34,25 +32,21 @@ public class AppxAdapter extends WpAdapter {
     /**
      * 获取全局 广告适配器
      */
-    public static WpAdapter getAppxInstance(){
-        return AfApplication.getApp().getSingleton(AdvertAdapter.KEY_ADVERT);
+    public static AppxAdapter getAppxInstance(){
+        return (AppxAdapter)getInstance();
     }
 
     public AppxAdapter(String defchannel) {
         super(defchannel);
     }
 
-    public static void initialize(AfApplication application, String channel, String currency, String appId) {
-        APP_ID = appId;
-        UNIT_POINT = AfStringUtil.isNotEmpty(currency)?currency:UNIT_POINT;
-        application.setSingleton(AdvertAdapter.KEY_ADVERT, new AppxAdapter(channel));
-    }
-
-    public static void initialize(String APPX_APP_KEY, String APPX_NATIVE_KEY) {
+    public static void initialize(String APPX_APP_KEY, String APPX_NATIVE_KEY, String channel, String currency, boolean debug) {
+        DEBUG = debug;
         AppxAdapter.APPX_APP_KEY = APPX_APP_KEY;
         AppxAdapter.APPX_NATIVE_KEY = APPX_NATIVE_KEY;
+        UNIT_POINT = TextUtils.isEmpty(currency) ? UNIT_POINT : currency;
+        mInstance = new AppxAdapter(channel);
     }
-
 
     @Override
     public void initInstance(Context context) {
@@ -148,7 +142,7 @@ public class AppxAdapter extends WpAdapter {
             if (appwallAd != null && appwallAd.isLoaded()) {
                 appwallAd.doShowAppWall();
             } else {
-                AfToast.makeToastLong("正在加载...");
+                Toast.makeText(context, "正在加载...", Toast.LENGTH_LONG).show();
             }
         } else {
             super.showOffers(context);
