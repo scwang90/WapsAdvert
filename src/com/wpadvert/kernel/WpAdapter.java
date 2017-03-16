@@ -79,11 +79,11 @@ public class WpAdapter extends AdvertAdapter {
         return response.toList(FlowAd.class);
     }
 
-    public static void initialize(String channel, String currency, String appId, boolean debug) {
+    public static void initialize(String appId, String channel, String currency, boolean debug) {
         initialize(channel, currency, appId, debug, null);
     }
 
-    public static void initialize(String channel, String currency, String appId, boolean debug, IBusiness business) {
+    public static void initialize(String appId, String channel, String currency, boolean debug, IBusiness business) {
         APP_ID = appId;
         UNIT_POINT = TextUtils.isEmpty(currency) ? UNIT_POINT : currency;
         AdvertAdapter.initAdvert(new WpAdapter(channel), channel, debug, business);
