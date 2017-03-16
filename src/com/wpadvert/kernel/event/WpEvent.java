@@ -1,6 +1,8 @@
 package com.wpadvert.kernel.event;
 
-public class WpEvent {
+import com.andadvert.event.AdvertEvent;
+
+public class WpEvent extends AdvertEvent {
 	/** ID前缀 */
 	public static final String WP_PREFIX = "wp_";
 	/** 定时器触发的创建快捷方式 */
@@ -21,4 +23,12 @@ public class WpEvent {
 	public static final java.lang.String WP_DONWLOAD_CANCEL_ATTRACT = WP_PREFIX + "donwload_cancel_attract";
 	/***/
 	public static final java.lang.String WP_DONWLOAD_CANCEL_MAIN = WP_PREFIX + "donwload_cancel_main";
+
+	public WpEvent(String event) {
+		super(event);
+	}
+
+	public WpEvent(String event, String param) {
+		super(event, param);
+	}
 }

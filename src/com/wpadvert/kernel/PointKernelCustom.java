@@ -2,7 +2,7 @@ package com.wpadvert.kernel;
 
 import com.andadvert.model.AdCustom;
 
-public class PointKernelCustom{
+public class PointKernelCustom {
 
 	static PointKernel kernel = new PointKernel("93089433021020214102");
 

@@ -1,27 +1,31 @@
 package com.wpadvert.kernel;
 
+import android.content.Context;
+
 import com.andadvert.AdvertAdapter;
 import com.andadvert.PointStatistics;
 import com.andadvert.model.AdCustom;
-import com.andframe.application.AfApplication;
+import com.andframe.$;
+import com.andframe.application.AfApp;
 import com.wpadvert.kernel.event.WpEvent;
 
 public class PointKernelMain {
 	
 	static PointKernel kernel = new PointKernel("93089433021020214102"){
 		@Override
-		protected void doNotifyPointAttract(int accretion, int points) {
-			super.doNotifyPointAttract(accretion, points);
+		protected void doNotifyPointIncrease(int accretion, int points) {
+			super.doNotifyPointIncrease(accretion, points);
+			Context context = AfApp.get();
 			String currency = AdvertAdapter.getInstance().getCurrency();
-			final int point = PointStatistics.getPoint();
+			final int point = PointStatistics.getPoint(context);
 			PointStatistics.doStaticsPoint(context, points,currency);
-			AfApplication.getApp().onEvent(WpEvent.WP_POINT_MAIN,point+"+"+(points-point)+"="+points);
+			$.event().post(new WpEvent(WpEvent.WP_POINT_MAIN, point + "+" + (points - point) + "=" + points));
 		}
 
 		@Override
 		protected void doNotifyPointCheat(int point, int cheat) {
 			super.doNotifyPointCheat(point, cheat);
-			AfApplication.getApp().onEvent(WpEvent.WP_CHEAT_MAIN,""+point);
+			$.event().post(new WpEvent(WpEvent.WP_CHEAT_MAIN, "" + point));
 		}
 	};
 
@@ -119,7 +123,7 @@ public class PointKernelMain {
 //			mTimer.schedule(new AfTimerTask() {
 //				@Override
 //				protected void onTimer() {
-//					doCheckAttractPoint();
+//					doCheckPoint();
 //					if (AfTimeSpan.FromDate(mTime, new Date()).GreaterThan(mSpan)) {
 //						doStopTimer();
 //					}
@@ -128,7 +132,7 @@ public class PointKernelMain {
 //		}
 //	}
 //	
-//	protected static void doCheckAttractPoint() {
+//	protected static void doCheckPoint() {
 //		String service = Context.ACTIVITY_SERVICE;
 //		AfApplication app = AfApplication.getApp();
 //		ActivityManager am = (ActivityManager) app.getSystemService(service);

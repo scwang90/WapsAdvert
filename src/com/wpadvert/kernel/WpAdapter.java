@@ -2,19 +2,20 @@ package com.wpadvert.kernel;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.LinearLayout;
 
 import com.andadvert.AdvertAdapter;
 import com.andadvert.OnlineKey;
 import com.andadvert.PointStatistics;
+import com.andadvert.listener.IBusiness;
 import com.andadvert.listener.PointsNotifier;
 import com.andadvert.model.AdCustom;
 import com.andadvert.util.DS;
-import com.andframe.application.AfApplication;
-import com.andframe.application.AfExceptionHandler;
+import com.andframe.application.AfApp;
 import com.andframe.caches.AfPrivateCaches;
-import com.andframe.util.java.AfStringUtil;
+import com.andframe.exception.AfExceptionHandler;
 import com.andrestful.api.HttpMethod;
 import com.andrestful.api.RequestHandler;
 import com.andrestful.api.Response;
@@ -57,14 +58,14 @@ public class WpAdapter extends AdvertAdapter {
         if (UNIT_POINT != null && UNIT_POINT.length() > 4) {
             UNIT_POINT = DS.d(UNIT_POINT);
         }
-        DynnamicJar.initize(AfApplication.getApp());
+        DynnamicJar.initize(AfApp.get());
     }
 
     /**
      * 获取全局 广告适配器
      */
     public static WpAdapter getWpInstance(){
-        return AfApplication.getApp().getSingleton(AdvertAdapter.KEY_ADVERT);
+        return (WpAdapter)getInstance();
     }
 
     protected RequestHandler handler = MultiRequestHandler.getInstance();
@@ -78,10 +79,14 @@ public class WpAdapter extends AdvertAdapter {
         return response.toList(FlowAd.class);
     }
 
-    public static void initialize(AfApplication application, String channel, String currency, String appId) {
+    public static void initialize(String channel, String currency, String appId, boolean debug) {
+        initialize(channel, currency, appId, debug, null);
+    }
+
+    public static void initialize(String channel, String currency, String appId, boolean debug, IBusiness business) {
         APP_ID = appId;
-        UNIT_POINT = AfStringUtil.isNotEmpty(currency)?currency:UNIT_POINT;
-        application.setSingleton(AdvertAdapter.KEY_ADVERT, new WpAdapter(channel));
+        UNIT_POINT = TextUtils.isEmpty(currency) ? UNIT_POINT : currency;
+        AdvertAdapter.initAdvert(new WpAdapter(channel), channel, debug, business);
     }
 
     protected WpAdapter(String defchannel)
@@ -271,7 +276,7 @@ public class WpAdapter extends AdvertAdapter {
                 return vdefault;
             }
             String value = Apache.getInstance(context).getConfig(key, vdefault);
-            if (AfStringUtil.isEmpty(value) && value != null) {
+            if (TextUtils.isEmpty(value) && value != null) {
                 return vdefault;
             }
             return value;

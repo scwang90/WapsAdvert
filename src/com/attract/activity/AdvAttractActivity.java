@@ -1,86 +1,41 @@
 package com.attract.activity;
 
-import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.andadvert.AdvertAdapter;
 import com.andadvert.model.AdCustom;
+import com.andadvert.util.AfNetwork;
 import com.andadvert.util.DS;
-import com.andframe.activity.AfActivity;
-import com.andframe.activity.framework.AfView;
-import com.andframe.adapter.AfListAdapter;
-import com.andframe.application.AfApplication;
-import com.andframe.constant.AfNetworkEnum;
-import com.andframe.feature.AfIntent;
-import com.andframe.layoutbind.AfFrameSelector;
-import com.andframe.layoutbind.AfListItem;
-import com.andframe.layoutbind.AfModuleProgress;
-import com.andframe.layoutbind.AfModuleProgressImpl;
-import com.andframe.layoutbind.AfModuleTitlebar;
-import com.andframe.layoutbind.AfModuleTitlebarImpl;
-import com.andframe.thread.AfHandlerTask;
-import com.attract.application.AdvAttractAdapter;
-import com.attract.kernel.AttractStatistics;
+import com.andframe.$;
+import com.andframe.activity.AfItemsActivity;
+import com.andframe.adapter.itemviewer.AfItemViewer;
+import com.andframe.api.Paging;
+import com.andframe.api.adapter.ItemViewer;
+import com.andframe.api.task.TaskWithPaging;
 import com.wpadvert.R;
 import com.wpadvert.kernel.PointKernelAttract;
 import com.wpadvert.kernel.event.WpEvent;
 
 import java.util.List;
 
-public class AdvAttractActivity extends AfActivity implements OnClickListener {
-	
-	private ListView mListView = null;
-	private AdvAdapter mAdapter = null;
-	private AfModuleTitlebar mTitlebar = null;
-	private AfModuleProgress mProgress = null;
-	private AfFrameSelector mSelector = null;
-	
+public class AdvAttractActivity extends AfItemsActivity<AdCustom> {
+
 	private long backTime = 0;
 
 	@Override
-	protected void onCreate(Bundle bundle, AfIntent intent) throws Exception {
-		AdvertAdapter.getInstance().initInstance(this);
-		
-		super.onCreate(bundle, intent);
+	protected void onCreate(Bundle bundle) {
+		super.onCreate(bundle);
 		setContentView(R.layout.wa_layout_advattract);
-		mListView = findViewByID(R.id.advattract_list);
-
-		String currency = AdvAttractAdapter.getInstance().getCurrency();
-		mTitlebar = new AfModuleTitlebarImpl(this);
-		mTitlebar.setTitle("免费"+currency);
-		mTitlebar.setOnGoBackListener(this);
-		mProgress = new AfModuleProgressImpl(this);
-		mProgress.setDescription("正在加载");
-		mSelector = new AfFrameSelector(this, R.id.advattract_frame);
-		mSelector.selectFrame(mProgress);
-
-//		mTitlebar.setOnGoBackListener(new OnClickListener() {
-//			@Override
-//			public void onClick(View v) {
-//				onBackKeyPressed();
-//			}
-//		});
-		
-		postTask(new LoadingTask());
+		AdvertAdapter.getInstance().initInstance(this);
+		String currency = AdvertAdapter.getInstance().getCurrency();//AdvAttractAdapter.getInstance().getCurrency();
+		$(R.id.titlebar_title).text("免费" + currency);
 	}
-	
-	@Override
-	public void onClick(View v) {
-		if (v != null && v.getId() == mTitlebar.getBtGoBackId()) {
-			if (!onBackKeyPressed()) {
-				this.finish();
-			}
-		}
-	}
-	
+
 	@Override
 	protected boolean onBackKeyPressed() {
 		backTime = System.currentTimeMillis();
@@ -110,10 +65,8 @@ public class AdvAttractActivity extends AfActivity implements OnClickListener {
 	protected void downloadAd(AdCustom ad) {
 		AdvertAdapter.getInstance().downloadAd(getActivity(), ad);
 		//触发统计下载事件
-		AfApplication.getApp().onEvent(WpEvent.WP_POINT_ATTRACT_DONWLOAD);
-//		Apache connect = Apache.getInstance(getActivity());
-//		connect.downloadAd(getActivity(), ad.Id);
-		AttractStatistics.doStaticsPoint();
+		$.event().post(new WpEvent(WpEvent.WP_POINT_ATTRACT_DONWLOAD));
+//		AttractStatistics.doStaticsPoint();
 		PointKernelAttract.doStatisticsAdInfo(ad);
 	}
 	
@@ -122,7 +75,7 @@ public class AdvAttractActivity extends AfActivity implements OnClickListener {
 		super.onPause();
 		long now = System.currentTimeMillis();
 		if(now-backTime > 1000){
-			AfApplication.getApp().exitForeground(this);
+			$.pager().finishAllActivity();
 		}
 	}
 
@@ -131,130 +84,63 @@ public class AdvAttractActivity extends AfActivity implements OnClickListener {
 		super.onDestroy();
 		AdvertAdapter.getInstance().uninstallAd(this);
 	}
-	
-	private class LoadingTask extends AfHandlerTask{
 
-		@Override
-		protected void onWorking(/*Message msg*/) throws Exception {
-			AdvertAdapter adapter = AdvertAdapter.getInstance();
-			List<AdCustom> ltdata = adapter.getAdCustomList(getActivity());
-			while (ltdata == null || ltdata.size() == 0) {
-				Thread.sleep(1000);
-				ltdata = adapter.getAdCustomList(getActivity());
-			}
-			mAdapter = new AdvAdapter(getActivity(), ltdata);
+	@Nullable
+	@Override
+	public List<AdCustom> onTaskLoadList(@Nullable Paging paging) throws Exception {
+		AdvertAdapter adapter = AdvertAdapter.getInstance();
+		List<AdCustom> ltdata = adapter.getAdCustomList(getActivity());
+		while (ltdata == null || ltdata.size() == 0) {
+			Thread.sleep(1000);
+			ltdata = adapter.getAdCustomList(getActivity());
 		}
-		
-		@Override
-		protected void onException(Throwable e) {
-			super.onException(e);
-			/**
-			 * 异常名称:
-				class java.lang.IllegalStateException
-			       异常信息:
-				Cannot execute task: the task is already running.
-			 */
-//			ExceptionHandler.handle(e, "");
-		}
-
-		@Override
-		protected boolean onHandle(/*Message msg*/) {
-			if (mAdapter != null) {
-				mListView.setAdapter(mAdapter);
-			}else {
-				makeToastLong("数据加载失败！");
-			}
-			mSelector.selectFrame(mListView);
-			return false;
-		}
+		return ltdata;
 	}
 
-	private class AdvAdapter extends AfListAdapter<AdCustom> implements OnClickListener{
+	@NonNull
+	@Override
+	public ItemViewer<AdCustom> newItemViewer(int viewType) {
+		return new AfItemViewer<AdCustom>(R.layout.wa_listitem_advattract) {
+			@Override
+			protected void onViewCreated(View view) {
+				super.onViewCreated(view);
+				$(R.id.advitem_download).clicked((OnClickListener) v -> onItemClick(mModel, -1));
+			}
+			@Override
+			public void onBinding(AdCustom model, int index) {
+				String currency = AdvertAdapter.getInstance().getCurrency();//AdvAttractAdapter.getInstance().getCurrency();
+				$(R.id.advitem_tip).text(model.Filesize);
+				$(R.id.advitem_title).text(model.Name);
+				$(R.id.advitem_content).text(model.Text);
+				$(R.id.adbar_downtry).text("下载"+model.Action);
+				$(R.id.advitem_download).text("送"+model.Points+currency);
 
-		public AdvAdapter(Context context, List<AdCustom> ltdata) {
-			super(context, ltdata);
-		}
-
-
-		@Override
-		protected IListItem<AdCustom> getListItem(AdCustom data) {
-			return new AfListItem<AdCustom>() {
-
-				private ImageView mIvImage;
-				private TextView mTvTip;
-				private TextView mTvTitle;
-				private TextView mTvDowntry;
-				private TextView mTvContent;
-				private TextView mTvDownload;
-				private RelativeLayout mRlLayout;
-				
-				@Override
-				public void onHandle(AfView view) {
-					mTvTip = view.findViewByID(R.id.advitem_tip);
-					mTvTitle = view.findViewByID(R.id.advitem_title);
-					mTvDowntry = view.findViewByID(R.id.adbar_downtry);
-					mTvContent = view.findViewByID(R.id.advitem_content);
-					mTvDownload = view.findViewByID(R.id.advitem_download);
-					mIvImage = view.findViewByID(R.id.advitem_image);
-					mRlLayout = view.findViewByID(R.id.advitem_layout);
-					
-					mTvDownload.setOnClickListener(AdvAdapter.this);
-					if (AfApplication.getNetworkStatus() == AfNetworkEnum.TYPE_WIFI) {
-						mRlLayout.setOnClickListener(AdvAdapter.this);
-					}
-				}
-
-				@Override
-				public void onBinding(AdCustom model,int index) {
-					mRlLayout.setTag(model);
-					mTvDownload.setTag(model);
-
-					String currency = AdvAttractAdapter.getInstance().getCurrency();
-					mTvTip.setText(model.Filesize);
-					mTvTitle.setText(model.Name);
-					mTvContent.setText(model.Text);
-					mTvDownload.setText("送"+model.Points+currency);
-					mTvDowntry.setText("下载"+model.Action);
-
-					if (model.Icon != null) {
-						$(mIvImage).image(model.Icon);
-					} else if (!TextUtils.isEmpty(model.IconUrl)) {
-						$(mIvImage).image(model.IconUrl);
-					} else {
+				if (model.Icon != null) {
+					$(R.id.advitem_image).image(model.Icon);
+				} else if (!TextUtils.isEmpty(model.IconUrl)) {
+					$(R.id.advitem_image).image(model.IconUrl);
+//				} else {
 //						$(mIvImage).image(AfApplication.getApp().getLogoId());
-					}
 				}
+			}
+		};
+	}
 
-				@Override
-				public int getLayoutId() {
-					return R.layout.wa_listitem_advattract;
-				}
-			};
-		}
-
-		@Override
-		public void onClick(final View v) {
-			if (v.getTag() instanceof AdCustom) {
-				final AdCustom custom = AdCustom.class.cast(v.getTag());
-				doShowDialog("温馨提示", "确定下载【"+custom.Name+"】吗？"/*+
+	@Override
+	public void onItemClick(final AdCustom custom, int index) {
+		if (index == -1 || AfNetwork.getNetworkState(getContext()) == AfNetwork.TYPE_WIFI) {
+			$.dialog(getContext()).showDialog("温馨提示", "确定下载【"+custom.Name+"】吗？"/*+
 						DS.d("e4df9701b39819305900c7b52451fea31f6980e529583c25d7b9bf35aaecc" +
 								"0032ed01e1effcf3edc54e8ecc3d3ad203683cd8bea0ecc7171")+
 						AdvAttractAdapter.getInstance().getCurrency()*/
-						,"下载",new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
+					,"下载", (dialog, which) -> {
 						downloadAd(custom);
 						makeToastLong(DS.d("e4df9701b39819305900c7b52451fea31f6980e52" +
 								"9583c25d7b9bf35aaecc0032ed01e1effcf3edc54e8ecc3d3ad2" +
 								"03683cd8bea0ecc7171")+
-								AdvAttractAdapter.getInstance().getCurrency());
-					}
-				},"取消",new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						AfApplication.getApp().onEvent(WpEvent.WP_DONWLOAD_CANCEL_ATTRACT);
-					}
-				});
+								AdvertAdapter.getInstance().getCurrency()//AdvAttractAdapter.getInstance().getCurrency()
+						);
+					},"取消", (dialog, which) -> $.event().post(new WpEvent(WpEvent.WP_DONWLOAD_CANCEL_ATTRACT)));
 //				doShowDialog("温馨提示", "    软件正在下载中，请" +
 //						"在下载完成之后半小时之内安装并打开30秒以上" +
 //						"（并确保网络连接），才能获得"+
@@ -268,8 +154,11 @@ public class AdvAttractActivity extends AfActivity implements OnClickListener {
 //						"c2f661f52f6c1e47bf86e4b8d2d6a38b9fa21286ae" +
 //						"3c752efc")+
 //						AdvAttractAdapter.getInstance().getCurrency());
-			}
 		}
-		
+	}
+
+	@Override
+	public boolean setMoreShow(@NonNull TaskWithPaging task, @Nullable List<AdCustom> list) {
+		return false;
 	}
 }

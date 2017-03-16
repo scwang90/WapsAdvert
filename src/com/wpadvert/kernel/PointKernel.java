@@ -2,22 +2,20 @@ package com.wpadvert.kernel;
 
 import android.app.ActivityManager;
 import android.content.Context;
-import android.os.Message;
 import android.widget.Toast;
 
 import com.andadvert.AdvertAdapter;
 import com.andadvert.model.AdCustom;
-import com.andframe.application.AfApplication;
-import com.andframe.application.AfExceptionHandler;
+import com.andadvert.util.AfNetwork;
+import com.andframe.application.AfApp;
 import com.andframe.caches.AfPrivateCaches;
-import com.andframe.thread.AfHandlerTimerTask;
-import com.andframe.util.android.AfNetwork;
+import com.andframe.exception.AfExceptionHandler;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class PointKernel extends AfHandlerTimerTask{
+public class PointKernel implements Runnable {
 	
 	public static class AdInfo{
 		public Date mDate;
@@ -43,9 +41,9 @@ public class PointKernel extends AfHandlerTimerTask{
 	//用户的积分
 	protected int mPoints = DEFAULE_POINT;
 	//等待下载安装的 app
-	protected List<AdInfo> mltMonitored = new ArrayList<AdInfo>();
+	protected List<AdInfo> mltMonitored = new ArrayList<>();
 	//已经下载安装的 app
-	protected List<AdInfo> mltInstalled = new ArrayList<AdInfo>();
+	protected List<AdInfo> mltInstalled = new ArrayList<>();
 
 	//	protected String KEY_CACHE = "93089433021020214102";
 	protected final String KEY_POINT = "91259234021020214102";
@@ -63,7 +61,6 @@ public class PointKernel extends AfHandlerTimerTask{
 	}
 	/**
 	 * 开始监听统计info
-	 * @param info
 	 * @return 成功监听（不在已经监听列表里面）
 	 */
 	public boolean doStatisticsAdInfo(AdCustom info) {
@@ -86,24 +83,23 @@ public class PointKernel extends AfHandlerTimerTask{
 	}
 
 	@Override
-	protected boolean onHandleTimer(Message msg) {
-		doCheckAttractPoint();
-		return true;
+	public void run() {
+		doCheckPoint();
 	}
 
-	protected void doCheckAttractPoint() {
+	protected void doCheckPoint() {
 		String service = Context.ACTIVITY_SERVICE;
-		AfApplication app = AfApplication.getApp();
+		AfApp app = AfApp.get();
 		ActivityManager am = (ActivityManager) app.getSystemService(service);
 		List<ActivityManager.RunningAppProcessInfo> proces = am.getRunningAppProcesses();
 		List<AdInfo> ltInstalled = new ArrayList<>();
 		for (AdInfo adinfo : mltMonitored) {
 			for (ActivityManager.RunningAppProcessInfo proce : proces) {
 				if (proce.processName.equals(adinfo.info.Package)) {
-					if(AfApplication.getNetworkStatus() == AfNetwork.TYPE_NONE){
+					if(AfNetwork.getNetworkState(app) == AfNetwork.TYPE_NONE){
 						String currency = AdvertAdapter.getInstance().getCurrency();
 						String msg = "请确保连接到互联网再运行安"+" ".trim()+"装软件才可获得"+currency;
-						Toast.makeText(AfApplication.getApp(), msg, Toast.LENGTH_LONG).show();
+						Toast.makeText(app, msg, Toast.LENGTH_LONG).show();
 						AfExceptionHandler.handleAttach(new Exception(msg), msg);
 						return;
 					}
@@ -145,7 +141,7 @@ public class PointKernel extends AfHandlerTimerTask{
 		adinfo.mDate = new Date();
 		mltInstalled.add(adinfo);
 		mPoints = mPoints + adinfo.info.Points;
-		doNotifyPointAttract(adinfo.info.Points, mPoints);
+		doNotifyPointIncrease(adinfo.info.Points, mPoints);
 	}
 
 	/**
@@ -153,7 +149,7 @@ public class PointKernel extends AfHandlerTimerTask{
 	 * @param accretion 增量
 	 * @param points 结果
 	 */
-	protected void doNotifyPointAttract(int accretion, int points) {
+	protected void doNotifyPointIncrease(int accretion, int points) {
 
 	}
 

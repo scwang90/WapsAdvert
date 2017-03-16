@@ -2,13 +2,13 @@ package com.wpadvert.kernel.application;
 
 import android.annotation.SuppressLint;
 
-import com.andframe.application.AfApplication;
-import com.andframe.application.AfExceptionHandler;
+import com.andframe.$;
 import com.andframe.caches.AfPrivateCaches;
-import com.andframe.thread.AfDispatcher;
+import com.andframe.task.AfDispatcher;
+import com.andpack.impl.ApExceptionHandler;
 import com.wpadvert.kernel.WpAdapter;
 
-public class WpExceptionHandler extends AfExceptionHandler{
+public class WpExceptionHandler extends ApExceptionHandler {
 
 	@Override
 	@SuppressLint("HandlerLeak")
@@ -36,7 +36,7 @@ public class WpExceptionHandler extends AfExceptionHandler{
 					return;
 				}
 			}
-		}else if(isWaps){
+		} else if (isWaps) {
 			AfPrivateCaches.getInstance().put(WpAdapter.KEY_ISWAPSWORKS, false);
 			handle(ex, "Deal Width cn.waps.");
 			startForeground();
@@ -45,12 +45,7 @@ public class WpExceptionHandler extends AfExceptionHandler{
 	}
 
 	private void startForeground() {
-		AfDispatcher.dispatch(new Runnable() {
-			@Override
-			public void run() {
-				AfApplication.getApp().startForeground();
-			}
-		});
+		AfDispatcher.dispatch(() -> $.pager().startForeground());
 	}
 	
 	

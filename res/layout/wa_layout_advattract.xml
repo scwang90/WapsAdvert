@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/af_module_titlebar" />
+    <android.support.v7.widget.Toolbar style="@style/AndFrame.Toolbar"
+        app:navigationIcon="@drawable/af_icon_goback">
+        <TextView style="@style/AndFrame.Toolbar.Title"
+            android:id="@+id/titlebar_title"
+            android:text="最新活动" />
 
-    <FrameLayout
-        android:id="@+id/advattract_frame"
+    </android.support.v7.widget.Toolbar>
+
+    <android.support.v7.widget.RecyclerView
+        android:paddingTop="@dimen/padding_common_d"
+        android:paddingBottom="@dimen/padding_common_d"
+        android:clipToPadding="false"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <ListView
-            android:id="@+id/advattract_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:cacheColorHint="@android:color/transparent"
-            android:divider="#DDDDDD"
-            android:dividerHeight="0.5dp" >
-        </ListView>
-        <include layout="@layout/af_module_progress"/>
-    </FrameLayout>
+        android:layout_height="match_parent"
+        tools:listitem="@layout/wa_listitem_advattract"/>
 
 </LinearLayout>

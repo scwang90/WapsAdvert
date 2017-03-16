@@ -15,10 +15,7 @@ public class WpBackService {
 	}
 
 	public static boolean SetBackground(Activity activity) {
-		if (mIBackService != null) {
-			return mIBackService.SetBackground(activity);
-		}
-		return false;
+		return mIBackService != null && mIBackService.SetBackground(activity);
 	}
 
 }

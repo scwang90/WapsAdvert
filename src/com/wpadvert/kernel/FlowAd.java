@@ -1,7 +1,10 @@
 package com.wpadvert.kernel;
 
-import com.andframe.application.AfApplication;
-import com.andframe.helper.android.AfDeviceInfo;
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.telephony.TelephonyManager;
+
+import com.andframe.application.AfApp;
 
 import java.util.HashMap;
 
@@ -9,13 +12,19 @@ import java.util.HashMap;
  * 信息流广告
  * Created by Administrator on 2015/11/30 0030.
  */
-public class FlowAd extends HashMap{
+@SuppressWarnings("unused")
+public class FlowAd extends HashMap {
 
-    static AfDeviceInfo deviceInfo;
+    static String mDeviceId;
 
+    @SuppressLint("HardwareIds")
     private void ensureDeviceInfo() {
-        if (deviceInfo == null) {
-            deviceInfo = new AfDeviceInfo(AfApplication.getAppContext());
+        if (mDeviceId == null) {
+            String tmserver = Context.TELEPHONY_SERVICE;
+            AfApp app = AfApp.get();
+            TelephonyManager manager = (TelephonyManager)app.getSystemService(tmserver);
+
+            mDeviceId = manager.getDeviceId().trim();
         }
     }
 
@@ -25,7 +34,7 @@ public class FlowAd extends HashMap{
 
     public String getClickUrl() {
         ensureDeviceInfo();
-        return "" + get("click_url") + "&udid=" + deviceInfo.getDeviceId();
+        return "" + get("click_url") + "&udid=" + mDeviceId;
     }
 
     public String getAdimg() {
@@ -34,12 +43,12 @@ public class FlowAd extends HashMap{
 
     public String getAdimg16_9() {
         ensureDeviceInfo();
-        return "" + get("adimg") + "&res_type=16_9&udid=" + deviceInfo.getDeviceId();
+        return "" + get("adimg") + "&res_type=16_9&udid=" + mDeviceId;
     }
 
     public String getAdimg4_3() {
         ensureDeviceInfo();
-        return "" + get("adimg") + "&res_type=4_3&udid=" + deviceInfo.getDeviceId();
+        return "" + get("adimg") + "&res_type=4_3&udid=" + mDeviceId;
     }
 
     public float getPrice() {
