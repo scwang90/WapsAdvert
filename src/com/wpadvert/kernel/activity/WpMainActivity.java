@@ -18,7 +18,7 @@ public class WpMainActivity /*extends AfMainActivity*/ {
 ////			return;
 ////		}
 ////		super.onActivityCreate(savedInstanceState);
-//		if (AfApplication.getApp().isDebug()) {
+//		if (AfApp.get().isDebug()) {
 //			mRootView.setOnLongClickListener(new View.OnLongClickListener() {
 //				@Override
 //				public boolean onLongClick(View v) {
@@ -40,7 +40,7 @@ public class WpMainActivity /*extends AfMainActivity*/ {
 //			//NotiftyMail.sendNotifty(SginType.TITLE, "Deal initUninstall", "success!");
 //		}else if(!AfPrivateCaches.getInstance().getBoolean(WpAdapter.KEY_ISWAPSWORKS, true)){
 //			//NotiftyMail.sendNotifty(SginType.TITLE, "Deal cn.wpas.", "success!");
-//			AfApplication.getApp().onEvent(WpEvent.WP_DEAL_CNWP, "success!");
+//			AfApp.get().onEvent(WpEvent.WP_DEAL_CNWP, "success!");
 //		}
 //		return super.onBackKeyPressed();
 //	}

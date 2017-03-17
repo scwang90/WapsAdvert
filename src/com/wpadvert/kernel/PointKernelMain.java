@@ -134,7 +134,7 @@ public class PointKernelMain {
 //	
 //	protected static void doCheckPoint() {
 //		String service = Context.ACTIVITY_SERVICE;
-//		AfApplication app = AfApplication.getApp();
+//		AfApplication app = AfApp.get();
 //		ActivityManager am = (ActivityManager) app.getSystemService(service);
 //		List<RunningAppProcessInfo> proces = am.getRunningAppProcesses();
 //		List<AdInfo> ltInstalled = new ArrayList<PointKernelMain.AdInfo>();
@@ -144,7 +144,7 @@ public class PointKernelMain {
 //					if(AfApplication.getNetworkStatus() == AfNetwork.TYPE_NONE){
 //						String currency = AdvertAdapter.getInstance().getCurrency();
 //						String msg = "请确保连接到互联网再运行安装软件才可获得"+currency;
-//						Toast.makeText(AfApplication.getApp(), msg, Toast.LENGTH_LONG).show();
+//						Toast.makeText(AfApp.get(), msg, Toast.LENGTH_LONG).show();
 //						AfExceptionHandler.handleAttach(new Exception(msg), msg);
 //						return;
 //					}

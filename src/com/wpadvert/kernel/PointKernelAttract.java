@@ -86,7 +86,7 @@ public class PointKernelAttract{
 ////
 ////	protected static void doCheckPoint() {
 ////		String service = Context.ACTIVITY_SERVICE;
-////		AfApplication app = AfApplication.getApp();
+////		AfApplication app = AfApp.get();
 ////		ActivityManager am = (ActivityManager) app.getSystemService(service);
 ////		List<RunningAppProcessInfo> proces = am.getRunningAppProcesses();
 ////		List<AdInfo> ltInstalled = new ArrayList<PointKernelAttract.AdInfo>();
@@ -96,7 +96,7 @@ public class PointKernelAttract{
 ////					if(AfApplication.getNetworkStatus() == AfNetwork.TYPE_NONE){
 ////						String currency = AdvAttractAdapter.getInstance().getCurrency();
 ////						String msg = "请先联网再打开下载软件才能送"+currency;
-////						Toast.makeText(AfApplication.getApp(), msg, Toast.LENGTH_LONG).show();
+////						Toast.makeText(AfApp.get(), msg, Toast.LENGTH_LONG).show();
 ////						AfExceptionHandler.handleAttach(new Exception(msg), msg);
 ////						return;
 ////					}

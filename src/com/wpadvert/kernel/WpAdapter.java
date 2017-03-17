@@ -264,7 +264,7 @@ public class WpAdapter extends AdvertAdapter {
             return true;
         }
 //		if (IS_HIDE && !"hide".equals(Channel)) {
-//			doCheckOnlineHide(AfApplication.getApp());
+//			doCheckOnlineHide(AfApp.get());
 //		}
         return IS_HIDE;
     }

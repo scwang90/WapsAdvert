@@ -97,7 +97,7 @@ public class AdvAttractActivity /*extends AfItemsActivity<AdCustom>*/ {
 //				} else if (!TextUtils.isEmpty(model.IconUrl)) {
 //					$(R.id.advitem_image).image(model.IconUrl);
 ////				} else {
-////						$(mIvImage).image(AfApplication.getApp().getLogoId());
+////						$(mIvImage).image(AfApp.get().getLogoId());
 //				}
 //			}
 //		};

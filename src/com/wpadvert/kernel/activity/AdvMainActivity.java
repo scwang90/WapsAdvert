@@ -79,7 +79,7 @@ public class AdvMainActivity extends AfItemsActivity<AdCustom> {
 				} else if (!TextUtils.isEmpty(model.IconUrl)) {
 					$(R.id.advpitem_image).image(model.IconUrl);
 //				} else {
-//						$(R.id.advpitem_image).image(AfApplication.getApp().getLogoId());
+//						$(R.id.advpitem_image).image(AfApp.get().getLogoId());
 				}
 
 				AdvertAdapter adapter = AdvertAdapter.getInstance();
