@@ -1,7 +1,7 @@
 package com.example.scwang.appxadvert;
 
 import com.andadvert.model.AdCustom;
-import com.andframe.application.AfApplication;
+import com.andframe.application.AfApp;
 import com.baidu.appx.BDNativeAd;
 
 /**
@@ -22,7 +22,7 @@ public class AppxNative extends AdCustom {
         this.Action = "安装";
         this.Filesize = "null".equals(info.getFileSize())?"4.12MB":info.getFileSize();
         this.Id = info.getClickUrl();
-        this.Package = AfApplication.getApp().getPackageName();
+        this.Package = AfApp.get().getPackageName();
         this.ImageUrls = new String[]{
             info.getImageUrl()
         };
