@@ -9,10 +9,10 @@
 
     <application
         android:allowBackup="true">
-        <activity  android:name="com.attract.activity.AdvAttractActivity"
-            android:screenOrientation="portrait"></activity>
+        <!--<activity  android:name="com.attract.activity.AdvAttractActivity"-->
+            <!--android:screenOrientation="portrait"></activity>-->
         <activity  android:name="com.wpadvert.kernel.activity.AdvMainActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
