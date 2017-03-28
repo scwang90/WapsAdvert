@@ -79,7 +79,7 @@ public class AdvAttractActivity /*extends AfItemsActivity<AdCustom>*/ {
 //	public ItemViewer<AdCustom> newItemViewer(int viewType) {
 //		return new AfItemViewer<AdCustom>(R.layout.wa_listitem_advattract) {
 //			@Override
-//			protected void onViewCreated(View view) {
+//			public void onViewCreated(View view) {
 //				super.onViewCreated(view);
 //				$(R.id.advitem_download).clicked((OnClickListener) v -> onItemClick(mModel, -1));
 //			}

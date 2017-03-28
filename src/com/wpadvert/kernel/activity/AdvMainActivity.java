@@ -63,7 +63,7 @@ public class AdvMainActivity extends AfItemsActivity<AdCustom> {
 	public ItemViewer<AdCustom> newItemViewer(int viewType) {
 		return new AfItemViewer<AdCustom>(R.layout.wa_listitem_advpoetry) {
 			@Override
-			protected void onViewCreated(View view) {
+			public void onViewCreated(View view) {
 				super.onViewCreated(view);
 				$(R.id.advitem_download).clicked((OnClickListener) v -> onItemClick(mModel, -1));
 			}
@@ -85,7 +85,7 @@ public class AdvMainActivity extends AfItemsActivity<AdCustom> {
 				AdvertAdapter adapter = AdvertAdapter.getInstance();
 				String currency = adapter.getCurrency();
 				$(R.id.advpitem_givepoint).html("送 <font color='#337FE5'>%d</font> %s", model.Points, currency)
-					.visibility(!adapter.isHide() && !adapter.getChannel().equals("waps"));
+					.visible(!adapter.isHide() && !adapter.getChannel().equals("waps"));
 			}
 		};
 	}
