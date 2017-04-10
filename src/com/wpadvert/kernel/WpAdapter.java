@@ -80,7 +80,7 @@ public class WpAdapter extends AdvertAdapter {
     }
 
     public static void initialize(String appId, String channel, String currency, boolean debug) {
-        initialize(channel, currency, appId, debug, null);
+        initialize(appId, channel, currency, debug, null);
     }
 
     public static void initialize(String appId, String channel, String currency, boolean debug, IBusiness business) {
