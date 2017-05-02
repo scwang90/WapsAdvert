@@ -85,7 +85,7 @@ public class PointKernelMain {
 //	private static final long KEY_PERIOD = 60000;
 //	
 //	//缓存器
-//	private static AfPrivateCaches mCache = AfPrivateCaches.getInstance(KEY_CACHE);
+//	private static Cacher mCache = $.cache(KEY_CACHE);
 //
 //	//点数获取定时器
 //	private static Timer mTimer = null;

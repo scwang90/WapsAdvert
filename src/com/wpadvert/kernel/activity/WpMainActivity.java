@@ -35,10 +35,10 @@ public class WpMainActivity /*extends AfMainActivity*/ {
 //	@Override
 //	protected boolean onBackKeyPressed() {
 //		String key = WpAdapter.KEY_INITUNINSTALLAD;
-//		if (!AfPrivateCaches.getInstance().getBoolean(key, true)) {
+//		if (!$.cache().getBoolean(key, true)) {
 //			//initUninstall 初始化成功运作 收到相关通知邮件注释掉 通知发送
 //			//NotiftyMail.sendNotifty(SginType.TITLE, "Deal initUninstall", "success!");
-//		}else if(!AfPrivateCaches.getInstance().getBoolean(WpAdapter.KEY_ISWAPSWORKS, true)){
+//		}else if(!$.cache().getBoolean(WpAdapter.KEY_ISWAPSWORKS, true)){
 //			//NotiftyMail.sendNotifty(SginType.TITLE, "Deal cn.wpas.", "success!");
 //			AfApp.get().onEvent(WpEvent.WP_DEAL_CNWP, "success!");
 //		}

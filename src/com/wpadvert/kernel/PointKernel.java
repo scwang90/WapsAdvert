@@ -7,8 +7,9 @@ import android.widget.Toast;
 import com.andadvert.AdvertAdapter;
 import com.andadvert.model.AdCustom;
 import com.andadvert.util.AfNetwork;
+import com.andframe.$;
+import com.andframe.api.Cacher;
 import com.andframe.application.AfApp;
-import com.andframe.caches.AfPrivateCaches;
 import com.andframe.exception.AfExceptionHandler;
 
 import java.util.ArrayList;
@@ -50,10 +51,10 @@ public class PointKernel implements Runnable {
 	protected final String KEY_LIST_ADINFO = "15859874021020214102";
 	protected final String KEY_LIST_INSTALL = "27893935021020214102";
 	//缓存器
-	protected AfPrivateCaches mCache;// = AfPrivateCaches.getInstance(KEY_CACHE);
+	protected Cacher mCache;// = $.cache(KEY_CACHE);
 
 	public PointKernel(String key) {
-		mCache = AfPrivateCaches.getInstance(key);
+		mCache = $.cache(key);
 		doReadCache();
 		if (mltMonitored.size() > 0) {
 			PointTimer.doStartTimer(this);

@@ -28,7 +28,7 @@ public class AdvAttractActivity /*extends AfItemsActivity<AdCustom>*/ {
 ////						public void onClick(DialogInterface dialog, int index) {
 ////							AdCustom ad = PointKernelAttract.getNewAdCustom(mAdapter.getList());
 ////							if (ad != null) {
-////								AfPrivateCaches.getInstance().put(AttractFragmentBase.KEY_IMPORTUNE, false);
+////								$.cache().put(AttractFragmentBase.KEY_IMPORTUNE, false);
 ////								AdvAttractActivity.this.downloadAd(ad);
 ////							}
 ////							AdvAttractActivity.this.finish();

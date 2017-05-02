@@ -13,8 +13,8 @@ import com.andadvert.listener.IBusiness;
 import com.andadvert.listener.PointsNotifier;
 import com.andadvert.model.AdCustom;
 import com.andadvert.util.DS;
+import com.andframe.$;
 import com.andframe.application.AfApp;
-import com.andframe.caches.AfPrivateCaches;
 import com.andframe.exception.AfExceptionHandler;
 import com.andrestful.api.HttpMethod;
 import com.andrestful.api.RequestHandler;
@@ -129,7 +129,7 @@ public class WpAdapter extends AdvertAdapter {
     @Override
     public void initInstance(Context context) {
         try {
-            if (AfPrivateCaches.getInstance().getBoolean(KEY_ISWAPSWORKS, true)) {
+            if ($.cache().getBoolean(KEY_ISWAPSWORKS, true)) {
                 Apache.getInstance(APP_ID, mChannel, context);
             } else {
                 IS_WAPSWORKS = false;
@@ -156,7 +156,7 @@ public class WpAdapter extends AdvertAdapter {
             Apache.getInstance(context).setCrashReport(false);
             // 初始化卸载广告
             try {
-                if (AfPrivateCaches.getInstance().getBoolean(KEY_INITUNINSTALLAD, true)) {
+                if ($.cache().getBoolean(KEY_INITUNINSTALLAD, true)) {
 //                    Apache.getInstance(context).initUninstallAd(context);
                 } else {
                     /**
