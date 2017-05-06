@@ -1,115 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
+<RelativeLayout style="@style/AndFrame.Layout"
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/advpitem_layout"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
 
-    <RelativeLayout
-        android:id="@+id/advpitem_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#BBFFFFFF"
-        android:padding="5dp">
+	<de.hdodenhof.circleimageview.CircleImageView
+		android:id="@+id/advpitem_image"
+		android:layout_width="50dp"
+		android:layout_height="50dp"
+		android:layout_centerVertical="true"
+		android:src="@android:drawable/sym_def_app_icon"/>
 
-        <ImageView
-            android:id="@+id/advpitem_image"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentLeft="true"
-            android:contentDescription="@string/app_name"
-            android:src="@android:drawable/sym_def_app_icon" />
+	<LinearLayout style="@style/AndFrame.Wrap.Wrap"
+		android:id="@+id/advpitem_downloadpanel"
+		android:layout_alignParentEnd="true"
+		android:layout_alignParentRight="true"
+		android:layout_centerVertical="true"
+		android:orientation="vertical">
+		<TextView style="@style/AndFrame.Button.Primary"
+			android:id="@+id/advpitem_download"
+			android:paddingTop="5dp"
+			android:paddingBottom="5dp"
+			android:paddingLeft="20dp"
+			android:paddingRight="20dp"
+			android:layout_margin="3dp"
+			android:textSize="@dimen/textsize_titlesmall"
+			tools:text="下载"/>
+		<TextView style="@style/AndFrame.Label.Small"
+			android:id="@+id/advpitem_givepoint"
+			android:layout_gravity="center_horizontal"
+			tools:text="送70积分"/>
+	</LinearLayout>
 
-        <TextView
-            android:id="@+id/advpitem_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="3dp"
-            android:layout_toRightOf="@id/advpitem_image"
-            android:text="@string/app_name"
-            android:textColor="@color/gray_dark"
-            android:textSize="16sp" />
+	<View style="@style/AndFrame.Divison.Vertical"
+		android:id="@+id/advpitem_divider"
+		android:layout_height="40dp"
+		android:layout_margin="5dp"
+		android:layout_centerVertical="true"
+		android:layout_toLeftOf="@+id/advpitem_downloadpanel"
+		android:layout_toStartOf="@+id/advpitem_downloadpanel"/>
 
-        <LinearLayout
-            android:id="@+id/advpitem_downloadpanel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:orientation="vertical" 
-            >
-	        <TextView
-	            android:id="@+id/advpitem_download"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:background="@drawable/wa_selector_button_blue"
-	            android:paddingTop="5dp"
-	            android:paddingBottom="5dp"
-	            android:paddingLeft="20dp"
-	            android:paddingRight="20dp"
-	            android:layout_margin="3dp"
-	            android:textStyle="bold"
-	            android:text="@string/app_name"
-	            android:textColor="@color/white"
-	            android:textSize="12sp" />
-        	<TextView 
-        	    android:id="@+id/advpitem_givepoint"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:layout_gravity="center_horizontal"
-	            android:text="@string/app_name"
-	            android:textColor="@color/gray_dark"
-	            android:textSize="12sp"/>
-        </LinearLayout>
-        <View 
-            android:id="@+id/advpitem_divider"
-            android:layout_width="0.9dp"
-            android:layout_height="40dp"
-            android:layout_margin="3dp"
-            android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/advpitem_downloadpanel"
-            android:background="@color/gray_light"/>
-        
-        
-        <TextView
-            android:id="@+id/advpitem_content"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/advpitem_image"
-            android:layout_toLeftOf="@+id/advpitem_divider"
-            android:layout_toRightOf="@id/advpitem_image"
-            android:layout_marginLeft="5dp"
-            android:paddingBottom="2dp"
-            android:singleLine="true"
-            android:text="@string/app_name"
-            android:textColor="@color/gray_dark"
-            android:textSize="14sp" />
-        
-        <TextView
-            android:id="@+id/advpitem_tip"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:layout_toLeftOf="@id/advpitem_divider"
-            android:singleLine="true"
-            android:text="@string/app_name"
-            android:textColor="@color/gray_light"
-            android:textSize="14sp" />
-        
-        <TextView
-            android:id="@+id/advpitem_filesize"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toLeftOf="@+id/advpitem_divider"
-            android:layout_centerVertical="true"
-            android:text="@string/adbar_downtry"
-            android:textColor="@color/gray_light"
-            android:textSize="12sp" />
-    </RelativeLayout>
+	<LinearLayout style="@style/AndFrame.Layout"
+		android:layout_toLeftOf="@id/advpitem_divider"
+		android:layout_toStartOf="@id/advpitem_divider"
+		android:layout_toRightOf="@id/advpitem_image"
+		android:layout_toEndOf="@id/advpitem_image"
+		android:layout_centerVertical="true"
+		android:orientation="vertical">
+		<TextView style="@style/AndFrame.Label.Title"
+			android:id="@+id/advpitem_title"
+			tools:text="咪咕音乐" />
+		<TextView style="@style/AndFrame.Label"
+			android:id="@+id/advpitem_content"
+			android:layout_marginTop="@dimen/padding_common_d"
+			tools:text="好音乐不断邀请你体验明星歌友会"/>
+	</LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@android:color/transparent" />
+	<TextView style="@style/AndFrame.Label.Assistant"
+		android:visibility="gone"
+		android:id="@+id/advpitem_tip"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="@dimen/padding_common_d"
+		android:layout_toLeftOf="@id/advpitem_divider"
+		android:layout_toStartOf="@id/advpitem_divider"
+		android:textSize="14sp"
+		tools:text="中国移动" />
 
-</LinearLayout>
+	<TextView style="@style/AndFrame.Label.Small"
+		android:visibility="gone"
+		android:id="@+id/advpitem_filesize"
+		android:layout_toLeftOf="@+id/advpitem_divider"
+		android:layout_toStartOf="@+id/advpitem_divider"
+		android:layout_centerVertical="true"
+		android:textColor="@color/colorTextAssistant"
+		android:text="@string/adbar_downtry"/>
+
+</RelativeLayout>

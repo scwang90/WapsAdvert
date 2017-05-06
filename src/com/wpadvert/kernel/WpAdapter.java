@@ -16,11 +16,13 @@ import com.andadvert.util.DS;
 import com.andframe.$;
 import com.andframe.application.AfApp;
 import com.andframe.exception.AfExceptionHandler;
+import com.andpack.activity.ApFragmentActivity;
 import com.andrestful.api.HttpMethod;
 import com.andrestful.api.RequestHandler;
 import com.andrestful.api.Response;
 import com.andrestful.http.MultiRequestHandler;
 import com.wpadvert.kernel.activity.AdvMainActivity;
+import com.wpadvert.kernel.fragment.AdvMainFragment;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -297,7 +299,8 @@ public class WpAdapter extends AdvertAdapter {
     public void showAppOffers(Context context) {
         if (IS_WAPSWORKS) {
 //			Apache.getInstance(context).showAppOffers(context);
-            context.startActivity(new Intent(context, AdvMainActivity.class));
+//            context.startActivity(new Intent(context, AdvMainActivity.class));
+            ApFragmentActivity.start(AdvMainFragment.class);
         }
     }
 
@@ -305,7 +308,8 @@ public class WpAdapter extends AdvertAdapter {
     public void showGameOffers(Context context) {
         if (IS_WAPSWORKS) {
 //			Apache.getInstance(context).showGameOffers(context);
-            context.startActivity(new Intent(context, AdvMainActivity.class));
+//            context.startActivity(new Intent(context, AdvMainActivity.class));
+            ApFragmentActivity.start(AdvMainFragment.class);
         }
     }
 
@@ -338,7 +342,12 @@ public class WpAdapter extends AdvertAdapter {
     public void spendPoints(Context context, int spend,
                             final PointsNotifier notifier) {
         if (IS_WAPSWORKS) {
-            if (PointKernelMain.getPoint() < spend) {
+            int point = PointKernelMain.getPoint();
+            if (point == PointKernelMain.DEFAULE_POINT) {
+                point = 20;
+                PointKernelMain.awardPoints(point - PointKernelMain.getPoint());
+            }
+            if (point < spend) {
                 notifier.getPointsFailed(getCurrency() + "余额不足" + spend);
                 return;
             }

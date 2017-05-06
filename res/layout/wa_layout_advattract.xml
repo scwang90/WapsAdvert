@@ -10,8 +10,7 @@
         app:navigationIcon="@drawable/af_icon_goback">
         <TextView style="@style/AndFrame.Toolbar.Title"
             android:id="@+id/titlebar_title"
-            android:text="最新活动" />
-
+            android:text="@string/wa_layout_advattract" />
     </android.support.v7.widget.Toolbar>
 
     <android.support.v7.widget.RecyclerView
@@ -20,6 +19,7 @@
         android:clipToPadding="false"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
         tools:listitem="@layout/wa_listitem_advattract"/>
 
 </LinearLayout>

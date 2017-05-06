@@ -14,30 +14,31 @@ import com.andadvert.model.AdCustom;
 import com.andadvert.util.AfNetwork;
 import com.andadvert.util.DS;
 import com.andframe.$;
-import com.andframe.activity.AfItemsActivity;
 import com.andframe.adapter.itemviewer.AfItemViewer;
 import com.andframe.api.Paging;
 import com.andframe.api.adapter.ItemViewer;
 import com.andframe.api.task.TaskWithPaging;
+import com.andpack.activity.ApItemsActivity;
+import com.andpack.annotation.statusbar.StatusBarPaddingType;
 import com.wpadvert.R;
 import com.wpadvert.kernel.PointKernelMain;
-import com.wpadvert.kernel.application.WpBackService;
 import com.wpadvert.kernel.event.WpEvent;
 
 import java.util.List;
 
-public class AdvMainActivity extends AfItemsActivity<AdCustom> {
+@StatusBarPaddingType(Toolbar.class)
+public class AdvMainActivity extends ApItemsActivity<AdCustom> {
 
 	@Override
 	protected void onCreate(Bundle bundle) {
 		super.onCreate(bundle);
 		setContentView(R.layout.wa_layout_advattract);
 
-		$(R.id.titlebar_title).text("热门应用推荐");
+//		$(R.id.titlebar_title).text("热门应用推荐");
 //		AfStatusBarCompat.compatPadding(mTitlebar.getView());
-		if (WpBackService.SetBackground(this)) {
-			$(Toolbar.class).backgroundColor(0x99000000);
-		}
+//		if (WpBackService.SetBackground(this)) {
+//			$(Toolbar.class).backgroundColor(0x99000000);
+//		}
 	}
 
 	@Nullable

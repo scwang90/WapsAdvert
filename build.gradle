@@ -40,4 +40,5 @@ dependencies {
     compile project(':andadvert')
     compile project(':andcloud')
     compile project(':andrestful')
+    compile 'de.hdodenhof:circleimageview:2.1.0'
 }
