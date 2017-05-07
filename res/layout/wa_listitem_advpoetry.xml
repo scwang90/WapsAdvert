@@ -27,7 +27,7 @@
 			android:paddingLeft="20dp"
 			android:paddingRight="20dp"
 			android:layout_margin="3dp"
-			android:textSize="@dimen/textsize_titlesmall"
+			android:textSize="@dimen/textsize_content"
 			tools:text="下载"/>
 		<TextView style="@style/AndFrame.Label.Small"
 			android:id="@+id/advpitem_givepoint"
@@ -35,7 +35,7 @@
 			tools:text="送70积分"/>
 	</LinearLayout>
 
-	<View style="@style/AndFrame.Divison.Vertical"
+	<Space style="@style/AndFrame.Divison.Vertical"
 		android:id="@+id/advpitem_divider"
 		android:layout_height="40dp"
 		android:layout_margin="5dp"

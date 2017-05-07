@@ -56,7 +56,7 @@ public class AdvMainFragment extends ApItemsFragment<AdCustom> {
 			@Override
 			public void onViewCreated(View view) {
 				super.onViewCreated(view);
-				$(R.id.advitem_download).clicked((OnClickListener) v -> onItemClick(mModel, -1));
+				$(R.id.advpitem_download).clicked((OnClickListener) v -> onItemClick(mModel, -1));
 			}
 			@Override
 			public void onBinding(AdCustom model, int index) {

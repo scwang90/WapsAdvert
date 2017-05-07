@@ -14,8 +14,6 @@
     </android.support.v7.widget.Toolbar>
 
     <android.support.v7.widget.RecyclerView
-        android:paddingTop="@dimen/padding_common_d"
-        android:paddingBottom="@dimen/padding_common_d"
         android:clipToPadding="false"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
