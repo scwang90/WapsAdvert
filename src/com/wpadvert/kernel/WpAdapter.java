@@ -344,7 +344,7 @@ public class WpAdapter extends AdvertAdapter {
         if (IS_WAPSWORKS) {
             int point = PointKernelMain.getPoint();
             if (point == PointKernelMain.DEFAULE_POINT) {
-                point = 20;
+                point = INITIAL_POINT;
                 PointKernelMain.awardPoints(point - PointKernelMain.getPoint());
             }
             if (point < spend) {
