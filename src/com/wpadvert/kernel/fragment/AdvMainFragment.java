@@ -54,8 +54,8 @@ public class AdvMainFragment extends ApItemsFragment<AdCustom> {
 	public ItemViewer<AdCustom> newItemViewer(int viewType) {
 		return new AfItemViewer<AdCustom>(R.layout.wa_listitem_advpoetry) {
 			@Override
-			public void onViewCreated(View view) {
-				super.onViewCreated(view);
+			public void onViewCreated() {
+				super.onViewCreated();
 				$(R.id.advpitem_download).clicked((OnClickListener) v -> onItemClick(mModel, -1));
 			}
 			@Override
