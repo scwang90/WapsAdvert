@@ -16,7 +16,6 @@ import com.andadvert.util.DS;
 import com.andframe.$;
 import com.andframe.application.AfApp;
 import com.andframe.exception.AfExceptionHandler;
-import com.andpack.activity.ApFragmentActivity;
 import com.andrestful.api.HttpMethod;
 import com.andrestful.api.RequestHandler;
 import com.andrestful.api.Response;
@@ -300,7 +299,7 @@ public class WpAdapter extends AdvertAdapter {
         if (IS_WAPSWORKS) {
 //			Apache.getInstance(context).showAppOffers(context);
 //            context.startActivity(new Intent(context, AdvMainActivity.class));
-            ApFragmentActivity.start(AdvMainFragment.class);
+            $.pager().startFragment(AdvMainFragment.class);
         }
     }
 
@@ -309,7 +308,7 @@ public class WpAdapter extends AdvertAdapter {
         if (IS_WAPSWORKS) {
 //			Apache.getInstance(context).showGameOffers(context);
 //            context.startActivity(new Intent(context, AdvMainActivity.class));
-            ApFragmentActivity.start(AdvMainFragment.class);
+            $.pager().startFragment(AdvMainFragment.class);
         }
     }
 
