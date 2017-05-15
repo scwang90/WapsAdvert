@@ -132,6 +132,7 @@ public class WpAdapter extends AdvertAdapter {
         try {
             if ($.cache().getBoolean(KEY_ISWAPSWORKS, true)) {
                 Apache.getInstance(APP_ID, mChannel, context);
+                IS_WAPSWORKS = true;
             } else {
                 IS_WAPSWORKS = false;
             }
