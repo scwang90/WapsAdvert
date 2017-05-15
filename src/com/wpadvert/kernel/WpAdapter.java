@@ -45,7 +45,7 @@ public class WpAdapter extends AdvertAdapter {
 
     protected static int UNIT_PRICE = 70;
 
-    protected static boolean IS_WAPSWORKS = true;
+    protected static boolean IS_WAPSWORKS = false;
 
     /**
      * 躲避广告结束日期
@@ -257,6 +257,16 @@ public class WpAdapter extends AdvertAdapter {
     @Override
     public String getCurrency() {
         return UNIT_POINT;
+    }
+
+    @Override
+    public boolean isWorkable() {
+        return IS_WAPSWORKS;
+    }
+
+    @Override
+    public boolean isImplemented() {
+        return true;
     }
 
     @Override
