@@ -2,6 +2,8 @@ package com.wpadvert.kernel;
 
 import android.content.Context;
 
+import com.andadvert.util.DS;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -29,12 +31,13 @@ public class DynnamicJar {
         if (!dynamicjar.exists()){
             try{
                 final InputStream in = context.getAssets().open(JAR_NAME);
-                byte[] bytes = new byte[in.available()];
-                in.read(bytes);
-                in.close();
+//                byte[] bytes = new byte[in.available()];
+//                in.read(bytes);
 
                 FileOutputStream out = new FileOutputStream(dynamicjar);
-                out.write(bytes);
+//                out.write(bytes);
+                XorEncrypt.encrypt(in,out, DS.getDesKey());
+                in.close();
                 out.close();
             } catch (Throwable e){
                 e.printStackTrace();
