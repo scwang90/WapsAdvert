@@ -3,8 +3,8 @@ package com.wpadvert.kernel.activity;
 public class WpMainActivity /*extends AfMainActivity*/ {
 
 //	@Override
-//	protected void onCreate(Bundle bundle, AfIntent intent) throws Exception {
-//		super.onCreate(bundle, intent);
+//	protected void onCreate(Bundle bundle) throws Exception {
+//		super.onCreate(bundle);
 ////		if (AttractActivity.attract(getIntent())) {
 ////			Intent intent = new Intent(this,AttractActivity.class);
 ////			String key = AttractActivity.KEY_URL;
