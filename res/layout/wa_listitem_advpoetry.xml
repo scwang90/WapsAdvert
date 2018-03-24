@@ -27,7 +27,7 @@
 			android:paddingLeft="20dp"
 			android:paddingRight="20dp"
 			android:layout_margin="3dp"
-			android:textSize="@dimen/textsize_content"
+			android:textSize="@dimen/dimenTextContent"
 			tools:text="下载"/>
 		<TextView style="@style/AndFrame.Label.Small"
 			android:id="@+id/advpitem_givepoint"
@@ -35,7 +35,7 @@
 			tools:text="送70积分"/>
 	</LinearLayout>
 
-	<Space style="@style/AndFrame.Divison.Vertical"
+	<Space style="@style/AndFrame.Division.Vertical"
 		android:id="@+id/advpitem_divider"
 		android:layout_height="40dp"
 		android:layout_margin="5dp"
@@ -55,7 +55,7 @@
 			tools:text="咪咕音乐" />
 		<TextView style="@style/AndFrame.Label"
 			android:id="@+id/advpitem_content"
-			android:layout_marginTop="@dimen/padding_common_d"
+			android:layout_marginTop="@dimen/dimenPaddingDiminutive"
 			tools:text="好音乐不断邀请你体验明星歌友会"/>
 	</LinearLayout>
 
@@ -64,7 +64,7 @@
 		android:id="@+id/advpitem_tip"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_marginTop="@dimen/padding_common_d"
+		android:layout_marginTop="@dimen/dimenPaddingDiminutive"
 		android:layout_toLeftOf="@id/advpitem_divider"
 		android:layout_toStartOf="@id/advpitem_divider"
 		android:textSize="14sp"
